@@ -72,8 +72,8 @@ export default function FeaturedProductTop() {
   return (
     <section className="py-8 lg:py-14">
       <div className="container mx-auto px-4">
-        <div className="flex justify-between items-center mb-4 sm:mb-6">
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold underline">Featured Products</h2>
+        <div className="flex justify-between items-center mb-10 sm:mb-10">
+          <h2 className="text-primary text-2xl md:text-3xl underline underline-offset-5 font-semibold">Featured Products</h2>
 
           {/* Navigation buttons for carousel */}
           <div className="flex gap-2 md:hidden">
