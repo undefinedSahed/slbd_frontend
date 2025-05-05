@@ -71,7 +71,7 @@ export default function Navbar() {
 
 
     return (
-        <nav className="fixed top-0 z-50 w-full border-b border-primary text-black bg-white h-20 flex justify-center flex-col">
+        <nav className="fixed top-0 z-50 w-full border-b border-primary text-black bg-white h-16 md:h-20 flex justify-center flex-col">
             <div className="container mx-auto flex h-16 items-center justify-between">
                 {/* Logo */}
                 <div>
@@ -147,7 +147,7 @@ export default function Navbar() {
                         <Sheet>
                             <SheetTrigger asChild>
                                 <Button variant="ghost" size="icon" className="md:hidden">
-                                    <Menu className="h-6 w-6 text-white" />
+                                    <Menu className="h-6 w-6 text-black" />
                                     <span className="sr-only">Toggle menu</span>
                                 </Button>
                             </SheetTrigger>

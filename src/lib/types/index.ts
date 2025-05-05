@@ -30,6 +30,7 @@ export interface ProductType {
     title: string;
     description: string;
     price: number;
+    discount: number;
     category: string;
     thumbnail: string;
     images: string[];
