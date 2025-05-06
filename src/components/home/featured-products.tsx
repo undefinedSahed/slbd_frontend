@@ -5,11 +5,11 @@ import { useQuery } from "@tanstack/react-query"
 import Image from "next/image"
 import { useRef, useState } from "react"
 import { ArrowLeft, ArrowRight } from "lucide-react"
-import FeaturedSingleProduct from "./featured-single-products"
+import FeaturedSingleProduct from "./featured-single-product"
 import { Button } from "@/components/ui/button"
 import { useMobile } from "@/hooks/use-mobile-nav"
 
-export default function FeaturedProductTop() {
+export default function FeaturedProducts() {
   const [selectedFeaturedProduct, setSelectedFeaturedProduct] = useState<string>("")
   const carouselRef = useRef<HTMLDivElement>(null)
   const isMobile = useMobile()
@@ -109,7 +109,7 @@ export default function FeaturedProductTop() {
             }}
           >
             {featuredProductsLoading
-              ? // Loading skeleton for products
+              ? 
               Array(8)
                 .fill(0)
                 .map((_, index) => (

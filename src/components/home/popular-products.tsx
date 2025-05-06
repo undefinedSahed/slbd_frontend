@@ -2,7 +2,7 @@
 
 import React from 'react'
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel"
-import SimpleLoader from '../shared/simple-loader'
+// import SimpleLoader from '../shared/simple-loader'
 import { useQuery } from '@tanstack/react-query'
 import { ProductType } from '@/lib/types'
 import ProductCard from '../shared/product-card'
@@ -28,8 +28,6 @@ export default function PopularProducts() {
                     <h2 className='text-primary text-2xl md:text-3xl underline underline-offset-5 font-semibold'>Popular Products</h2>
                 </div>
 
-                {isLoading && <SimpleLoader />}
-
                 {isError && <div>Error: {error.message}</div>}
 
 
@@ -41,6 +39,20 @@ export default function PopularProducts() {
                         }}
                         className="w-full"
                     >
+                        {
+                            isLoading &&
+                            <div className="flex gap-4">
+                                {
+                                    Array(4)
+                                        .fill(0)
+                                        .map((_, index) => (
+                                            <div key={index}
+                                                className="w-full aspect-square bg-gray-200 animate-pulse rounded-md snap-start"
+                                            ></div>
+                                        ))
+                                }
+                            </div>
+                        }
                         <CarouselContent className="-ml-4">
                             {products?.map((item: ProductType) => (
                                 <CarouselItem key={item._id} className="lg:pl-4 basis-full md:basis-1/2 lg:basis-1/4">

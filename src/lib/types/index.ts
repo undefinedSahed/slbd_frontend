@@ -68,3 +68,16 @@ export interface ProductCardProps {
     title: string
     price: number
 }
+
+
+
+
+export interface BlogType {
+    _id: string;
+    title: string;
+    description: string;
+    image: string;
+    createdAt: string;
+    updatedAt: string;
+    __v: number;
+}

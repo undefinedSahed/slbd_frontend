@@ -82,3 +82,29 @@
         transform: rotate(360deg);
     }
 }
+
+
+/* Works on Chrome, Safari, and Edge */
+::-webkit-scrollbar {
+    width: 8px;
+    /* width of the scrollbar */
+}
+
+::-webkit-scrollbar-track {
+    background:  #afeb24;
+    /* scrollbar track color */
+}
+
+::-webkit-scrollbar-thumb {
+    background: #16a34a;
+    /*scrollbarthumbcolor*/border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -ms-border-radius: 4px;
+    -o-border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgb(135, 160, 94);
+    /* scrollbar thumb on hover */
+}

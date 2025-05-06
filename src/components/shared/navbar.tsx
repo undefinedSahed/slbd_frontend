@@ -153,7 +153,7 @@ export default function Navbar() {
                             </SheetTrigger>
                             <SheetContent
                                 side="right"
-                                className="w-[280px] sm:w-[300px] pl-5 bg-[#f5f0e8]"
+                                className="w-[280px] sm:w-[300px] pl-5 bg-[#dff3ed]"
                             >
                                 <nav className="flex flex-col gap-4 pt-10">
                                     {navLinks.map((link) => (
