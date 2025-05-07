@@ -13,8 +13,8 @@ import React, { useState } from 'react'
 const navLinks = [
     { name: "Home", href: "/" },
     { name: "About us", href: "/about-us" },
-    { name: "Shop", href: "/shop" },
     { name: "Services", href: "/services" },
+    { name: "E-Shop", href: "/shop" },
     { name: "FAQ", href: "/faq" },
     { name: "Contact", href: "/contact" },
 ];
@@ -63,7 +63,7 @@ export default function Navbar() {
     const handleSearch = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === "Enter" && searchTerm.trim()) {
             router.push(
-                `/auctions?searchTerm=${encodeURIComponent(searchTerm.trim())}`
+                `/shop?search=${encodeURIComponent(searchTerm.trim())}`
             );
             setSearchTerm("");
         }

@@ -67,6 +67,7 @@ export interface ProductCardProps {
     thumbnail: string
     title: string
     price: number
+    discount: number
 }
 
 

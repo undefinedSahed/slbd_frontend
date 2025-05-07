@@ -1,30 +1,31 @@
 import { Facebook, Instagram, MailIcon, MailsIcon, PhoneCallIcon, Twitter } from 'lucide-react'
+import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
+import Logo from '../../../public/assets/logo.png'
 
 export default function Footer() {
   return (
     <footer className="pt-8 lg:pt-14">
       <div className="container mx-auto">
-        <div className="grid lg:grid-cols-[2fr_1fr_1fr_1fr] gap-5 pb-5 border-b-2 border-primary">
-          <div className="lg:mr-20">
+        <div className="grid lg:grid-cols-[2fr_1fr_1fr_1fr] md:grid-cols-3 gap-5 pb-5 border-b-2 border-primary">
+          <div className="lg:mr-20 md:col-span-3 lg:col-auto">
+            <div className="flex justify-center lg:justify-start">
+              <Image
+                src={Logo}
+                alt='logo'
+                width={200}
+                height={200}
+                className='w-32 object-contain aspect-5/3'
+              />
+            </div>
             <p className="text-[#727272] text-[16px]">
               The smartest guide to decorating kitchen cabinets to help optimize
               the area of family kitchen space.
             </p>
-            <div className="flex flex-col lg:flex-row gap-3 mt-5 justify-center lg:justify-start">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="w-full lg:w-[300px] px-4 py-2 border border-primary rounded-lg focus:outline-none focus:ring-2 focus:ring-primary transition-all  shadow-sm"
-              />
-              <button className="bg-primary text-white px-6 py-2 rounded-lg font-semibold">
-                SUBMIT
-              </button>
-            </div>
 
             {/* Social Media Icons */}
-            <div className="flex justify-center lg:justify-between py-6 gap-4 text-3xl">
+            <div className="flex justify-center lg:justify-start py-6 gap-6 text-3xl">
               <Link href="https://www.facebook.com/profile.php?id=100090851693362" target="_blank">
                 <Facebook className="text-[#727272] hover:scale-110 hover:text-primary transition-all duration-300 cursor-pointer" />
               </Link>

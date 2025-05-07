@@ -6,11 +6,21 @@ import React from 'react'
 export default function ProductCard({
     thumbnail,
     title,
-    price
+    price,
+    discount
 }: ProductCardProps) {
     return (
         <div className='shadow-primary shadow-sm mb-4 rounded-md'>
             <div className="relative group overflow-hidden">
+
+                {/* Discount show if has */}
+
+                {discount > 0 &&
+                    <div className="absolute top-2 left-2 px-6 py-2 rounded-sm bg-primary text-white text-center">
+                        <p className='text-sm font-medium'>{discount}%</p>
+                    </div>
+                }
+
                 <Image
                     src={thumbnail}
                     alt="Solex Sofa"
@@ -28,7 +38,10 @@ export default function ProductCard({
             <div className="text-center px-3 py-5 text-[#1B6732] ">
                 <h3 className="text-lg font-semibold pb-2">{title}</h3>
                 <p className="text-base font-medium">
-                    ৳ {price}
+                    ৳ {discount > 0 ? (price * (1 - discount / 100)).toFixed(2) : price}
+                    {discount > 0 && (
+                        <span className="line-through text-gray-500 ml-3">৳ {price}</span>
+                    )}
                 </p>
             </div>
         </div>

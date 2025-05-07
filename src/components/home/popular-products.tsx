@@ -57,6 +57,7 @@ export default function PopularProducts() {
                             {products?.map((item: ProductType) => (
                                 <CarouselItem key={item._id} className="lg:pl-4 basis-full md:basis-1/2 lg:basis-1/4">
                                     <ProductCard
+                                        discount={item.discount}
                                         thumbnail={item.thumbnail}
                                         title={item.title}
                                         price={item.price}

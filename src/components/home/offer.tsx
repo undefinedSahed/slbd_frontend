@@ -4,7 +4,7 @@ import React from 'react'
 export default function Offer() {
 
     return (
-        <section className='bg-gray-200 py-10 mt-8 lg:mt-24 lg:px-6 items-center align-middle'>
+        <section className='bg-gray-200 py-10 lg:py-20 mt-8 lg:mt-24 lg:px-6 items-center align-middle'>
             <div className="container mx-auto">
                 <div className="text-center m-5 sm:m-10 px-4">
                     <div className="">
