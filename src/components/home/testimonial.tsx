@@ -27,11 +27,13 @@ const Testimonial = () => {
     ]
 
     return (
-        <section className='py-8 lg:py-14'>
+        <section className='py-8 lg:py-20'>
             <div className="container mx-auto">
                 <div className="">
-                    <h2 className='text-primary text-2xl md:text-3xl underline underline-offset-5 font-semibold'>What Our Clients Say</h2>
-                    <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-center lg:py-10 py-8'>
+                    <div className='pb-5 lg:pb-10'>
+                        <h2 className='text-primary text-xl md:text-3xl underline underline-offset-5 font-semibold'>What Our Clients Say</h2>
+                    </div>
+                    <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-center'>
                         {ClientSays.map((item, i) => (
                             <div key={i} className='border-1 border-primary px-5 py-5 lg:px-8 lg:py-6 rounded-md'>
                                 <div className='flex items-center gap-3 mt-5  '>

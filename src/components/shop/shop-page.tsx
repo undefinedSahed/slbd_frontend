@@ -18,7 +18,7 @@ import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectVa
 // Main component with Suspense boundary
 export default function Products() {
     return (
-        <Suspense fallback={<div className="py-12">Loading auctions...</div>}>
+        <Suspense fallback={<div className="py-12">Loading products...</div>}>
             <AllProducts />
         </Suspense>
     );
@@ -214,6 +214,26 @@ function AllProducts() {
     // Filter sidebar component
     const FilterSidebar = () => (
         <div className="flex flex-col gap-5 p-5 rounded-md bg-[#b7d96b] overflow-y-auto h-screen lg:h-fit">
+
+            {/* Sort By Filter */}
+            <div>
+                <h4 className="text-xl font-medium text-[#000000] pb-2">Sort By</h4>
+                <Select value={selectedSortBy} onValueChange={handleSortByChange}>
+                    <SelectTrigger className="w-full border-primary">
+                        <SelectValue placeholder="Default" />
+                    </SelectTrigger>
+                    <SelectContent className="bg-primary text-white">
+                        <SelectGroup>
+                            <SelectItem value="default">Default</SelectItem>
+                            <SelectItem value="shuffle">Shuffle</SelectItem>
+                            <SelectItem value="popular">Popular</SelectItem>
+                            <SelectItem value="price-low-to-high">Price: Low to High</SelectItem>
+                            <SelectItem value="price-high-to-low">Price: High to Low</SelectItem>
+                        </SelectGroup>
+                    </SelectContent>
+                </Select>
+            </div>
+
             {/* Category List */}
             <div>
                 <h4 className="text-xl font-medium text-[#000000] pb-4">Category</h4>
@@ -243,30 +263,10 @@ function AllProducts() {
             </div>
 
 
-            {/* Sort By Filter */}
-            <div>
-                <h4 className="text-xl font-medium text-[#000000] pb-2">Sort By</h4>
-                <Select value={selectedSortBy} onValueChange={handleSortByChange}>
-                    <SelectTrigger className="w-full border-primary">
-                        <SelectValue placeholder="Default" />
-                    </SelectTrigger>
-                    <SelectContent className="bg-primary text-white">
-                        <SelectGroup>
-                            <SelectItem value="default">Default</SelectItem>
-                            <SelectItem value="shuffle">Shuffle</SelectItem>
-                            <SelectItem value="popular">Popular</SelectItem>
-                            <SelectItem value="price-low-to-high">Price: Low to High</SelectItem>
-                            <SelectItem value="price-high-to-low">Price: High to Low</SelectItem>
-                        </SelectGroup>
-                    </SelectContent>
-                </Select>
-            </div>
-
-
             {/* Clear Filters Button */}
             <button
                 onClick={clearFilters}
-                className="w-full py-2 bg-primary text-white rounded-md hover:bg-[#534738] transition-colors"
+                className="w-full py-2 bg-primary text-white rounded-md cursor-pointer transition-colors"
             >
                 Clear All Filters
             </button>
@@ -331,6 +331,7 @@ function AllProducts() {
 
     return (
         <section className="lg:py-28 py-20">
+
             <div className="text-center lg:pb-0 pb-8 relative ">
                 <div className="absolute left-0 top-1/2 -translate-y-1/2 lg:hidden">
                     <Sheet open={isDrawerOpen} onOpenChange={setIsDrawerOpen}>
@@ -353,7 +354,7 @@ function AllProducts() {
                         </SheetTrigger>
                         <SheetContent
                             side="left"
-                            className="w-[85%] sm:w-[350px] p-0 bg-transparent border-none"
+                            className="w-[60%] sm:w-[350px] p-0 bg-transparent border-none"
                             onInteractOutside={() => setIsDrawerOpen(false)}
                             onEscapeKeyDown={() => setIsDrawerOpen(false)}
                         >
@@ -383,23 +384,24 @@ function AllProducts() {
                 </div>
             </div>
 
+            {/* Products */}
             <div className="grid grid-cols-1 lg:grid-cols-11 gap-6 lg:translate-y-[-20px]">
                 <div className="col-span-1 lg:col-span-8">
                     {filteredProducts?.length === 0 ? (
                         <div className="text-center py-10">
                             <p className="text-lg text-primary">
-                                No auctions found matching your criteria.
+                                No products found matching your criteria.
                             </p>
                             <button
                                 onClick={clearFilters}
-                                className="mt-4 px-4 py-2 bg-primary text-white rounded-md hover:bg-[#534738] transition-colors"
+                                className="mt-4 px-4 py-2 bg-primary text-white rounded-md cursor-pointer transition-colors"
                             >
                                 Clear Filters
                             </button>
                         </div>
                     ) : (
                         <div className="">
-                            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3">
+                            <div className="grid grid-cols-2 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3">
                                 {filteredProducts?.map((product: ProductType) => (
                                     <ProductCard
                                         key={product._id}
@@ -407,6 +409,7 @@ function AllProducts() {
                                         title={product.title}
                                         price={product.price}
                                         discount={product.discount}
+                                        sold={product.sold}
                                     />
                                 ))}
                             </div>

@@ -71,7 +71,7 @@ export default function Navbar() {
 
 
     return (
-        <nav className="fixed top-0 z-50 w-full border-b border-primary text-black bg-white h-16 md:h-20 flex justify-center flex-col">
+        <nav className="sticky top-0 z-50 w-full border-b border-primary text-black bg-white h-16 md:h-20 flex justify-center flex-col">
             <div className="container mx-auto flex h-16 items-center justify-between">
                 {/* Logo */}
                 <div>
@@ -153,7 +153,7 @@ export default function Navbar() {
                             </SheetTrigger>
                             <SheetContent
                                 side="right"
-                                className="w-[280px] sm:w-[300px] pl-5 bg-[#dff3ed]"
+                                className="w-[220px] sm:w-[300px] pl-5 bg-[#dff3ed]"
                             >
                                 <nav className="flex flex-col gap-4 pt-10">
                                     {navLinks.map((link) => (

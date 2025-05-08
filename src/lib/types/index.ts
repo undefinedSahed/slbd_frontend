@@ -57,8 +57,9 @@ export interface ProductType {
         storageTemperature?: string;
         warranty?: string[];
     };
+    rating?: number;
     stock: 'in stock' | 'out of stock';
-    sold?: number;
+    sold: number;
 }
 
 
@@ -68,6 +69,7 @@ export interface ProductCardProps {
     title: string
     price: number
     discount: number
+    sold: number
 }
 
 
@@ -81,4 +83,25 @@ export interface BlogType {
     createdAt: string;
     updatedAt: string;
     __v: number;
+}
+
+
+
+export interface ServiceType {
+    image: string
+    title: string
+    description: string
+}
+
+
+export interface ServiceCardProps {
+    image: string
+    title: string
+    description: string
+}
+
+
+
+export interface CommonBannerProps {
+    heading: string
 }

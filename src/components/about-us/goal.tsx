@@ -23,7 +23,7 @@ export default function Goal() {
         },
     ]
     return (
-        <section className='py-8 lg:py-20'>
+        <section className='py-5 lg:py-20'>
             <div className="container mx-auto">
                 <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-8 mb-5'>
                     {missionInfo.map((item, index) => (

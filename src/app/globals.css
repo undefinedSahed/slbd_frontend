@@ -9,7 +9,7 @@
 }
 
 .container {
-    @apply lg:px-10 px-2 sm:px-2
+    @apply lg:px-10 px-3 sm:px-2
 }
 
 .loader {

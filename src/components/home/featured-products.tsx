@@ -70,9 +70,9 @@ export default function FeaturedProducts() {
   }
 
   return (
-    <section className="py-8 lg:py-14">
+    <section className="py-5 lg:py-14">
       <div className="container mx-auto px-4">
-        <div className="flex justify-between items-center mb-10 sm:mb-10">
+        <div className="flex justify-between items-center mb-5 sm:mb-10">
           <h2 className="text-primary text-2xl md:text-3xl underline underline-offset-5 font-semibold">Featured Products</h2>
 
           {/* Navigation buttons for carousel */}
@@ -99,7 +99,7 @@ export default function FeaturedProducts() {
         </div>
 
         {/* Featured Products Carousel/Grid */}
-        <div className="relative mb-8 overflow-hidden">
+        <div className="relative mb-2 lg:mb-8 overflow-hidden">
           <div
             ref={carouselRef}
             className="flex md:grid md:grid-cols-4 lg:grid-cols-8 gap-2 sm:gap-4 overflow-x-auto snap-x snap-mandatory scrollbar-hide"

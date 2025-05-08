@@ -22,10 +22,10 @@ export default function PopularProducts() {
 
 
     return (
-        <section className="py-8 lg:py-20">
+        <section className="py-5 lg:py-20">
             <div className="container mx-auto">
-                <div className="pb-10">
-                    <h2 className='text-primary text-2xl md:text-3xl underline underline-offset-5 font-semibold'>Popular Products</h2>
+                <div className="pb-5 lg:pb-10">
+                    <h2 className='text-primary text-xl md:text-3xl underline underline-offset-5 font-semibold'>Popular Products</h2>
                 </div>
 
                 {isError && <div>Error: {error.message}</div>}
@@ -55,19 +55,20 @@ export default function PopularProducts() {
                         }
                         <CarouselContent className="-ml-4">
                             {products?.map((item: ProductType) => (
-                                <CarouselItem key={item._id} className="lg:pl-4 basis-full md:basis-1/2 lg:basis-1/4">
+                                <CarouselItem key={item._id} className="basis-1/2 md:basis-1/3 lg:basis-1/4">
                                     <ProductCard
                                         discount={item.discount}
                                         thumbnail={item.thumbnail}
                                         title={item.title}
                                         price={item.price}
+                                        sold={item.sold}
                                     />
                                 </CarouselItem>
                             ))
                             }
                         </CarouselContent>
-                        <CarouselPrevious className="absolute cursor-pointer lg:left-[93%] left-[80%] md:left-[90%] lg:-top-16 -top-14 bg-primary hover:bg-green-700 text-white border-none lg:h-10 h-8 lg:w-10 w-8 rounded-full" />
-                        <CarouselNext className="absolute cursor-pointer lg:right-2 -right-0 lg:-top-16 -top-14 transform -translate-y-1/2 bg-primary hover:bg-green-700 text-white border-none lg:h-10 h-8 lg:w-10 w-8 rounded-full" />
+                        <CarouselPrevious className="absolute cursor-pointer lg:left-[93%] left-[81%] md:left-[88%] lg:!-top-16 !-top-9 bg-primary hover:bg-green-700 text-white border-none md:h-10 h-7 md:w-10 w-7 rounded-full" />
+                        <CarouselNext className="absolute cursor-pointer lg:right-2 right-1 lg:!-top-16 !-top-9 transform -translate-y-1/2 bg-primary hover:bg-green-700 text-white border-none md:h-10 h-7 md:w-10 w-7 rounded-full" />
                     </Carousel>
                 </div>
             </div>

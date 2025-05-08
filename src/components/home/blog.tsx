@@ -24,7 +24,7 @@ export default function Blogs() {
 
 
     return (
-        <section className="py-8 lg:py-14">
+        <section className="py-5 lg:py-14">
             <div className="container mx-auto">
                 {/* Blog Header */}
                 <div className="flex items-center justify-between px-4 md:px-10 lg:px-0 mb-10">
