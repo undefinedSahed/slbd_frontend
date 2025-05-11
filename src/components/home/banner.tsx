@@ -4,7 +4,7 @@ import React from 'react'
 export default function BannerHome() {
 
     return (
-        <section className="relative lg:h-screen h-[70svh] flex items-center pt-12"
+        <section className="relative lg:h-[90vh] h-[70svh] flex items-center"
             style={
                 {
                     backgroundImage: "url('../../assets/banner_bg.jpg')",

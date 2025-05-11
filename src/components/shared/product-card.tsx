@@ -1,6 +1,7 @@
 import { ProductCardProps } from '@/lib/types'
 import { Eye, Heart, ShoppingCart } from 'lucide-react'
 import Image from 'next/image'
+import Link from 'next/link'
 import React from 'react'
 
 export default function ProductCard({
@@ -30,10 +31,10 @@ export default function ProductCard({
                     layout="responsive"
                     className="rounded-t-lg w-full aspect-5/4 object-cover"
                 />
-                <div className="flex bg-white rounded-sm py-1 md:py-2 px-5 absolute bottom-2 md:bottom-4 left-1/2 -translate-x-1/2 space-x-3 md:space-x-5 lg:opacity-0 group-hover:opacity-100 transition duration-500">
-                    <Heart className='w-3 md:w-5 h-3 md:h-5' />
-                    <ShoppingCart className='w-3 md:w-5 h-3 md:h-5' />
-                    <Eye className='w-3 md:w-5 h-3 md:h-5' />
+                <div className="flex gap-5 bg-white rounded-sm py-1 md:py-2 px-5 absolute bottom-1 md:bottom-4 left-1/2 -translate-x-1/2 space-x-3 md:space-x-5 lg:opacity-0 group-hover:opacity-100 transition duration-500">
+                    <Heart className='w-4 md:w-5 h-4 md:h-5' />
+                    <ShoppingCart className='w-4 md:w-5 h-4 md:h-5' />
+                    <Link href={`/shop/${title}`}><Eye className='w-4 md:w-5 h-4 md:h-5' /></Link>
                 </div>
             </div>
             <div className="px-2 md:px-3 py-2 md:py-5 text-[#1B6732] ">
@@ -41,7 +42,7 @@ export default function ProductCard({
                 <div className="flex items-start justify-between">
                     <div className="">
                         <div className="text-xs md:text-base font-medium lg:flex lg:items-center lg:gap-2">
-                            ৳ {discount > 0 ? (price * (1 - discount / 100)).toFixed(2) : price}
+                            ৳ {discount && discount > 0 ? (price * (1 - discount / 100)).toFixed(2) : price}
                             <div className="">
                                 {discount > 0 && (
                                     <span className="line-through text-gray-500">৳ {price}</span>

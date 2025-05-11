@@ -15,6 +15,12 @@ import { CategoryType, ProductType } from "@/lib/types";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
 
 
+interface PriceRanges {
+    id: number;
+    range: string;
+    text: string;
+}
+
 // Main component with Suspense boundary
 export default function Products() {
     return (
@@ -67,12 +73,17 @@ function AllProducts() {
         searchParams.get("category") || ""
     );
 
+    const [selectedPriceRange, setSelectedPriceRange] = useState(
+        searchParams.get("price") || ""
+    );
+
     // Update URL when filters change
     useEffect(() => {
         const params = new URLSearchParams();
 
         if (debouncedSearchQuery) params.set("searchTerm", debouncedSearchQuery);
         if (selectedCategory) params.set("category", selectedCategory);
+        if (selectedPriceRange) params.set("price", selectedPriceRange);
         if (selectedSortBy && selectedSortBy !== "default")
             params.set("sortBy", selectedSortBy);
 
@@ -81,6 +92,7 @@ function AllProducts() {
         debouncedSearchQuery,
         selectedCategory,
         selectedSortBy,
+        selectedPriceRange,
         router
     ]);
 
@@ -104,6 +116,7 @@ function AllProducts() {
         debouncedSearchQuery,
         selectedCategory,
         selectedSortBy,
+        selectedPriceRange,
         isDrawerOpen
     ]);
 
@@ -139,6 +152,7 @@ function AllProducts() {
             selectedCategory,
             currentPage,
             selectedSortBy,
+            selectedPriceRange,
             limit
         ],
         queryFn: async () => {
@@ -148,6 +162,7 @@ function AllProducts() {
             // Add all filter parameters
             if (debouncedSearchQuery) queryParams.set("search", debouncedSearchQuery);
             if (selectedCategory) queryParams.set("category", selectedCategory);
+            if (selectedPriceRange) queryParams.set("price", selectedPriceRange);
             if (selectedSortBy !== "default") {
                 queryParams.set("sortBy", selectedSortBy);
             }
@@ -162,6 +177,7 @@ function AllProducts() {
             if (!res.ok) throw new Error(`Failed to fetch auctions: ${res.statusText}`);
             return res.json();
         },
+        staleTime: 1000 * 60 * 5
     });
 
     const filteredProducts = filteredProductsResponse?.data?.data ?? filteredProductsResponse?.data?.data ?? [];
@@ -183,6 +199,13 @@ function AllProducts() {
     };
 
 
+    const handlePriceRangeChange = (priceRange: string, isChecked: boolean) => {
+        setSelectedPriceRange(isChecked ? priceRange : "");
+        setIsDrawerOpen(false);
+    };
+
+
+
     const handleSortByChange = (value: string) => {
         setSelectedSortBy(value);
         setIsDrawerOpen(false);
@@ -199,22 +222,29 @@ function AllProducts() {
         setSelectedCategory("");
         setSelectedSortBy("default");
         setIsDrawerOpen(false);
+        setSelectedPriceRange("");
         router.replace("", { scroll: false });
     };
 
 
-    useEffect(() => {
-        setSelectedCategory("")
-        setSelectedSortBy("default")
-    }, [router.refresh])
+    // useEffect(() => {
+    //     setSelectedCategory("")
+    //     setSelectedSortBy("default")
+    // }, [router.refresh])
 
-
-    console.log(totalPages)
+    const prices = [
+        { id: 1, range: "0-500", text: "Up to 500" },
+        { id: 2, range: "501-1000", text: "501 - 1000" },
+        { id: 3, range: "1001-2000", text: "1001 - 2000" },
+        { id: 4, range: "2001-3000", text: "2001 - 3000" },
+        { id: 5, range: "3001-5000", text: "3001 - 5000" },
+        { id: 6, range: "5001-10000", text: "5001 - 10000" },
+        { id: 7, range: "10001-10000000", text: "Above 10000" },
+    ]
 
     // Filter sidebar component
     const FilterSidebar = () => (
-        <div className="flex flex-col gap-5 p-5 rounded-md bg-[#b7d96b] overflow-y-auto h-screen lg:h-fit">
-
+        <div className="flex flex-col gap-5 p-5 rounded-md bg-primary/20 overflow-y-auto h-screen lg:h-fit">
             {/* Sort By Filter */}
             <div>
                 <h4 className="text-xl font-medium text-[#000000] pb-2">Sort By</h4>
@@ -260,6 +290,33 @@ function AllProducts() {
                         ))}
                     </ul>
                 )}
+            </div>
+
+
+            {/* Pricing List */}
+            <div>
+                <h4 className="text-xl font-medium text-[#000000] pb-4">Price Range</h4>
+
+                <ul className="space-y-3">
+                    {prices?.map((priceRanges: PriceRanges) => (
+                        <li key={priceRanges.id} className="flex items-center gap-1">
+                            <Checkbox
+                                id={`price-${priceRanges.id}`}
+                                checked={selectedPriceRange === priceRanges.range}
+                                onCheckedChange={(checked) =>
+                                    handlePriceRangeChange(priceRanges.range, !!checked)
+                                }
+                            />
+                            <label
+                                htmlFor={`category-${priceRanges.id}`}
+                                className="text-base text-primary font-medium capitalize cursor-pointer"
+                            >
+                                {priceRanges.text}
+                            </label>
+                        </li>
+                    ))}
+                </ul>
+
             </div>
 
 
@@ -327,10 +384,11 @@ function AllProducts() {
     const hasActiveFilters =
         searchQuery !== "" ||
         selectedSortBy !== "default" ||
-        selectedCategory !== ""
+        selectedCategory !== "" ||
+        selectedPriceRange !== "";
 
     return (
-        <section className="lg:py-28 py-20">
+        <section className="lg:py-16 py-10">
 
             <div className="text-center lg:pb-0 pb-8 relative ">
                 <div className="absolute left-0 top-1/2 -translate-y-1/2 lg:hidden">

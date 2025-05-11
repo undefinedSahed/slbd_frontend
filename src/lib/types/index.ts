@@ -105,3 +105,32 @@ export interface ServiceCardProps {
 export interface CommonBannerProps {
     heading: string
 }
+
+
+
+export interface FeatureTableProps {
+    isLoading: boolean,
+    specs?: {
+        nominatedRatedVoltage?: string;
+        outputVoltage?: string;
+        luminousEfficiency?: string;
+        lumensMaintenance?: string;
+        efficiencyOfDriverCircuit?: string;
+        colourOfLightOutput?: string;
+        numberOfSMDModules?: number[];
+        inputCurrentVariation?: string;
+        driver?: string;
+        powerFactor?: number;
+        beamAngle?: string;
+        CRI?: string;
+        THD?: string;
+        IPRating?: string;
+        frequency?: string;
+        colourTemperature?: string;
+        materials?: string;
+        lifeTime?: string;
+        operationTemperature?: string;
+        storageTemperature?: string;
+        warranty?: string[];
+    };
+}

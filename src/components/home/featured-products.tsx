@@ -25,7 +25,7 @@ export default function FeaturedProducts() {
   })
 
   if (featuredProducts?.length > 0 && !selectedFeaturedProduct) {
-    setSelectedFeaturedProduct(featuredProducts[0]._id)
+    setSelectedFeaturedProduct(featuredProducts[0].title)
   }
 
   const { data: singleProduct, isLoading: singleProductLoading } = useQuery({
@@ -121,7 +121,7 @@ export default function FeaturedProducts() {
               : featuredProducts?.map((product: ProductType) => (
                 <button
                   key={product._id}
-                  onClick={() => setSelectedFeaturedProduct(product._id)}
+                  onClick={() => setSelectedFeaturedProduct(product.title)}
                   className={`relative overflow-hidden rounded-md min-w-[33%] sm:min-w-[33%] md:min-w-auto snap-start ${selectedFeaturedProduct === product._id ? "ring-2 ring-primary" : ""
                     }`}
                 >

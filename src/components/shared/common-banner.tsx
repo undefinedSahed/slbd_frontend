@@ -4,7 +4,7 @@ import React from 'react'
 export default function CommonBanner({ heading }: CommonBannerProps) {
     return (
         <section
-            className="md:h-[50vh] h-[40vh] relative flex items-center justify-center"
+            className="md:h-[50vh] h-[20vh] relative flex items-center justify-center"
             style={{
                 backgroundImage: "url('../../assets/about_ban_bg.jpg')",
                 backgroundPosition: "center",

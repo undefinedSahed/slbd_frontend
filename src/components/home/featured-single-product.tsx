@@ -6,6 +6,7 @@ import { useState } from "react"
 import { Heart, Share2, Star, Minus, Plus } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
+import Link from "next/link"
 
 interface FeaturedSingleProductProps {
     product: ProductType | null
@@ -38,6 +39,27 @@ export default function FeaturedSingleProduct({ product, isLoading }: FeaturedSi
             </div>
         )
     }
+
+
+    // Function to format the key (convert camelCase to Title Case with spaces)
+    const formatKey = (key: string) => {
+        return (
+            key
+                // Insert a space before all uppercase letters
+                .replace(/([A-Z])/g, " $1")
+                // Replace first character to uppercase
+                .replace(/^./, (str) => str.toUpperCase())
+        )
+    }
+
+    
+    const formatValue = (value: string | number | string[] | number[]) => {
+        if (Array.isArray(value)) {
+            return value.join(", ")
+        }
+        return value
+    }
+
 
     if (!product) return null
 
@@ -103,7 +125,7 @@ export default function FeaturedSingleProduct({ product, isLoading }: FeaturedSi
                 <div className="flex flex-col sm:flex-row gap-3 mt-6">
                     <Button className="flex-1 cursor-pointer text-white h-10">Add To Cart</Button>
                     <Button variant="outline" className="flex-1 h-10 cursor-pointer">
-                        View Details
+                        <Link href={`/shop/${product.title}`} className="w-full">View Details</Link>
                     </Button>
                 </div>
 
@@ -115,8 +137,8 @@ export default function FeaturedSingleProduct({ product, isLoading }: FeaturedSi
                                 .slice(0, 6)
                                 .map(([key, value]) => (
                                     <div key={key} className="flex gap-2">
-                                        <span className="font-medium">{key}:</span>
-                                        <span>{Array.isArray(value) ? value.join(", ") : value}</span>
+                                        <span className="font-medium">{formatKey(key)} :</span>
+                                        <span>{formatValue(value)}</span>
                                     </div>
                                 ))}
                         </div>
