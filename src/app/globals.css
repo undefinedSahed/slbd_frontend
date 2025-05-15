@@ -91,13 +91,14 @@
 }
 
 ::-webkit-scrollbar-track {
-    background:  #afeb24;
+    background: #afeb24;
     /* scrollbar track color */
 }
 
 ::-webkit-scrollbar-thumb {
     background: #16a34a;
-    /*scrollbarthumbcolor*/border-radius: 4px;
+    /*scrollbarthumbcolor*/
+    border-radius: 4px;
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
     -ms-border-radius: 4px;

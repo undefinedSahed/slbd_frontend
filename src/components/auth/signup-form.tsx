@@ -4,7 +4,6 @@ import * as z from "zod";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-// import { useRouter } from "next/navigation";
 import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
@@ -17,9 +16,8 @@ import {
     FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useRouter } from "next/navigation";
-import { registerUser } from "@/app/actions/auth";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 const registerFormSchema = z
     .object({
@@ -35,13 +33,8 @@ const registerFormSchema = z
         password: z.string().min(6, {
             message: "Password must be at least 6 characters.",
         }),
-        confirmPassword: z.string(),
         city: z.string(),
     })
-    .refine((data) => data.password === data.confirmPassword, {
-        message: "Passwords do not match.",
-        path: ["confirmPassword"],
-    });
 
 type RegisterFormValues = z.infer<typeof registerFormSchema>;
 
@@ -55,7 +48,6 @@ export function RegisterForm() {
             fullname: "",
             email: "",
             password: "",
-            confirmPassword: "",
             city: "",
             mobile: ""
         },
@@ -64,33 +56,33 @@ export function RegisterForm() {
     async function onSubmit(data: RegisterFormValues) {
         setIsLoading(true);
 
-        console.log("signup", data);
-
-        try {
-            const result = await registerUser({
-                username: data?.fullname,
-                email: data?.email,
-                mobile: data?.mobile,
-                password: data?.password,
-                confirmPassword: data?.confirmPassword,
-                city: data?.city
-            });
-
-            console.log("sign up", result);
-
-            if (result.success) {
-                toast("Account Successfully created");
-                toast("Login to continue");
-                router.push("/login");
-            } else {
-                toast("Registration failed");
+        const response = await fetch(
+            `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/users/register`,
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(data),
             }
-        } catch (error) {
-            toast("Something went wrong || " + error);
-        } finally {
-            setIsLoading(false);
+        )
+
+
+        const responseData = await response.json();
+
+        if (responseData.success) {
+            toast.success(`${responseData.message}. Check Email to Verify`)
         }
+
+        if (!responseData.success) {
+            toast.error(`${responseData.message.message}`)
+        }
+
+        setIsLoading(false)
+        router.push("/login")
+
     }
+
 
     return (
         <div className="flex justify-center items-center min-h-screen bg-background">
@@ -197,28 +189,6 @@ export function RegisterForm() {
 
                                 <FormField
                                     control={form.control}
-                                    name="confirmPassword"
-                                    render={({ field }) => (
-                                        <FormItem>
-                                            <FormLabel className="text-sm sm:text-base">
-                                                Confirm Password
-                                            </FormLabel>
-                                            <FormControl>
-                                                <Input
-                                                    {...field}
-                                                    type="password"
-                                                    placeholder="Confirm your password"
-                                                    disabled={isLoading}
-                                                    className="h-10 sm:h-12 rounded-md text-sm sm:text-base"
-                                                />
-                                            </FormControl>
-                                            <FormMessage className="text-xs sm:text-sm" />
-                                        </FormItem>
-                                    )}
-                                />
-
-                                <FormField
-                                    control={form.control}
                                     name="city"
                                     render={({ field }) => (
                                         <FormItem>
@@ -244,7 +214,7 @@ export function RegisterForm() {
                                     disabled={isLoading}
                                     className="w-full h-10 sm:h-12 bg-primary hover:bg-primary/90 text-sm sm:text-base font-semibold text-white rounded-md"
                                 >
-                                    Sign Up
+                                    {isLoading ? "Loading" : "Register"}
                                 </Button>
                             </form>
                         </Form>

@@ -1,9 +1,9 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-// import { SessionProvider } from "next-auth/react";
 import Navbar from "@/components/shared/navbar";
 import Footer from "@/components/shared/footer";
+import { SessionProvider } from "next-auth/react";
 
 export default function LayoutShell({
     children,
@@ -27,10 +27,11 @@ export default function LayoutShell({
     );
 
     return (
-        <>
+
+        <SessionProvider>
             {!shouldHideLayout && <Navbar />}
             {children}
             {!shouldHideLayout && <Footer />}
-        </>
+        </SessionProvider>
     );
 }

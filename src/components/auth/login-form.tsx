@@ -20,6 +20,7 @@ import { Input } from "@/components/ui/input";
 
 import { Eye, EyeOff } from "lucide-react";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 // Schema with explicit typing
 const loginFormSchema = z.object({
@@ -32,6 +33,8 @@ type LoginFormValues = z.infer<typeof loginFormSchema>;
 export function LoginForm() {
     const [isLoading, setIsLoading] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
+
+    const router = useRouter()
 
     const form = useForm<LoginFormValues>({
         resolver: zodResolver(loginFormSchema),
@@ -46,20 +49,17 @@ export function LoginForm() {
         // console.log(data, "login data");
         try {
             const response = await signIn("credentials", {
-                username: data.email,
+                email: data.email,
                 password: data.password,
-                redirect: false,
-                callbackUrl: "/",
+                // callbackUrl: "/",
             });
 
             // console.log("login data df", response);
             if (response?.error) {
                 toast.error("Invalid username or password", { position: "top-right" });
-                // alert(response?.error);
             } else {
                 toast.success("Login successful");
-                // router.push("/dashboard");
-                window.location.href = "/";
+                // window.location.href = "/account";
                 // router.refresh();
             }
         } catch (error) {
@@ -112,7 +112,7 @@ export function LoginForm() {
                                                 </FormLabel>
                                                 <FormControl>
                                                     <Input
-                                                        type="string"
+                                                        type="email"
                                                         placeholder="Enter your email"
                                                         {...field}
                                                         className="h-10 sm:h-12 text-sm sm:text-base"
@@ -179,9 +179,9 @@ export function LoginForm() {
                             {/* Mobile-only Register Link */}
                             <div className="lg:hidden text-center mt-4">
                                 <p className="text-sm text-primary mb-2">
-                                    Don’t have an account?
+                                    Don&apos;t have an account?
                                 </p>
-                                <Link href="/sign-up">
+                                <Link href="/signup">
                                     <Button
                                         variant="outline"
                                         className="px-6 py-2 border-primary text-primary hover:bg-primary hover:text-white text-sm"

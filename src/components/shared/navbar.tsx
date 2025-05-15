@@ -5,6 +5,7 @@ import { Input } from '@/components/ui/input';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { useMobile } from '@/hooks/use-mobile-nav';
 import { Menu, Search, Store, UserRound } from 'lucide-react';
+import { useSession } from 'next-auth/react';
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation';
@@ -29,9 +30,21 @@ const cartList = [
 
 
 export default function Navbar() {
+
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const session = useSession()
+
+    const token = session?.data?.accessToken
+
+    if (token) {
+        setIsLoggedIn(true)
+    }
+
+    console.log(token, "token")
+
+
     const isMobile = useMobile();
     const pathname = usePathname();
-    const [isLoggedIn] = useState(false);
     const router = useRouter();
 
     const [searchTerm, setSearchTerm] = useState("");
