@@ -189,8 +189,6 @@ function AllProducts() {
         }
     }, [filteredProductsResponse]);
 
-    console.log("Filtered Products", filteredProducts)
-
 
     // Handlers
     const handleCategoryChange = (categoryName: string, isChecked: boolean) => {
@@ -244,10 +242,10 @@ function AllProducts() {
 
     // Filter sidebar component
     const FilterSidebar = () => (
-        <div className="flex flex-col gap-5 p-5 rounded-md bg-primary/20 overflow-y-auto h-screen lg:h-fit">
+        <div className="flex flex-col gap-5 p-5 rounded-md bg-white lg:bg-primary/20 overflow-y-auto h-screen lg:h-fit">
             {/* Sort By Filter */}
             <div>
-                <h4 className="text-xl font-medium text-[#000000] pb-2">Sort By</h4>
+                <h4 className="text-sm lg:text-xl font-medium text-[#000000] pb-2">Sort By</h4>
                 <Select value={selectedSortBy} onValueChange={handleSortByChange}>
                     <SelectTrigger className="w-full border-primary">
                         <SelectValue placeholder="Default" />
@@ -266,7 +264,7 @@ function AllProducts() {
 
             {/* Category List */}
             <div>
-                <h4 className="text-xl font-medium text-[#000000] pb-4">Category</h4>
+                <h4 className="text-sm lg:text-xl font-medium text-[#000000] pb-4">Category</h4>
                 {isCategoriesLoading ? (
                     <p className="text-primary">Loading categories...</p>
                 ) : (
@@ -279,10 +277,11 @@ function AllProducts() {
                                     onCheckedChange={(checked) =>
                                         handleCategoryChange(category.title, !!checked)
                                     }
+                                    className="h-3 w-3 lg:h-5 lg:w-5"
                                 />
                                 <label
                                     htmlFor={`category-${category._id}`}
-                                    className="text-base text-primary font-medium capitalize cursor-pointer"
+                                    className="text-xs lg:text-base text-primary font-medium capitalize cursor-pointer"
                                 >
                                     {category.title}
                                 </label>
@@ -295,7 +294,7 @@ function AllProducts() {
 
             {/* Pricing List */}
             <div>
-                <h4 className="text-xl font-medium text-[#000000] pb-4">Price Range</h4>
+                <h4 className="text-sm lg:text-xl font-medium text-[#000000] pb-4">Price Range</h4>
 
                 <ul className="space-y-3">
                     {prices?.map((priceRanges: PriceRanges) => (
@@ -306,10 +305,11 @@ function AllProducts() {
                                 onCheckedChange={(checked) =>
                                     handlePriceRangeChange(priceRanges.range, !!checked)
                                 }
+                                className="h-3 w-3 lg:h-5 lg:w-5"
                             />
                             <label
                                 htmlFor={`category-${priceRanges.id}`}
-                                className="text-base text-primary font-medium capitalize cursor-pointer"
+                                className="text-xs lg:text-base text-primary font-medium capitalize cursor-pointer"
                             >
                                 {priceRanges.text}
                             </label>
@@ -378,7 +378,6 @@ function AllProducts() {
         );
     }
 
-    console.log("filteredProductsResponse", filteredProductsResponse);
 
 
     const hasActiveFilters =
@@ -397,13 +396,13 @@ function AllProducts() {
                             <Button
                                 variant="ghost"
                                 size="icon"
-                                className="text-primary relative"
+                                className="text-primary relative mt-10"
                             >
-                                <p className="py-1 mt-4 ml-6 px-4 rounded-md bg-primary text-white text-xs">
+                                <p className="py-1 mt-10 ml-6 px-4 rounded-md bg-primary text-white text-xs">
                                     Filter
                                 </p>
                                 {hasActiveFilters && (
-                                    <span className="absolute top-2 -right-7 flex h-4 w-4 items-center justify-center rounded-full bg-primary text-[10px] text-white">
+                                    <span className="absolute top-4 -right-7 flex h-3 w-3 items-center justify-center rounded-full bg-primary text-[5px] text-white">
                                         •
                                     </span>
                                 )}
@@ -412,7 +411,7 @@ function AllProducts() {
                         </SheetTrigger>
                         <SheetContent
                             side="left"
-                            className="w-[60%] sm:w-[350px] p-0 bg-transparent border-none"
+                            className="w-[100%] sm:w-[350px] p-0 bg-transparent border-none"
                             onInteractOutside={() => setIsDrawerOpen(false)}
                             onEscapeKeyDown={() => setIsDrawerOpen(false)}
                         >
@@ -428,7 +427,7 @@ function AllProducts() {
             </div>
 
             {/* Search bar */}
-            <div className="lg:flex justify-end">
+            <div className="lg:flex justify-end mt-5">
                 <div className="">
                     <div className="relative mb-6 lg:w-[380px]">
                         <Input

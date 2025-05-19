@@ -1,5 +1,8 @@
 {
   "compilerOptions": {
+    "types": [
+      "next-auth"
+    ],
     "target": "ES2017",
     "lib": [
       "dom",

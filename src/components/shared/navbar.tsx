@@ -9,7 +9,8 @@ import { useSession } from 'next-auth/react';
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { FaFacebook, FaInstagram, FaTiktok, FaTwitter } from 'react-icons/fa';
 
 const navLinks = [
     { name: "Home", href: "/" },
@@ -31,16 +32,16 @@ const cartList = [
 
 export default function Navbar() {
 
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
     const session = useSession()
+    const token = session?.data?.user?.accessToken
 
-    const token = session?.data?.accessToken
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-    if (token) {
-        setIsLoggedIn(true)
-    }
 
-    console.log(token, "token")
+
+    useEffect(() => {
+        setIsLoggedIn(!!token);
+    }, [token]);
 
 
     const isMobile = useMobile();
@@ -140,7 +141,7 @@ export default function Navbar() {
                     )}
 
                     {/* Icon Links - shown when logged in */}
-                    {isLoggedIn && (
+                    {isLoggedIn && !isMobile && (
                         <div className="flex items-center gap-2 sm:gap-4">
                             {iconLinks.map(({ icon: Icon, href, count }) => (
                                 <Link key={href} href={href} className={getIconClasses(href)}>
@@ -166,9 +167,9 @@ export default function Navbar() {
                             </SheetTrigger>
                             <SheetContent
                                 side="right"
-                                className="w-[220px] sm:w-[300px] pl-5 bg-[#dff3ed]"
+                                className="w-[220px] sm:w-[300px] pl-5 bg-primary/90 text-white"
                             >
-                                <nav className="flex flex-col gap-4 pt-10">
+                                <nav className="flex flex-col gap-4 pt-10 pb-4 border-b pr-3">
                                     {navLinks.map((link) => (
                                         <Link
                                             key={link.name}
@@ -179,6 +180,7 @@ export default function Navbar() {
                                             {link.name}
                                         </Link>
                                     ))}
+
                                     {!isLoggedIn ? (
                                         <Link
                                             href="/login"
@@ -189,13 +191,13 @@ export default function Navbar() {
                                     ) : (
                                         <>
                                             <Link
-                                                href="/wishlist"
+                                                href="/cart"
                                                 className={`relative text-base font-medium text-muted-foreground transition-colors hover:text-foreground ${isActive("/wishlist") ? "text-foreground" : ""
                                                     }`}
                                             >
-                                                Wishlist
+                                                Cart
                                                 {cartList?.length > 0 && (
-                                                    <span className="absolute top-[-8px] right-[-8px] bg-[#E4C072] text-white rounded-full text-[10px] px-[6px] font-semibold">
+                                                    <span className="absolute top-[-8px] -left-3 bg-white text-primary rounded-full text-[10px] h-4 w-4 flex justify-center items-center font-semibold">
                                                         {cartList.length}
                                                     </span>
                                                 )}
@@ -210,6 +212,18 @@ export default function Navbar() {
                                         </>
                                     )}
                                 </nav>
+                                <div className="flex flex-col gap-1">
+                                    <a href="tel:8801724188240" className="text-xs font-medium">Call : +880 1724-188240</a>
+                                    <a href="mailto:superlightingbd1@gmail.com" className="text-xs font-medium">superlightingbd1@gmail.com</a>
+                                    <div className="flex justify-start items-center gap-3 text-xl pt-5">
+                                        <Link href="https://www.facebook.com/profile.php?id=100090851693362" target="_blank">
+                                            <FaFacebook className="text-white hover:scale-110 hover:text-primary transition-all duration-300 cursor-pointer" />
+                                        </Link>
+                                        <FaInstagram className="text-white hover:scale-110 hover:text-primary transition-all duration-300 cursor-pointer" />
+                                        <FaTiktok className="text-white hover:scale-110 hover:text-primary transition-all duration-300 cursor-pointer" />
+                                        <FaTwitter className="text-white hover:scale-110 hover:text-primary transition-all duration-300 cursor-pointer" />
+                                    </div>
+                                </div>
                             </SheetContent>
                         </Sheet>
                     )}

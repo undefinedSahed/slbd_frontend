@@ -45,25 +45,27 @@ export function LoginForm() {
     });
 
     const onSubmit = async (data: LoginFormValues) => {
-        setIsLoading(true);
-        // console.log(data, "login data");
         try {
+            setIsLoading(true);
             const response = await signIn("credentials", {
                 email: data.email,
                 password: data.password,
-                // callbackUrl: "/",
+                redirect: false, // Important for handling manually
             });
 
-            // console.log("login data df", response);
-            if (response?.error) {
-                toast.error("Invalid username or password", { position: "top-right" });
+            if (response?.ok && !response.error) {
+                toast.success("Login successful!", { position: "top-right" });
+
+                // Redirect user to dashboard or home page
+                router.push("/"); // Change this path if needed
             } else {
-                toast.success("Login successful");
-                // window.location.href = "/account";
-                // router.refresh();
+                toast.error("Invalid email or password", { position: "top-right" });
             }
         } catch (error) {
-            toast.error("Something went wrong. Please try again. || " + error);
+            toast.error("Something went wrong. Please try again.", {
+                position: "top-right",
+            });
+            console.error("Login error:", error);
         } finally {
             setIsLoading(false);
         }

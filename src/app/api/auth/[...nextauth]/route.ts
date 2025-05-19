@@ -1,85 +1,74 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { loginUser } from "@/app/actions/auth";
 
 const handler = NextAuth({
     providers: [
         CredentialsProvider({
-            name: "Credentials",
+            name: "credentials",
             credentials: {
-                email: {
-                    label: "Email",
-                    type: "email",
-                    placeholder: "email@example.com",
-                },
+                email: { label: "Email", type: "text" },
                 password: { label: "Password", type: "password" },
             },
             async authorize(credentials) {
-                if (!credentials?.email || !credentials?.password) {
-                    throw new Error("Email and password are required");
+                if (!credentials?.email || !credentials?.password) return null;
+
+                try {
+                    const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API_URL}/users/login`, {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({
+                            email: credentials.email,
+                            password: credentials.password,
+                        }),
+                    });
+
+                    const result = await res.json();
+
+                    if (res.ok && result?.data?.accessToken) {
+                        return {
+                            id: result.data.id,
+                            fullname: result.data.fullname,
+                            email: result.data.email,
+                            role: result.data.role,
+                            accessToken: result.data.accessToken,
+                        };
+                    }
+
+                    return null;
+                } catch (err) {
+                    console.error("Auth error", err);
+                    return null;
                 }
-
-                const result = await loginUser({
-                    email: credentials.email,
-                    password: credentials.password,
-                });
-
-                if (!result.success) {
-                    // Forward the message from your backend
-                    throw new Error(result.message || "Invalid credentials");
-                }
-
-                const user = result.data.user;
-
-                console.log(user)
-
-                return {
-                    id: user._id.toString(),
-                    name: user.fullname,
-                    email: user.email,
-                    role: user.role,
-                    isVerified: user.verified,
-                    token: user.accessToken,
-                };
-
             },
         }),
     ],
-    pages: {
-        signIn: "/login",
-        signOut: "/logout",
-        error: "/auth/error",
-    },
     callbacks: {
         async jwt({ token, user }) {
             if (user) {
-                token.user = {
-                    id: user.id,
-                    name: user.name,
-                    email: user.email,
-                    role: user.role,
-                    isVerified: user.verified,
-                };
+                token.accessToken = user.accessToken;
                 token.role = user.role;
-                token.accessToken = user.token;
+                token.id = user.id;
+                token.fullname = user.fullname;
             }
             return token;
         },
         async session({ session, token }) {
-            session.user = {
-                ...token.user,
-                verified: token.user.isVerified,
-            };
-            session.accessToken = token.accessToken;
+            if (token && session.user) {
+                session.user.accessToken = token.accessToken;
+                session.user.role = token.role;
+                session.user.id = token.id;
+                session.user.fullname = token.fullname;
+            }
             return session;
         },
     },
+    pages: {
+        signIn: "/login",
+    },
     session: {
         strategy: "jwt",
-        maxAge: 24 * 60 * 60, // 24 hours
     },
     secret: process.env.NEXTAUTH_SECRET,
-    debug: process.env.NODE_ENV === "development",
 });
 
 export { handler as GET, handler as POST };

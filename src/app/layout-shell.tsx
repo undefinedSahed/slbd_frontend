@@ -3,7 +3,16 @@
 import { usePathname } from "next/navigation";
 import Navbar from "@/components/shared/navbar";
 import Footer from "@/components/shared/footer";
-import { SessionProvider } from "next-auth/react";
+import { useMemo } from "react";
+
+const hiddenPaths = [
+    "/dashboard",
+    "/forgot-password",
+    "/reset-password",
+    "/signup/verify-email",
+    "/login",
+    "/signup",
+];
 
 export default function LayoutShell({
     children,
@@ -12,26 +21,15 @@ export default function LayoutShell({
 }) {
     const pathname = usePathname();
 
-    const hiddenPaths = [
-        "/dashboard",
-        "/seller-dashboard",
-        "/forgot-password",
-        "/reset-password",
-        "/verify-otp",
-        "/login",
-        "/signup",
-    ];
-
-    const shouldHideLayout = hiddenPaths.some((path) =>
-        pathname.startsWith(path)
-    );
+    const shouldHideLayout = useMemo(() => {
+        return hiddenPaths.some((path) => pathname === path);
+    }, [pathname]);
 
     return (
-
-        <SessionProvider>
+        <>
             {!shouldHideLayout && <Navbar />}
             {children}
             {!shouldHideLayout && <Footer />}
-        </SessionProvider>
+        </>
     );
 }
