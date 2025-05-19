@@ -120,12 +120,12 @@ export default function ContactSection() {
                     </div>
 
                     {/* Contact Information */}
-                    <div className="space-y-10">
+                    <div className="space-y-5 lg:space-y-10">
                         <div>
                             <h2 className="text-2xl font-semibold text-primary mb-8">Other Ways to Reach Us</h2>
                         </div>
 
-                        <div className="space-y-8">
+                        <div className="space-y-4 lg:space-y-8">
                             <div className="bg-primary/10 py-6 px-6 rounded-lg">
                                 <div className="flex items-center space-x-4 pb-2">
                                     <Phone className="h-5 w-5 text-green-600" />
