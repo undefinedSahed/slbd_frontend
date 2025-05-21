@@ -65,6 +65,7 @@ export interface ProductType {
 
 
 export interface ProductCardProps {
+    id: string
     thumbnail: string
     title: string
     price: number

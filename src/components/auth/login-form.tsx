@@ -171,7 +171,7 @@ export function LoginForm() {
                                     <Button
                                         type="submit"
                                         disabled={isLoading}
-                                        className="w-full h-10 sm:h-12 bg-primary hover:bg-primary/90 text-sm sm:text-base font-bold text-white"
+                                        className="w-full h-10 sm:h-12 bg-primary hover:bg-primary/90 text-sm sm:text-base font-bold text-white cursor-pointer"
                                     >
                                         {isLoading ? "Logging in..." : "Log In"}
                                     </Button>
@@ -186,7 +186,7 @@ export function LoginForm() {
                                 <Link href="/signup">
                                     <Button
                                         variant="outline"
-                                        className="px-6 py-2 border-primary text-primary hover:bg-primary hover:text-white text-sm"
+                                        className="px-6 py-2 border-primary text-primary hover:bg-primary hover:text-white text-sm cursor-pointer"
                                     >
                                         Register
                                     </Button>

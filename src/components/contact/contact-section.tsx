@@ -52,7 +52,7 @@ export default function ContactSection() {
     return (
         <section className="py-5 lg:py-20">
             <div className="container mx-auto">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-center">
                     {/* Contact Form */}
                     <div className="bg-primary/10 pt-20 pb-5 px-5 rounded-2xl">
                         <div className="pb-10">
@@ -103,7 +103,7 @@ export default function ContactSection() {
                                 <Label>Message</Label>
                                 <Textarea
                                     name="message"
-                                    placeholder="Tell us a little about the project..."
+                                    placeholder="Tell us a little about your concern..."
                                     required
                                     className="border-primary focus:ring-green-600 focus:border-green-600 min-h-[120px]"
                                 />

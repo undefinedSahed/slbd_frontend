@@ -4,13 +4,15 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { useMobile } from '@/hooks/use-mobile-nav';
-import { Menu, Search, Store, UserRound } from 'lucide-react';
+import { Menu, Search, UserRound } from 'lucide-react';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
-import { FaFacebook, FaInstagram, FaTiktok, FaTwitter } from 'react-icons/fa';
+import { FaCartPlus, FaFacebook, FaInstagram, FaTiktok, FaTwitter } from 'react-icons/fa';
+import { useQuery } from '@tanstack/react-query';
+
 
 const navLinks = [
     { name: "Home", href: "/" },
@@ -22,12 +24,12 @@ const navLinks = [
 ];
 
 
-const cartList = [
-    { name: "Item 1", href: "/" },
-    { name: "Item 2", href: "/" },
-    { name: "Item 3", href: "/" },
-    { name: "Item 4", href: "/" },
-];
+// const cartList = [
+//     { name: "Item 1", href: "/" },
+//     { name: "Item 2", href: "/" },
+//     { name: "Item 3", href: "/" },
+//     { name: "Item 4", href: "/" },
+// ];
 
 
 export default function Navbar() {
@@ -38,10 +40,31 @@ export default function Navbar() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
 
-
     useEffect(() => {
         setIsLoggedIn(!!token);
     }, [token]);
+
+
+    const { data: cartItemsNumber } = useQuery({
+        queryKey: ['cartItems', token],
+        queryFn: async () => {
+            const res = await fetch(
+                `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/cart`,
+                {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
+            )
+
+            return res.json()
+        },
+
+        select: (cartData) => cartData?.data?.items?.length
+    })
+
 
 
     const isMobile = useMobile();
@@ -52,7 +75,7 @@ export default function Navbar() {
 
 
     const iconLinks = [
-        { icon: Store, href: "/cart", count: cartList?.length },
+        { icon: FaCartPlus, href: "/cart", count: cartItemsNumber },
         { icon: UserRound, href: "/accounts", count: 0 },
     ];
 
@@ -196,9 +219,9 @@ export default function Navbar() {
                                                     }`}
                                             >
                                                 Cart
-                                                {cartList?.length > 0 && (
+                                                {cartItemsNumber > 0 && (
                                                     <span className="absolute top-[-8px] -left-3 bg-white text-primary rounded-full text-[10px] h-4 w-4 flex justify-center items-center font-semibold">
-                                                        {cartList.length}
+                                                        {cartItemsNumber}
                                                     </span>
                                                 )}
                                             </Link>

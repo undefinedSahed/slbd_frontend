@@ -461,6 +461,7 @@ function AllProducts() {
                             <div className="grid grid-cols-2 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3">
                                 {filteredProducts?.map((product: ProductType) => (
                                     <ProductCard
+                                        id={product._id}
                                         key={product._id}
                                         thumbnail={product.thumbnail}
                                         title={product.title}

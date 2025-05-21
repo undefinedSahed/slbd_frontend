@@ -58,6 +58,7 @@ export default function RelatedProducts({ category }: { category: string }) {
                                 <CarouselItem key={item._id} className="basis-1/2 md:basis-1/3 lg:basis-1/4">
                                     <div className="h-full">
                                         <ProductCard
+                                        id={item._id}
                                             discount={item.discount}
                                             thumbnail={item.thumbnail}
                                             title={item.title}

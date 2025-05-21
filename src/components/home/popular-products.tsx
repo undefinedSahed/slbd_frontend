@@ -58,10 +58,12 @@ export default function PopularProducts() {
                                 <CarouselItem key={item._id} className="basis-1/2 md:basis-1/3 lg:basis-1/4">
                                     <div className="h-full">
                                         <ProductCard
-                                            discount={item.discount}
+                                            id={item._id}
+                                            key={item._id}
                                             thumbnail={item.thumbnail}
                                             title={item.title}
                                             price={item.price}
+                                            discount={item.discount}
                                             sold={item.sold}
                                         />
                                     </div>

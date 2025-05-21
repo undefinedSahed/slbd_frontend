@@ -7,6 +7,10 @@ import { Heart, Share2, Star, Minus, Plus } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 import Link from "next/link"
+import { toast } from "sonner"
+import { useQueryClient } from "@tanstack/react-query"
+import { useSession } from "next-auth/react"
+import { useRouter } from "next/navigation"
 
 interface FeaturedSingleProductProps {
     product: ProductType | null
@@ -14,8 +18,18 @@ interface FeaturedSingleProductProps {
 }
 
 export default function FeaturedSingleProduct({ product, isLoading }: FeaturedSingleProductProps) {
+
     const [quantity, setQuantity] = useState(1)
 
+    const session = useSession()
+
+    const token = session?.data?.user?.accessToken
+
+    const router = useRouter()
+
+    const queryclient = useQueryClient()
+
+    
     const incrementQuantity = () => {
         setQuantity((prev) => prev + 1)
     }
@@ -52,7 +66,7 @@ export default function FeaturedSingleProduct({ product, isLoading }: FeaturedSi
         )
     }
 
-    
+
     const formatValue = (value: string | number | string[] | number[]) => {
         if (Array.isArray(value)) {
             return value.join(", ")
@@ -62,6 +76,35 @@ export default function FeaturedSingleProduct({ product, isLoading }: FeaturedSi
 
 
     if (!product) return null
+
+
+
+    const handleAddToCart = async () => {
+        if (!token) {
+            toast.error('Please login to continue')
+            router.push('/login')
+            return
+        }
+        const res = await fetch(
+            `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/cart/addtocart`,
+            {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    "Authorization": `Bearer ${token}`
+                },
+                body: JSON.stringify({
+                    product_id: product._id,
+                    quantity: quantity
+                })
+            }
+        )
+        if (!res.ok) return toast.error('Something went wrong')
+        const data = await res.json()
+        toast.success(data.message)
+        queryclient.invalidateQueries({ queryKey: ['cartItems', token] });
+    }
+
 
     return (
         <div className="grid md:grid-cols-2 gap-6 lg:gap-10 mt-8">
@@ -123,7 +166,7 @@ export default function FeaturedSingleProduct({ product, isLoading }: FeaturedSi
                 </div>
 
                 <div className="flex flex-col sm:flex-row gap-3 mt-6">
-                    <Button className="flex-1 cursor-pointer text-white h-10">Add To Cart</Button>
+                    <Button onClick={handleAddToCart} className="flex-1 cursor-pointer text-white h-10">Add To Cart</Button>
                     <Button variant="outline" className="flex-1 h-10 cursor-pointer">
                         <Link href={`/shop/${product.title}`} className="w-full">View Details</Link>
                     </Button>

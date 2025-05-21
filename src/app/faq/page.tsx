@@ -2,6 +2,7 @@ import FAQSection from '@/components/faq/faq-section'
 import React from 'react'
 import { Metadata } from 'next'
 import Image from 'next/image';
+import CommonBanner from '@/components/shared/common-banner';
 
 export const metadata: Metadata = {
     title: "Frequently Asked Questions | Super Lighting BD",
@@ -11,7 +12,8 @@ export const metadata: Metadata = {
 export default function page() {
     return (
         <main>
-            <div className="py-12 px-4 md:px-6 lg:px-8">
+            <CommonBanner heading='FAQ'/>
+            <div className="py-20 px-4 md:px-6 lg:px-8">
                 <h2 className=" text-xl md:text-3xl underline underline-offset-5 font-bold text-center mb-12 text-primary">Frequently Asked Questions</h2>
                 <div className="flex justify-between">
                     <div className="w-full md:w-2/3">

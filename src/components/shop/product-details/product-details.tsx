@@ -8,12 +8,28 @@ import { Heart, Share2, BarChart2, Minus, Plus, Truck } from "lucide-react"
 import FeaturesTable from "./features-table"
 import RelatedProducts from "./related-products"
 
+import { toast } from "sonner"
+import { useQueryClient } from "@tanstack/react-query"
+import { useSession } from "next-auth/react"
+import { useRouter } from "next/navigation"
+import Link from "next/link"
+
+
 interface ProductDetails {
     productName: string
 }
 
 export default function ProductDetails({ productName }: ProductDetails) {
     const [quantity, setQuantity] = useState(1)
+
+
+    const session = useSession()
+
+    const token = session?.data?.user?.accessToken
+
+    const router = useRouter()
+
+    const queryclient = useQueryClient()
 
     const [selectedImageIndex, setSelectedImageIndex] = useState(0)
     // Fetch product details
@@ -43,6 +59,33 @@ export default function ProductDetails({ productName }: ProductDetails) {
     if (errorProduct) {
         return <div>Error loading product details: {errorProduct.message}</div>
     }
+
+    const handleAddToCart = async () => {
+        if (!token) {
+            toast.error('Please login to continue')
+            router.push('/login')
+            return
+        }
+        const res = await fetch(
+            `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/cart/addtocart`,
+            {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    "Authorization": `Bearer ${token}`
+                },
+                body: JSON.stringify({
+                    product_id: product._id,
+                    quantity: quantity
+                })
+            }
+        )
+        if (!res.ok) return toast.error('Something went wrong')
+        const data = await res.json()
+        toast.success(data.message)
+        queryclient.invalidateQueries({ queryKey: ['cartItems', token] });
+    }
+
 
     return (
         <section className="py-4 sm:py-5 lg:py-20">
@@ -115,7 +158,7 @@ export default function ProductDetails({ productName }: ProductDetails) {
                             <div className="mt-4 sm:mt-6 flex flex-wrap items-center gap-3 sm:gap-4">
                                 <div className="flex items-center border border-primary rounded-md">
                                     <button
-                                        className="p-1.5 sm:p-2 text-primary hover:bg-gray-100 disabled:opacity-50"
+                                        className="p-1.5 sm:p-2 text-primary cursor-pointer disabled:opacity-50"
                                         onClick={() => setQuantity(Math.max(1, quantity - 1))}
                                         disabled={quantity <= 1}
                                     >
@@ -133,7 +176,7 @@ export default function ProductDetails({ productName }: ProductDetails) {
                                         className="w-10 sm:w-12 text-center border-x border-primary text-sm sm:text-base"
                                     />
                                     <button
-                                        className="p-1.5 sm:p-2 text-primary hover:bg-gray-100"
+                                        className="p-1.5 sm:p-2 text-primary cursor-pointer"
                                         onClick={() => setQuantity(quantity + 1)}
                                     >
                                         <Plus className="h-4 w-4 sm:h-5 sm:w-5" />
@@ -141,13 +184,18 @@ export default function ProductDetails({ productName }: ProductDetails) {
                                 </div>
 
                                 <div className="flex flex-wrap gap-3 sm:gap-4">
-                                    <button className="px-4 sm:px-6 py-1.5 sm:py-2 border border-primary rounded-md text-gray-800 text-sm sm:text-base font-medium hover:bg-gray-50">
+                                    <button
+                                        onClick={handleAddToCart}
+                                        className="px-4 sm:px-6 py-1.5 sm:py-2 border border-primary rounded-md text-gray-800 text-sm sm:text-base font-medium hover:bg-gray-50 cursor-pointer">
                                         ADD TO CART
                                     </button>
 
-                                    <button className="px-4 sm:px-6 py-1.5 sm:py-2 bg-primary text-white rounded-md text-sm sm:text-base font-medium hover:bg-gray-800">
-                                        BUY NOW
-                                    </button>
+                                    <Link href={`/checkout?productName=${product.title}&quantity=${quantity}`}>
+                                        <button
+                                            className="px-4 sm:px-6 py-1.5 sm:py-2 bg-primary text-white rounded-md text-sm sm:text-base font-medium hover:bg-primary/90 cursor-pointer">
+                                            BUY NOW
+                                        </button>
+                                    </Link>
                                 </div>
                             </div>
 
