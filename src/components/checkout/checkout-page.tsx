@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { useQuery } from "@tanstack/react-query"
-import { useSearchParams } from "next/navigation"
+import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import Image from "next/image"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
@@ -63,7 +63,9 @@ const formSchema = z.object({
 type FormValues = z.infer<typeof formSchema>
 
 export default function CheckoutPage() {
-    // const router = useRouter()
+    const router = useRouter()
+    const pathname = usePathname(); // replaces asPath
+
     const searchParams = useSearchParams()
     const productName = searchParams.get("productName")
     const quantityParam = searchParams.get("quantity")
@@ -72,6 +74,8 @@ export default function CheckoutPage() {
 
     const session = useSession()
     const token = session?.data?.user?.accessToken
+
+    const { fullname, city } = session?.data?.user || {}
 
 
     const [cities, setCities] = useState<string[]>([])
@@ -83,9 +87,22 @@ export default function CheckoutPage() {
             name: "",
             phone: "",
             address: "",
-            city: "Dhaka"
+            city: ""
         },
     })
+
+
+    useEffect(() => {
+        if (session?.data?.user) {
+            form.reset({
+                name: fullname,
+                city: city,
+                phone: "",
+                address: "",
+            })
+
+        }
+    }, [session?.data?.user, fullname, city, form])
 
     // const { watch } = form;
 
@@ -168,9 +185,17 @@ export default function CheckoutPage() {
     }
 
     const onSubmit = async (values: FormValues) => {
+
+
+        if (!token) {
+            toast.error("Please login to continue")
+            const fullPath = `${pathname}?${searchParams.toString()}`;
+            router.push(`/login?callbackUrl=${encodeURIComponent(fullPath)}`);
+            return
+        }
+
         try {
             setIsSubmitting(true)
-
             // Prepare order data
             const orderData = {
                 items: items.map((item: CartItem) => ({
@@ -205,9 +230,9 @@ export default function CheckoutPage() {
             toast.success("Your order has been placed successfully!")
             // Redirect to order confirmation page
             setIsSubmitting(false)
-            // router.push(`/order-confirmation/${data.data._id}`)
         } catch (error) {
             toast.success("Failed to create order")
+            setIsSubmitting(false)
             console.log(error)
         }
     }
@@ -280,14 +305,13 @@ export default function CheckoutPage() {
                                                 <Select
                                                     onValueChange={(value) => {
                                                         field.onChange(value)
-                                                        // Force re-render to update delivery charge
                                                         form.trigger("city")
                                                     }}
                                                     defaultValue={field.value}
                                                 >
                                                     <FormControl>
                                                         <SelectTrigger className="bg-white">
-                                                            <SelectValue placeholder="Select a city" />
+                                                            <SelectValue placeholder="Dhaka" />
                                                         </SelectTrigger>
                                                     </FormControl>
                                                     <SelectContent className="bg-white">

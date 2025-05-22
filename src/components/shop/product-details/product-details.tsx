@@ -4,14 +4,14 @@ import Image from "next/image"
 import { useState } from "react"
 import ProductImageGallery from "./image-gallery"
 import { useQuery } from "@tanstack/react-query"
-import { Heart, Share2, BarChart2, Minus, Plus, Truck } from "lucide-react"
+import { Minus, Plus, Truck } from "lucide-react"
 import FeaturesTable from "./features-table"
 import RelatedProducts from "./related-products"
 
 import { toast } from "sonner"
 import { useQueryClient } from "@tanstack/react-query"
 import { useSession } from "next-auth/react"
-import { useRouter } from "next/navigation"
+import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import Link from "next/link"
 
 
@@ -22,7 +22,8 @@ interface ProductDetails {
 export default function ProductDetails({ productName }: ProductDetails) {
     const [quantity, setQuantity] = useState(1)
 
-
+    const pathname = usePathname()
+    const searchParams = useSearchParams()
     const session = useSession()
 
     const token = session?.data?.user?.accessToken
@@ -63,7 +64,8 @@ export default function ProductDetails({ productName }: ProductDetails) {
     const handleAddToCart = async () => {
         if (!token) {
             toast.error('Please login to continue')
-            router.push('/login')
+            const fullPath = `${pathname}?${searchParams.toString()}`;
+            router.push(`/login?callbackUrl=${encodeURIComponent(fullPath)}`);
             return
         }
         const res = await fetch(
@@ -127,7 +129,7 @@ export default function ProductDetails({ productName }: ProductDetails) {
 
                             <div className="flex items-center mt-2">
                                 <Truck className="h-4 w-4 sm:h-5 sm:w-5 mr-2 text-gray-700" />
-                                <span className="text-sm sm:text-base text-gray-700">Free delivery from ৳ 1000</span>
+                                <span className="text-sm sm:text-base text-gray-700">Free delivery from ৳ 2000</span>
                             </div>
 
                             <div className="mt-3 sm:mt-4 flex items-baseline">
@@ -142,18 +144,7 @@ export default function ProductDetails({ productName }: ProductDetails) {
 
                             <p className="mt-3 sm:mt-4 text-sm sm:text-base text-gray-600">{product.description}</p>
 
-                            <div className="mt-4 sm:mt-6 flex items-center">
-                                <button className="p-1.5 sm:p-2 border border-primary rounded-md">
-                                    <Heart className="h-4 w-4 sm:h-5 sm:w-5 text-primary" />
-                                </button>
-                                <button className="p-1.5 sm:p-2 border border-primary rounded-md ml-2">
-                                    <BarChart2 className="h-4 w-4 sm:h-5 sm:w-5 text-primary" />
-                                </button>
-                                <button className="p-1.5 sm:p-2 border border-primary rounded-md ml-2">
-                                    <Share2 className="h-4 w-4 sm:h-5 sm:w-5 text-primary" />
-                                </button>
-                                <span className="ml-2 sm:ml-4 text-xs sm:text-sm text-primary">(There are 24 products left)</span>
-                            </div>
+                            
 
                             <div className="mt-4 sm:mt-6 flex flex-wrap items-center gap-3 sm:gap-4">
                                 <div className="flex items-center border border-primary rounded-md">

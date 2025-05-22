@@ -76,7 +76,7 @@ export default function Navbar() {
 
     const iconLinks = [
         { icon: FaCartPlus, href: "/cart", count: cartItemsNumber },
-        { icon: UserRound, href: "/accounts", count: 0 },
+        { icon: UserRound, href: "/account", count: 0 },
     ];
 
 
@@ -108,7 +108,7 @@ export default function Navbar() {
 
 
     return (
-        <nav className="sticky top-0 z-50 w-full border-b border-primary text-black bg-white h-16 md:h-20 flex justify-center flex-col">
+        <nav className="sticky top-0 z-50 w-full border-b border-primary text-black bg-white/60 backdrop-blur-2xl h-16 md:h-20 flex justify-center flex-col">
             <div className="container mx-auto flex h-16 items-center justify-between">
                 {/* Logo */}
                 <div>

@@ -44,7 +44,7 @@ export default function Category() {
                                         .fill(0)
                                         .map((_, index) => (
                                             <div key={index}
-                                                className="w-full aspect-square bg-gray-200 animate-pulse rounded-md snap-start"
+                                                className="w-full aspect-5/3 bg-gray-200 animate-pulse rounded-md snap-start"
                                             ></div>
                                         ))
                                 }
@@ -52,7 +52,7 @@ export default function Category() {
                         }
                         <CarouselContent className="-ml-4">
                             {categories?.map((item: CategoryType) => (
-                                <CarouselItem key={item._id} className="lg:pl-4 basis-1/2 md:basis-1/3 lg:basis-1/4">
+                                <CarouselItem key={item._id} className="lg:pl-4 basis-1/2 md:basis-1/3 lg:basis-1/5">
                                     <CategoryCard
                                         key={item._id}
                                         image={item.image}

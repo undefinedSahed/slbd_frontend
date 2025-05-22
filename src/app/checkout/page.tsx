@@ -4,7 +4,7 @@ import React, { Suspense } from 'react'
 export default function page() {
     return (
         <main>
-            <Suspense>
+            <Suspense fallback={<div>Loading...</div>}>
                 <CheckoutPage />
             </Suspense>
         </main>

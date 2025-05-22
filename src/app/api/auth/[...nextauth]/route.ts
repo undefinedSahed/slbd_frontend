@@ -31,6 +31,7 @@ const handler = NextAuth({
                             email: result.data.email,
                             role: result.data.role,
                             accessToken: result.data.accessToken,
+                            city: result.data.city
                         };
                     }
 
@@ -49,6 +50,7 @@ const handler = NextAuth({
                 token.role = user.role;
                 token.id = user.id;
                 token.fullname = user.fullname;
+                token.city = user.city;
             }
             return token;
         },
@@ -58,6 +60,7 @@ const handler = NextAuth({
                 session.user.role = token.role;
                 session.user.id = token.id;
                 session.user.fullname = token.fullname;
+                session.user.city = token.city;
             }
             return session;
         },

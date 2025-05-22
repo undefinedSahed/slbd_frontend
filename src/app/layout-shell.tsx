@@ -29,7 +29,7 @@ export default function LayoutShell({
         <>
             {!shouldHideLayout && <Navbar />}
             {children}
-            {!shouldHideLayout && <Footer />}
+            {!shouldHideLayout || pathname.includes("/account") && <Footer />}
         </>
     );
 }

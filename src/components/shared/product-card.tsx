@@ -1,10 +1,10 @@
 import { ProductCardProps } from '@/lib/types'
 import { useQueryClient } from '@tanstack/react-query'
-import { Eye, Heart, ShoppingCart } from 'lucide-react'
+import { Eye, ShoppingCart } from 'lucide-react'
 import { useSession } from 'next-auth/react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import React from 'react'
 import { toast } from 'sonner'
 
@@ -21,12 +21,14 @@ export default function ProductCard({
     const session = useSession()
     const token = session?.data?.user?.accessToken
     const queryclient = useQueryClient()
-
+    const pathname = usePathname()
+    const searchParams = useSearchParams()
 
     const handleAddToCart = async () => {
         if (!token) {
             toast.error('Please login to continue')
-            router.push('/login')
+            const fullPath = `${pathname}?${searchParams.toString()}`;
+            router.push(`/login?callbackUrl=${encodeURIComponent(fullPath)}`);
             return
         }
         const res = await fetch(
@@ -69,15 +71,14 @@ export default function ProductCard({
                     width={1000}
                     height={1000}
                     layout="responsive"
-                    className="rounded-t-lg w-full aspect-5/4 object-cover"
+                    className="rounded-t-lg w-full aspect-5/3 object-cover"
                 />
-                <div className="flex gap-5 bg-white rounded-sm py-1 md:py-2 px-5 absolute bottom-1 md:bottom-4 left-1/2 -translate-x-1/2 space-x-3 md:space-x-5 lg:opacity-0 group-hover:opacity-100 transition duration-500">
-                    <Heart className='w-4 md:w-5 h-4 md:h-5' />
+                <div className="flex gap-2 bg-white rounded-sm py-1 md:py-2 px-5 absolute bottom-1 md:bottom-4 left-1/2 -translate-x-1/2 space-x-3 md:space-x-5 lg:opacity-0 group-hover:opacity-100 transition duration-500">
                     <ShoppingCart
                         onClick={handleAddToCart}
-                        className='w-4 md:w-5 h-4 md:h-5 cursor-pointer'
+                        className='w-4 md:w-5 h-4 md:h-5 cursor-pointer text-primary'
                     />
-                    <Link href={`/shop/${title}`}><Eye className='w-4 md:w-5 h-4 md:h-5' /></Link>
+                    <Link href={`/shop/${title}`}><Eye className='w-4 md:w-5 h-4 md:h-5 text-primary' /></Link>
                 </div>
             </div>
             <div className="px-2 md:px-3 py-2 md:py-5 text-[#1B6732] ">

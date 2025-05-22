@@ -1,6 +1,6 @@
 import { LoginForm } from '@/components/auth/login-form'
 import { Metadata } from 'next';
-import React from 'react'
+import React, { Suspense } from 'react'
 
 export const metadata: Metadata = {
   title: "Login | Super Lighting BD",
@@ -10,7 +10,9 @@ export const metadata: Metadata = {
 export default function page() {
   return (
     <main>
-      <LoginForm />
+      <Suspense fallback={<div>Loading...</div>}>
+        <LoginForm />
+      </Suspense>
     </main>
   )
 }

@@ -20,7 +20,7 @@ import { Input } from "@/components/ui/input";
 
 import { Eye, EyeOff } from "lucide-react";
 import { toast } from "sonner";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 // Schema with explicit typing
 const loginFormSchema = z.object({
@@ -36,6 +36,8 @@ export function LoginForm() {
 
     const router = useRouter()
 
+    const searchParams = useSearchParams()
+
     const form = useForm<LoginFormValues>({
         resolver: zodResolver(loginFormSchema),
         defaultValues: {
@@ -46,20 +48,20 @@ export function LoginForm() {
 
     const onSubmit = async (data: LoginFormValues) => {
         try {
+            const callbackUrl = searchParams.get("callbackUrl") || "/";
             setIsLoading(true);
             const response = await signIn("credentials", {
                 email: data.email,
                 password: data.password,
-                redirect: false, // Important for handling manually
+                redirect: false,
+                callbackUrl // Important for handling manually
             });
 
             if (response?.ok && !response.error) {
-                toast.success("Login successful!", { position: "top-right" });
-
-                // Redirect user to dashboard or home page
-                router.push("/"); // Change this path if needed
+                toast.success("Login successful!");
+                router.push(`${response.url}`);
             } else {
-                toast.error("Invalid email or password", { position: "top-right" });
+                toast.error("Invalid email or password");
             }
         } catch (error) {
             toast.error("Something went wrong. Please try again.", {

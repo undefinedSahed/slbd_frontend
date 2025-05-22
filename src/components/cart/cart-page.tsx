@@ -73,6 +73,8 @@ export default function CartPage() {
         }, 0);
     };
 
+    console.log(session.data?.user.city)
+
 
     const calculateTotal = () => {
         const subtotal = calculateSubtotal()
@@ -225,7 +227,7 @@ export default function CartPage() {
                 <h1 className=" text-xl md:text-3xl underline underline-offset-5 font-bold mb-12 text-primary">Shopping Cart</h1>
                 <div className="grid lg:grid-cols-3 gap-8">
                     <div className="lg:col-span-2">
-                        <div className="bg-white rounded-lg shadow overflow-hidden">
+                        <div className="bg-white rounded-lg shadow">
                             <div className="hidden md:grid md:grid-cols-12 p-4 bg-gray-50 font-medium text-gray-700">
                                 <div className="md:col-span-6">Product</div>
                                 <div className="md:col-span-2 text-center">Price</div>

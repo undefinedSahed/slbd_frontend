@@ -10,7 +10,7 @@ import Link from "next/link"
 import { toast } from "sonner"
 import { useQueryClient } from "@tanstack/react-query"
 import { useSession } from "next-auth/react"
-import { useRouter } from "next/navigation"
+import { usePathname, useRouter, useSearchParams } from "next/navigation"
 
 interface FeaturedSingleProductProps {
     product: ProductType | null
@@ -26,10 +26,11 @@ export default function FeaturedSingleProduct({ product, isLoading }: FeaturedSi
     const token = session?.data?.user?.accessToken
 
     const router = useRouter()
-
+    const pathname = usePathname()
+    const searchParams = useSearchParams()
     const queryclient = useQueryClient()
 
-    
+
     const incrementQuantity = () => {
         setQuantity((prev) => prev + 1)
     }
@@ -82,7 +83,8 @@ export default function FeaturedSingleProduct({ product, isLoading }: FeaturedSi
     const handleAddToCart = async () => {
         if (!token) {
             toast.error('Please login to continue')
-            router.push('/login')
+            const fullPath = `${pathname}?${searchParams.toString()}`;
+            router.push(`/login?callbackUrl=${encodeURIComponent(fullPath)}`);
             return
         }
         const res = await fetch(

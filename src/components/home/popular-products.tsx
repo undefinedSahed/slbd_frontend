@@ -47,7 +47,7 @@ export default function PopularProducts() {
                                         .fill(0)
                                         .map((_, index) => (
                                             <div key={index}
-                                                className="w-full aspect-square bg-gray-200 animate-pulse rounded-md snap-start"
+                                                className="w-full aspect-5/3 bg-gray-200 animate-pulse rounded-md snap-start"
                                             ></div>
                                         ))
                                 }
