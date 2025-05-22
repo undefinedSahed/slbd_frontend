@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { useMobile } from '@/hooks/use-mobile-nav';
-import { Menu, Search, UserRound } from 'lucide-react';
+import { Menu, Search } from 'lucide-react';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image'
 import Link from 'next/link'
@@ -12,6 +12,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
 import { FaCartPlus, FaFacebook, FaInstagram, FaTiktok, FaTwitter } from 'react-icons/fa';
 import { useQuery } from '@tanstack/react-query';
+import { fetchUserProfile } from '../account/profile-form';
 
 
 const navLinks = [
@@ -23,89 +24,60 @@ const navLinks = [
     { name: "Contact", href: "/contact" },
 ];
 
-
-// const cartList = [
-//     { name: "Item 1", href: "/" },
-//     { name: "Item 2", href: "/" },
-//     { name: "Item 3", href: "/" },
-//     { name: "Item 4", href: "/" },
-// ];
-
-
 export default function Navbar() {
-
-    const session = useSession()
-    const token = session?.data?.user?.accessToken
-
+    const session = useSession();
+    const token = session?.data?.user?.accessToken;
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-
 
     useEffect(() => {
         setIsLoggedIn(!!token);
     }, [token]);
 
+    const { data: userProfile } = useQuery({
+        queryKey: ["userProfile"],
+        queryFn: () => fetchUserProfile(String(token)),
+        select: (userdata) => userdata.data,
+        enabled: !!token,
+    });
 
     const { data: cartItemsNumber } = useQuery({
         queryKey: ['cartItems', token],
         queryFn: async () => {
-            const res = await fetch(
-                `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/cart`,
-                {
-                    method: 'GET',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        Authorization: `Bearer ${token}`,
-                    },
-                }
-            )
-
-            return res.json()
+            const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API_URL}/cart`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+            return res.json();
         },
-
         select: (cartData) => cartData?.data?.items?.length
-    })
-
-
+    });
 
     const isMobile = useMobile();
     const pathname = usePathname();
     const router = useRouter();
-
     const [searchTerm, setSearchTerm] = useState("");
 
-
-    const iconLinks = [
-        { icon: FaCartPlus, href: "/cart", count: cartItemsNumber },
-        { icon: UserRound, href: "/account", count: 0 },
-    ];
-
-
     const getIconClasses = (href: string) => `
-  relative border-2 rounded-full p-2 transition-colors
-  ${pathname.startsWith(href)
+        relative border-2 rounded-full h-10 w-10 flex items-center justify-center transition-colors
+        ${pathname.startsWith(href)
             ? "border-green-600"
-            : "border-black hover:border-primary hover:text-white hover:bg-green-600"
-        }
-`;
-
-    const getIconColor = (href: string) => pathname.startsWith(href) ? "text-primary" : "text-black";
+            : "border-black hover:border-primary hover:text-white"}
+    `;
 
     const isActive = (href: string) => {
-        // Special case for home page
         if (href === "/") return pathname === href;
         return pathname.startsWith(href);
     };
 
-
     const handleSearch = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === "Enter" && searchTerm.trim()) {
-            router.push(
-                `/shop?search=${encodeURIComponent(searchTerm.trim())}`
-            );
+            router.push(`/shop?search=${encodeURIComponent(searchTerm.trim())}`);
             setSearchTerm("");
         }
     };
-
 
     return (
         <nav className="sticky top-0 z-50 w-full border-b border-primary text-black bg-white/60 backdrop-blur-2xl h-16 md:h-20 flex justify-center flex-col">
@@ -154,7 +126,7 @@ export default function Navbar() {
                         <Search className="absolute right-2 top-1/2 h-4 w-4 -translate-y-1/2 transform text-green-600" />
                     </div>
 
-                    {/* Login Button - shown when not logged in */}
+                    {/* Login Button */}
                     {!isLoggedIn && (
                         <Link href="/login" className="hidden md:block">
                             <Button variant="default" className="px-6 hidden lg:block bg-green-600 hover:bg-green-700 cursor-pointer text-white">
@@ -163,19 +135,33 @@ export default function Navbar() {
                         </Link>
                     )}
 
-                    {/* Icon Links - shown when logged in */}
+                    {/* Icons when logged in */}
                     {isLoggedIn && !isMobile && (
                         <div className="flex items-center gap-2 sm:gap-4">
-                            {iconLinks.map(({ icon: Icon, href, count }) => (
-                                <Link key={href} href={href} className={getIconClasses(href)}>
-                                    <Icon className={getIconColor(href)} size={20} />
-                                    {count > 0 && (
-                                        <span className="absolute top-[-5px] right-[-5px] bg-primary text-white rounded-full text-[10px] px-[6px] font-semibold">
-                                            {count}
-                                        </span>
-                                    )}
-                                </Link>
-                            ))}
+                            {/* Cart Icon */}
+                            <Link href="/cart" className={getIconClasses("/cart")}>
+                                <FaCartPlus size={20} className="text-green-600" />
+                                {cartItemsNumber > 0 && (
+                                    <span className="absolute top-[-5px] right-[-5px] bg-primary text-white rounded-full text-[10px] px-[6px] font-semibold">
+                                        {cartItemsNumber}
+                                    </span>
+                                )}
+                            </Link>
+
+                            {/* Profile Image */}
+                            <Link href="/account" className={getIconClasses("/account")}>
+                                {userProfile?.avatar ? (
+                                    <Image
+                                        src={userProfile.avatar}
+                                        alt="User Avatar"
+                                        width={500}
+                                        height={500}
+                                        className="w-[70px] aspect-square rounded-full object-cover"
+                                    />
+                                ) : (
+                                    <div className="w-7 h-7 rounded-full bg-gray-300" />
+                                )}
+                            </Link>
                         </div>
                     )}
 
@@ -197,27 +183,19 @@ export default function Navbar() {
                                         <Link
                                             key={link.name}
                                             href={link.href}
-                                            className={`text-base font-medium text-muted-foreground transition-colors hover:text-foreground ${isActive(link.href) ? "text-foreground" : ""
-                                                }`}
+                                            className={`text-base font-medium text-muted-foreground transition-colors hover:text-foreground ${isActive(link.href) ? "text-foreground" : ""}`}
                                         >
                                             {link.name}
                                         </Link>
                                     ))}
 
                                     {!isLoggedIn ? (
-                                        <Link
-                                            href="/login"
-                                            className="text-base font-medium text-muted-foreground transition-colors hover:text-foreground"
-                                        >
+                                        <Link href="/login" className="text-base font-medium text-muted-foreground transition-colors hover:text-foreground">
                                             Login
                                         </Link>
                                     ) : (
                                         <>
-                                            <Link
-                                                href="/cart"
-                                                className={`relative text-base font-medium text-muted-foreground transition-colors hover:text-foreground ${isActive("/wishlist") ? "text-foreground" : ""
-                                                    }`}
-                                            >
+                                            <Link href="/cart" className="relative text-base font-medium text-muted-foreground transition-colors hover:text-foreground">
                                                 Cart
                                                 {cartItemsNumber > 0 && (
                                                     <span className="absolute top-[-8px] -left-3 bg-white text-primary rounded-full text-[10px] h-4 w-4 flex justify-center items-center font-semibold">
@@ -225,11 +203,7 @@ export default function Navbar() {
                                                     </span>
                                                 )}
                                             </Link>
-                                            <Link
-                                                href="/accounts"
-                                                className={`text-base font-medium text-muted-foreground transition-colors hover:text-foreground ${isActive("/accounts") ? "text-foreground" : ""
-                                                    }`}
-                                            >
+                                            <Link href="/account" className="text-base font-medium text-muted-foreground transition-colors hover:text-foreground">
                                                 My Account
                                             </Link>
                                         </>
@@ -253,5 +227,5 @@ export default function Navbar() {
                 </div>
             </div>
         </nav>
-    )
+    );
 }

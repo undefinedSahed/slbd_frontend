@@ -10,7 +10,8 @@ export const metadata: Metadata = {
     description: "View details of your order",
 }
 
-export default function OrderDetailsPage({ params }: { params: { id: string } }) {
+export default async function OrderDetailsPage({ params }: { params: Promise<{ id: string }> }) {
+     const resolvedParams = await params;
     return (
         <div className="space-y-6">
             <div>
@@ -22,13 +23,13 @@ export default function OrderDetailsPage({ params }: { params: { id: string } })
                         </Link>
                     </Button>
                     <div>
-                        <h3 className="text-xl font-bold">Order #{params.id}</h3>
+                        <h3 className="text-xl font-bold">Order #{resolvedParams.id}</h3>
                         <p className="text-sm text-muted-foreground">View the details of your order</p>
                     </div>
                 </div>
             </div>
             <Separator />
-            <OrderDetails orderId={params.id} />
+            <OrderDetails orderId={resolvedParams.id} />
         </div>
     )
 }

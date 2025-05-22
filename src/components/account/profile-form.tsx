@@ -2,11 +2,11 @@
 
 import type React from "react"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import * as z from "zod"
-import { useQuery } from "@tanstack/react-query"
+import { useQuery, useQueryClient } from "@tanstack/react-query"
 import { Button } from "@/components/ui/button"
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
@@ -15,18 +15,17 @@ import { Card, CardContent } from "@/components/ui/card"
 import { toast } from "sonner"
 import { Camera, Loader2 } from "lucide-react"
 import { format } from "date-fns"
+import { useSession } from "next-auth/react"
 
 
 const profileFormSchema = z.object({
-    fullName: z.string().min(2, {
+    fullname: z.string().min(2, {
         message: "Full name must be at least 2 characters.",
     }),
     email: z.string().email({
         message: "Please enter a valid email address.",
     }),
-    phone: z.string().min(10, {
-        message: "Phone number must be at least 10 digits.",
-    }),
+    mobile: z.string().regex(/^(\+8801|01)[3-9]\d{8}$/, { message: "Please enter a valid Bangladeshi phone number" }),
     city: z.string().min(2, {
         message: "City must be at least 2 characters.",
     }),
@@ -34,19 +33,22 @@ const profileFormSchema = z.object({
 
 type ProfileFormValues = z.infer<typeof profileFormSchema>
 
-// Mock API call
-const fetchUserProfile = async () => {
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1000))
-    return {
-        fullName: "John Doe",
-        email: "john.doe@example.com",
-        phone: "1234567890",
-        city: "New York",
-        profilePicture: "",
-        createdAt: "2023-01-15T00:00:00.000Z",
+
+export const fetchUserProfile = async (token: string) => {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API_URL}/users/profile`, {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    });
+
+    if (!res.ok) {
+        throw new Error("Failed to fetch user profile");
     }
-}
+
+    const data = await res.json();
+    return data;
+};
+
 
 // Mock API call
 // const updateUserProfile = async (data: ProfileFormValues) => {
@@ -59,40 +61,79 @@ const fetchUserProfile = async () => {
 export function ProfileForm() {
     const [isSubmitting, setIsSubmitting] = useState(false)
     const [profileImage, setProfileImage] = useState<string | null>(null)
+    const queryClient = useQueryClient();
 
-    const { data: userProfile, isLoading } = useQuery({
+    const session = useSession()
+    const token = session?.data?.user?.accessToken
+
+    const { data: userProfile, isLoading, error } = useQuery({
         queryKey: ["userProfile"],
-        queryFn: fetchUserProfile,
-    })
+        queryFn: () => fetchUserProfile(String(token)),
+        select: (userdata) => userdata.data,
+        enabled: !!token, // Only run query if token is available
+    });
 
     const form = useForm<ProfileFormValues>({
         resolver: zodResolver(profileFormSchema),
         defaultValues: {
-            fullName: "",
+            fullname: "",
             email: "",
-            phone: "",
+            mobile: "",
             city: "",
         },
-        values: userProfile
-            ? {
-                fullName: userProfile.fullName,
-                email: userProfile.email,
-                phone: userProfile.phone,
-                city: userProfile.city,
-            }
-            : undefined,
     })
 
-    function onSubmit(values: ProfileFormValues) {
-        setIsSubmitting(true)
+    useEffect(() => {
+        if (userProfile) {
+            form.reset({
+                fullname: userProfile.fullname,
+                email: userProfile.email,
+                mobile: userProfile.mobile,
+                city: userProfile.city,
+            })
+        }
+    }, [userProfile, form])
 
-        // Simulate API call
-        setTimeout(() => {
-            console.log(values)
-            setIsSubmitting(false)
-            toast.success("Profile updated successfully")
-        }, 2000)
+    function onSubmit(values: ProfileFormValues) {
+        setIsSubmitting(true);
+
+        const formData = new FormData();
+        formData.append("fullname", values.fullname);
+        formData.append("mobile", values.mobile);
+        formData.append("city", values.city);
+
+        // Attach image file if selected
+        const fileInput = document.getElementById("picture") as HTMLInputElement;
+        if (fileInput?.files?.[0]) {
+            formData.append("avatar", fileInput.files[0]); // backend accepts req.file
+        }
+
+        fetch(`${process.env.NEXT_PUBLIC_BACKEND_API_URL}/users/profile/update`, {
+            method: "PUT",
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+            body: formData,
+        })
+            .then(async (res) => {
+                if (!res.ok) {
+                    const error = await res.json();
+                    toast.error(error?.message || "Profile update failed");
+                }
+                return res.json();
+            })
+            .then(() => {
+                toast.success("Profile updated successfully");
+            })
+            .catch((error) => {
+                toast.error(error.message);
+            })
+            .finally(() => {
+                queryClient.invalidateQueries({ queryKey: ["userProfile"] });
+                setIsSubmitting(false);
+            });
     }
+
 
     const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0]
@@ -113,6 +154,14 @@ export function ProfileForm() {
         )
     }
 
+    if (error) {
+        return (
+            <div className="flex h-[50vh] items-center justify-center">
+                <h2>Error fetching user profile</h2>
+            </div>
+        )
+    }
+
     return (
         <div className="space-y-6">
             <div className="grid gap-6 md:grid-cols-2">
@@ -120,12 +169,13 @@ export function ProfileForm() {
                     <CardContent className="pt-6">
                         <div className="flex flex-col items-center space-y-4">
                             <Avatar className="h-32 w-32">
-                                <AvatarImage src={profileImage || userProfile?.profilePicture} />
+                                <AvatarImage src={profileImage || userProfile?.avatar} className="object-cover h-full w-full" />
                                 <AvatarFallback className="bg-green-100 text-green-600 text-xl">
-                                    {userProfile?.fullName
+                                    {(userProfile?.fullname ?? "User")
                                         .split(" ")
-                                        .map((n) => n[0])
-                                        .join("")}
+                                        .map((n: string[]) => n[0])
+                                        .join("")
+                                        .toUpperCase()}
                                 </AvatarFallback>
                             </Avatar>
 
@@ -153,7 +203,7 @@ export function ProfileForm() {
                             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
                                 <FormField
                                     control={form.control}
-                                    name="fullName"
+                                    name="fullname"
                                     render={({ field }) => (
                                         <FormItem>
                                             <FormLabel>Full Name</FormLabel>
@@ -182,10 +232,10 @@ export function ProfileForm() {
 
                                 <FormField
                                     control={form.control}
-                                    name="phone"
+                                    name="mobile"
                                     render={({ field }) => (
                                         <FormItem>
-                                            <FormLabel>Phone Number</FormLabel>
+                                            <FormLabel>mobile Number</FormLabel>
                                             <FormControl>
                                                 <Input placeholder="1234567890" {...field} />
                                             </FormControl>
@@ -208,7 +258,7 @@ export function ProfileForm() {
                                     )}
                                 />
 
-                                <Button type="submit" className="bg-green-600 hover:bg-green-700" disabled={isSubmitting}>
+                                <Button type="submit" className="bg-green-600 hover:bg-green-700 text-white cursor-pointer" disabled={isSubmitting}>
                                     {isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
                                     Save Changes
                                 </Button>

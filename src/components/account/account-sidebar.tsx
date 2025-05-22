@@ -9,9 +9,9 @@ export function AccountSidebar() {
     const pathname = usePathname()
 
     const isActive = (path: string) => {
-        if (path === "/account/profile" && pathname === "/profile") return true
-        if (path === "/account/orders" && (pathname === "/orders" || pathname.startsWith("/orders/"))) return true
-        if (path === "/account/cart" && pathname === "/cart") return true
+        if (path === "/account/profile" && pathname === "/account/profile") return true
+        if (path === "/account/orders" && (pathname === "/account/orders" || pathname.startsWith("/orders/"))) return true
+        if (path === "/account/cart" && pathname === "/account/cart") return true
         return false
     }
 
@@ -28,7 +28,7 @@ export function AccountSidebar() {
                         <SidebarMenuButton
                             asChild
                             isActive={isActive("/account/profile")}
-                            className="data-[active=true]:bg-green-600 data-[active=true]:text-white"
+                            className="data-[active=true]:bg-green-600 data-[active=true]:text-white py-6 pl-5"
                         >
                             <Link href="/account/profile">
                                 <User className="mr-2 h-4 w-4" />
@@ -40,10 +40,10 @@ export function AccountSidebar() {
                         <SidebarMenuButton
                             asChild
                             isActive={isActive("/account/orders")}
-                            className="data-[active=true]:bg-green-600 data-[active=true]:text-white"
+                            className="data-[active=true]:bg-green-600 data-[active=true]:text-white py-6 pl-5"
                         >
                             <Link href="/account/orders">
-                                <Package className="mr-2 h-4 w-4" />
+                                <Package className="mr-2 h-6 w-6" />
                                 <span>Orders</span>
                             </Link>
                         </SidebarMenuButton>
@@ -52,7 +52,7 @@ export function AccountSidebar() {
                         <SidebarMenuButton
                             asChild
                             isActive={isActive("/account/cart")}
-                            className="data-[active=true]:bg-green-600 data-[active=true]:text-white"
+                            className="data-[active=true]:bg-green-600 data-[active=true]:text-white py-6 pl-5"
                         >
                             <Link href="/account/cart">
                                 <ShoppingCart className="mr-2 h-4 w-4" />

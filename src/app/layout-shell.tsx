@@ -21,15 +21,19 @@ export default function LayoutShell({
 }) {
     const pathname = usePathname();
 
-    const shouldHideLayout = useMemo(() => {
-        return hiddenPaths.some((path) => pathname === path);
+    const shouldHideNavbar = useMemo(() => {
+        return hiddenPaths.includes(pathname);
+    }, [pathname]);
+
+    const shouldHideFooter = useMemo(() => {
+        return hiddenPaths.includes(pathname) || pathname.startsWith("/account/");
     }, [pathname]);
 
     return (
         <>
-            {!shouldHideLayout && <Navbar />}
+            {!shouldHideNavbar && <Navbar />}
             {children}
-            {!shouldHideLayout && <Footer />}
+            {!shouldHideFooter && <Footer />}
         </>
     );
 }
