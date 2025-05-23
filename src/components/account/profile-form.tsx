@@ -49,15 +49,6 @@ export const fetchUserProfile = async (token: string) => {
     return data;
 };
 
-
-// Mock API call
-// const updateUserProfile = async (data: ProfileFormValues) => {
-//     // Simulate API call
-//     await new Promise((resolve) => setTimeout(resolve, 1500))
-//     console.log("Updating profile:", data)
-//     return data
-// }
-
 export function ProfileForm() {
     const [isSubmitting, setIsSubmitting] = useState(false)
     const [profileImage, setProfileImage] = useState<string | null>(null)

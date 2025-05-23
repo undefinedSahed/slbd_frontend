@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { useQuery } from "@tanstack/react-query"
+import { useQuery, useQueryClient } from "@tanstack/react-query"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import Image from "next/image"
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -65,6 +65,9 @@ type FormValues = z.infer<typeof formSchema>
 export default function CheckoutPage() {
     const router = useRouter()
     const pathname = usePathname(); // replaces asPath
+
+
+    const queryClient = useQueryClient()
 
     const searchParams = useSearchParams()
     const productName = searchParams.get("productName")
@@ -213,7 +216,7 @@ export default function CheckoutPage() {
                 wasCartCheckout: !productName,
             }
 
-            const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API_URL}/checkout`, {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API_URL}/orders`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -228,10 +231,11 @@ export default function CheckoutPage() {
             }
 
             toast.success("Your order has been placed successfully!")
+            queryClient.invalidateQueries({ queryKey: ["cartData", token] })
             // Redirect to order confirmation page
             setIsSubmitting(false)
         } catch (error) {
-            toast.success("Failed to create order")
+            toast.error("Failed to create order")
             setIsSubmitting(false)
             console.log(error)
         }

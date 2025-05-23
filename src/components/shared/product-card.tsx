@@ -48,7 +48,7 @@ export default function ProductCard({
         if (!res.ok) return toast.error('Something went wrong')
         const data = await res.json()
         toast.success(data.message)
-        queryclient.invalidateQueries({ queryKey: ['cartItems', token] });
+        queryclient.invalidateQueries({ queryKey: ['cartData', token] });
     }
 
 

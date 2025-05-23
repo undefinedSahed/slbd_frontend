@@ -15,17 +15,17 @@ export default async function OrderDetailsPage({ params }: { params: Promise<{ i
     return (
         <div className="space-y-6">
             <div>
-                <div className="flex items-center gap-4">
-                    <Button variant="outline" size="sm" asChild>
-                        <Link href="/orders">
-                            <ArrowLeft className="mr-2 h-4 w-4" />
-                            Back to Orders
-                        </Link>
-                    </Button>
+                <div className="space-y-3">
                     <div>
                         <h3 className="text-xl font-bold">Order #{resolvedParams.id}</h3>
                         <p className="text-sm text-muted-foreground">View the details of your order</p>
                     </div>
+                    <Button variant="outline" size="sm" asChild>
+                        <Link href="/account/orders">
+                            <ArrowLeft className="mr-2 h-4 w-4" />
+                            Back to Orders
+                        </Link>
+                    </Button>
                 </div>
             </div>
             <Separator />

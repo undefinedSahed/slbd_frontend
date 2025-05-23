@@ -41,7 +41,7 @@ export default function Navbar() {
     });
 
     const { data: cartItemsNumber } = useQuery({
-        queryKey: ['cartItems', token],
+        queryKey: ['cartData', token],
         queryFn: async () => {
             const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API_URL}/cart`, {
                 method: 'GET',

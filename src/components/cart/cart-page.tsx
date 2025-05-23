@@ -73,7 +73,6 @@ export default function CartPage() {
         }, 0);
     };
 
-    console.log(session.data?.user.city)
 
 
     const calculateTotal = () => {
@@ -193,8 +192,7 @@ export default function CartPage() {
         if (changedItems.length > 0) {
             updateCartItemQuantity(changedItems);
         } else {
-            // Optionally show a message that no changes were made
-            console.log("No changes to update.");
+           toast.error("No changes to update.");
         }
     }
 
@@ -217,8 +215,6 @@ export default function CartPage() {
             </div>
         )
     }
-
-    console.log(token)
 
 
     return (
