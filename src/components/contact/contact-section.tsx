@@ -9,11 +9,15 @@ import emailjs from "@emailjs/browser"
 import { toast } from "sonner"
 import { useSession } from "next-auth/react"
 import { Label } from "../ui/label"
+import Link from "next/link"
+import { usePathname } from "next/navigation"
 
 export default function ContactSection() {
+
     const [isSubmitting, setIsSubmitting] = useState(false)
     const formRef = useRef<HTMLFormElement>(null)
-
+    const pathname = usePathname()
+    const fullPath = `${pathname}`
     const session = useSession()
 
     const user = session.data?.user
@@ -46,7 +50,6 @@ export default function ContactSection() {
             setIsSubmitting(false)
         }
     }
-
 
 
     return (
@@ -109,13 +112,27 @@ export default function ContactSection() {
                                 />
                             </div>
 
-                            <Button
-                                type="submit"
-                                disabled={isSubmitting || !user}
-                                className="w-full bg-green-600 hover:bg-green-700 text-white h-12"
-                            >
-                                {user ? isSubmitting ? "Sending..." : "Send Message" : "Login to send message"}
-                            </Button>
+                            {
+                                user ? (
+                                    <Button
+                                        type="submit"
+                                        disabled={isSubmitting}
+                                        className="w-full bg-green-600 hover:bg-green-700 text-white h-12 cursor-pointer"
+                                    >
+                                        {isSubmitting ? "Sending..." : "Send Message"}
+                                    </Button>
+                                )
+                                    :
+                                    (
+                                        <Link href={`/login?callbackUrl=${encodeURIComponent(fullPath)}`}>
+                                            <Button
+                                                className="w-full bg-green-600 hover:bg-green-700 text-white h-12 cursor-pointer"
+                                            >
+                                                Login to send message
+                                            </Button>
+                                        </Link>
+                                    )
+                            }
                         </form>
                     </div>
 

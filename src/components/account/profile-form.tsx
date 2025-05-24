@@ -200,7 +200,7 @@ export function ProfileForm() {
                                             <FormControl>
                                                 <Input placeholder="John Doe" {...field} />
                                             </FormControl>
-                                            <FormMessage />
+                                            <FormMessage className="text-red-500"/>
                                         </FormItem>
                                     )}
                                 />
@@ -215,7 +215,7 @@ export function ProfileForm() {
                                                 <Input placeholder="john.doe@example.com" {...field} disabled />
                                             </FormControl>
                                             <FormDescription>Email cannot be changed</FormDescription>
-                                            <FormMessage />
+                                            <FormMessage className="text-red-500"/>
                                         </FormItem>
                                     )}
                                 />
@@ -229,7 +229,7 @@ export function ProfileForm() {
                                             <FormControl>
                                                 <Input placeholder="1234567890" {...field} />
                                             </FormControl>
-                                            <FormMessage />
+                                            <FormMessage className="text-red-500"/>
                                         </FormItem>
                                     )}
                                 />
@@ -243,7 +243,7 @@ export function ProfileForm() {
                                             <FormControl>
                                                 <Input placeholder="New York" {...field} />
                                             </FormControl>
-                                            <FormMessage />
+                                            <FormMessage className="text-red-500"/>
                                         </FormItem>
                                     )}
                                 />

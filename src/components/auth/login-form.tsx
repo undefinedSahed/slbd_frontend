@@ -122,7 +122,7 @@ export function LoginForm() {
                                                         className="h-10 sm:h-12 text-sm sm:text-base"
                                                     />
                                                 </FormControl>
-                                                <FormMessage />
+                                                <FormMessage className="text-red-500"/>
                                             </FormItem>
                                         )}
                                     />
@@ -156,7 +156,7 @@ export function LoginForm() {
                                                         </button>
                                                     </div>
                                                 </FormControl>
-                                                <FormMessage />
+                                                <FormMessage className="text-red-500"/>
                                             </FormItem>
                                         )}
                                     />

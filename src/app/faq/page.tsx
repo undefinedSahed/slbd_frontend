@@ -12,10 +12,10 @@ export const metadata: Metadata = {
 export default function page() {
     return (
         <main>
-            <CommonBanner heading='FAQ'/>
-            <div className="py-20 px-4 md:px-6 lg:px-8">
-                <h2 className=" text-xl md:text-3xl underline underline-offset-5 font-bold text-center mb-12 text-primary">Frequently Asked Questions</h2>
-                <div className="flex justify-between">
+            <CommonBanner heading='FAQ' />
+            <div className="py-8 lg:py-20 px-2 md:px-6 lg:px-36">
+                <h2 className="text-xl md:text-3xl underline underline-offset-5 font-bold text-center mb-6 lg:mb-12 text-primary">Frequently Asked Questions</h2>
+                <div className="flex justify-between items-center">
                     <div className="w-full md:w-2/3">
                         <FAQSection />
                     </div>

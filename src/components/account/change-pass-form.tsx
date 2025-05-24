@@ -115,7 +115,7 @@ export default function ChangePasswordForm() {
                                             </span>
                                         </div>
                                     </FormControl>
-                                    <FormMessage />
+                                    <FormMessage className="text-red-500"/>
                                 </FormItem>
                             )}
                         />
@@ -142,7 +142,7 @@ export default function ChangePasswordForm() {
                                             </span>
                                         </div>
                                     </FormControl>
-                                    <FormMessage />
+                                    <FormMessage className="text-red-500"/>
                                 </FormItem>
                             )}
                         />
@@ -169,7 +169,7 @@ export default function ChangePasswordForm() {
                                             </span>
                                         </div>
                                     </FormControl>
-                                    <FormMessage />
+                                    <FormMessage className="text-red-500"/>
                                 </FormItem>
                             )}
                         />

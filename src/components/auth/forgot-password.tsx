@@ -78,7 +78,7 @@ export default function ForgotPasswordPage() {
                             className="w-full py-6 bg-[#d0eddb]/70 border border-white cursor-pointer shadow-xl"
                             disabled={isLoading}
                         >
-                            {isLoading ? "Sending..." : "Send OTP"}
+                            {isLoading ? "Sending..." : "Send Reset Link"}
                         </Button>
                     </form>
                 </div>

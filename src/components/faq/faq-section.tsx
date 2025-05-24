@@ -39,11 +39,6 @@ export default function FAQSection() {
                 "Yes, most of our products are energy-efficient LED solutions designed to reduce power consumption and lower electricity bills.",
         },
         {
-            question: "Do you offer installation services?",
-            answer:
-                "Yes, we provide professional installation services for all types of lighting fixtures. Installation fees vary based on location and product type.",
-        },
-        {
             question: "Can I schedule a consultation for a lighting project?",
             answer:
                 "Yes, you can book a free consultation with our lighting experts through our website or by calling our customer service line.",
@@ -54,7 +49,7 @@ export default function FAQSection() {
     return (
         <section className="">
             <div className="container mx-auto">
-                <div className="space-y-6">
+                <div className="space-y-2 lg:space-y-6">
                     {faqs.map((faq, index) => (
                         <div key={index} className="border rounded-lg shadow-sm">
                             <Accordion type="single" collapsible className="w-full">

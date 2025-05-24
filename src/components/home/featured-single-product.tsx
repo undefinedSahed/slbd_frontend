@@ -3,7 +3,7 @@
 import type { ProductType } from "@/lib/types"
 import Image from "next/image"
 import { useState } from "react"
-import { Heart, Share2, Star, Minus, Plus } from "lucide-react"
+import { Share2, Star, Minus, Plus } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 import Link from "next/link"
@@ -108,6 +108,7 @@ export default function FeaturedSingleProduct({ product, isLoading }: FeaturedSi
     }
 
 
+
     return (
         <div className="grid md:grid-cols-2 gap-6 lg:gap-10 mt-8">
             {/* Product Image */}
@@ -145,7 +146,7 @@ export default function FeaturedSingleProduct({ product, isLoading }: FeaturedSi
 
                 <p className="text-gray-600 mt-4">{product.description}</p>
 
-                <div className="flex items-center gap-20 mt-6">
+                <div className="flex items-center gap-4 mt-6">
                     <div className="flex items-center border rounded-md">
                         <Button variant="ghost" size="icon" onClick={decrementQuantity} className="h-10 w-10">
                             <Minus className="h-4 w-4" />
@@ -155,12 +156,17 @@ export default function FeaturedSingleProduct({ product, isLoading }: FeaturedSi
                             <Plus className="h-4 w-4" />
                         </Button>
                     </div>
-                    <div className="flex items-center gap-4">
-                        <Button variant="outline" size="icon" className="rounded-full">
-                            <Heart className="h-4 w-4" />
-                            <span className="sr-only">Add to wishlist</span>
-                        </Button>
-                        <Button variant="outline" size="icon" className="rounded-full">
+                    <div className="">
+                        <Button
+                            onClick={() => {
+                                navigator.clipboard.writeText(window.location.href)
+                                toast.success('Link copied to clipboard')
+                            }
+                            }
+                            variant="outline"
+                            size="icon"
+                            className="rounded-full cursor-pointer"
+                        >
                             <Share2 className="h-4 w-4" />
                             <span className="sr-only">Share product</span>
                         </Button>
@@ -190,6 +196,6 @@ export default function FeaturedSingleProduct({ product, isLoading }: FeaturedSi
                     </div>
                 )}
             </div>
-        </div>
+        </div >
     )
 }

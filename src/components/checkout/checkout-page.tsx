@@ -270,7 +270,7 @@ export default function CheckoutPage() {
                                                 <FormControl>
                                                     <Input placeholder="John Doe" className="bg-white" {...field} />
                                                 </FormControl>
-                                                <FormMessage />
+                                                <FormMessage className="text-red-500"/>
                                             </FormItem>
                                         )}
                                     />
@@ -283,7 +283,7 @@ export default function CheckoutPage() {
                                                 <FormControl>
                                                     <Input placeholder="01XXXXXXXXX" className="bg-white" {...field} />
                                                 </FormControl>
-                                                <FormMessage />
+                                                <FormMessage className="text-red-500"/>
                                             </FormItem>
                                         )}
                                     />
@@ -296,7 +296,7 @@ export default function CheckoutPage() {
                                                 <FormControl>
                                                     <Input placeholder="123 Main St" className="bg-white" {...field} />
                                                 </FormControl>
-                                                <FormMessage />
+                                                <FormMessage className="text-red-500"/>
                                             </FormItem>
                                         )}
                                     />
@@ -326,7 +326,7 @@ export default function CheckoutPage() {
                                                         }
                                                     </SelectContent>
                                                 </Select>
-                                                <FormMessage />
+                                                <FormMessage className="text-red-500"/>
                                             </FormItem>
                                         )}
                                     />
