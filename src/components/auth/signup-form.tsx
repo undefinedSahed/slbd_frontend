@@ -70,13 +70,13 @@ export function RegisterForm() {
 
         const responseData = await response.json();
 
-        
+
         if (!responseData.success) {
             toast.error(`${responseData.message.message}`)
         }
 
         if (responseData.success) {
-            toast.success(`${responseData.message}. Check Email to Verify`)
+            toast.success(`${responseData.message}. Check email to verify account.`)
             router.push("/login")
         }
 

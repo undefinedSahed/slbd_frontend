@@ -24,23 +24,29 @@ const handler = NextAuth({
 
                     const result = await res.json();
 
-                    if (res.ok && result?.data?.accessToken) {
+                    if (!res.ok) {
+                        throw new Error(result?.message || "Login failed");
+                    }
+
+                    if (result?.data?.accessToken) {
                         return {
                             id: result.data.id,
                             fullname: result.data.fullname,
                             email: result.data.email,
                             role: result.data.role,
                             accessToken: result.data.accessToken,
-                            city: result.data.city
+                            city: result.data.city,
                         };
                     }
 
                     return null;
-                } catch (err) {
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                } catch (err: any) {
                     console.error("Auth error", err);
-                    return null;
+                    throw new Error(err.message || "Internal Server Error");
                 }
-            },
+            }
+            ,
         }),
     ],
     callbacks: {

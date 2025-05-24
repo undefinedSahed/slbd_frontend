@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import React from 'react'
 import AboutMainImage from "../../../public/assets/about1.jpg"
+import Link from 'next/link'
 
 export default function AboutMain() {
     return (
@@ -21,7 +22,9 @@ export default function AboutMain() {
                             Super Light BD is a trusted lighting solutions provider, offering a wide range of interior and outdoor lights. From stylish home lighting to durable street and industrial lights, we ensure top-quality products at the best prices. Our mission is to brighten every space with innovative and energy-efficient lighting. With a commitment to customer satisfaction, we provide reliable solutions for homes, offices, and commercial spaces. Choose Super Light BD for modern, long-lasting, and eco-friendly lighting.
                         </p>
                         <div>
-                            <button className='bg-primary text-white px-12 py-3 rounded-md mt-4 text-sm hover:text-[#2BA14D] hover:border-1 hover:border-[#2BA14D] hover:bg-white transition-all duration-700 ease-in-out'>Explore </button>
+                            <Link href="/services">
+                                <button className='bg-primary text-white px-12 py-3 rounded-md mt-4 text-sm cursor-pointer'>Explore </button>
+                            </Link>
                         </div>
                     </div>
                 </div>

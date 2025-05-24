@@ -1,8 +1,6 @@
 "use client"
 
-import type React from "react"
-
-import { useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import * as z from "zod"
@@ -16,7 +14,6 @@ import { toast } from "sonner"
 import { Camera, Loader2 } from "lucide-react"
 import { format } from "date-fns"
 import { useSession } from "next-auth/react"
-
 
 const profileFormSchema = z.object({
     fullname: z.string().min(2, {
@@ -33,26 +30,25 @@ const profileFormSchema = z.object({
 
 type ProfileFormValues = z.infer<typeof profileFormSchema>
 
-
 export const fetchUserProfile = async (token: string) => {
     const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API_URL}/users/profile`, {
         headers: {
             Authorization: `Bearer ${token}`,
         },
-    });
+    })
 
     if (!res.ok) {
-        throw new Error("Failed to fetch user profile");
+        throw new Error("Failed to fetch user profile")
     }
 
-    const data = await res.json();
-    return data;
-};
+    const data = await res.json()
+    return data
+}
 
 export function ProfileForm() {
     const [isSubmitting, setIsSubmitting] = useState(false)
     const [profileImage, setProfileImage] = useState<string | null>(null)
-    const queryClient = useQueryClient();
+    const queryClient = useQueryClient()
 
     const session = useSession()
     const token = session?.data?.user?.accessToken
@@ -61,8 +57,8 @@ export function ProfileForm() {
         queryKey: ["userProfile"],
         queryFn: () => fetchUserProfile(String(token)),
         select: (userdata) => userdata.data,
-        enabled: !!token, // Only run query if token is available
-    });
+        enabled: !!token,
+    })
 
     const form = useForm<ProfileFormValues>({
         resolver: zodResolver(profileFormSchema),
@@ -86,17 +82,23 @@ export function ProfileForm() {
     }, [userProfile, form])
 
     function onSubmit(values: ProfileFormValues) {
-        setIsSubmitting(true);
+        setIsSubmitting(true)
 
-        const formData = new FormData();
-        formData.append("fullname", values.fullname);
-        formData.append("mobile", values.mobile);
-        formData.append("city", values.city);
+        const formData = new FormData()
+        formData.append("fullname", values.fullname)
+        formData.append("mobile", values.mobile)
+        formData.append("city", values.city)
 
-        // Attach image file if selected
-        const fileInput = document.getElementById("picture") as HTMLInputElement;
-        if (fileInput?.files?.[0]) {
-            formData.append("avatar", fileInput.files[0]); // backend accepts req.file
+        const fileInput = document.getElementById("picture") as HTMLInputElement | null
+        const file = fileInput?.files?.[0]
+
+        if (file) {
+            if (file.size > 10 * 1024 * 1024) {
+                toast.error("File size must be less than 10 MB")
+                setIsSubmitting(false)
+                return // stop submission
+            }
+            formData.append("avatar", file)
         }
 
         fetch(`${process.env.NEXT_PUBLIC_BACKEND_API_URL}/users/profile/update`, {
@@ -108,23 +110,20 @@ export function ProfileForm() {
         })
             .then(async (res) => {
                 if (!res.ok) {
-                    const error = await res.json();
-                    toast.error(error?.message || "Profile update failed");
+                    const error = await res.json()
+                    toast.error(error?.message || "Profile update failed")
+                    throw new Error(error?.message)
                 }
-                return res.json();
-            })
-            .then(() => {
-                toast.success("Profile updated successfully");
+                toast.success("Profile updated successfully")
+                queryClient.invalidateQueries({ queryKey: ["userProfile"] })
             })
             .catch((error) => {
-                toast.error(error.message);
+                toast.error(error.message)
             })
             .finally(() => {
-                queryClient.invalidateQueries({ queryKey: ["userProfile"] });
-                setIsSubmitting(false);
-            });
+                setIsSubmitting(false)
+            })
     }
-
 
     const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0]
@@ -164,7 +163,7 @@ export function ProfileForm() {
                                 <AvatarFallback className="bg-green-100 text-green-600 text-xl">
                                     {(userProfile?.fullname ?? "User")
                                         .split(" ")
-                                        .map((n: string[]) => n[0])
+                                        .map((n: string) => n[0])
                                         .join("")
                                         .toUpperCase()}
                                 </AvatarFallback>
@@ -226,7 +225,7 @@ export function ProfileForm() {
                                     name="mobile"
                                     render={({ field }) => (
                                         <FormItem>
-                                            <FormLabel>mobile Number</FormLabel>
+                                            <FormLabel>Mobile Number</FormLabel>
                                             <FormControl>
                                                 <Input placeholder="1234567890" {...field} />
                                             </FormControl>
@@ -249,7 +248,11 @@ export function ProfileForm() {
                                     )}
                                 />
 
-                                <Button type="submit" className="bg-green-600 hover:bg-green-700 text-white cursor-pointer" disabled={isSubmitting}>
+                                <Button
+                                    type="submit"
+                                    className="bg-green-600 hover:bg-green-700 text-white cursor-pointer"
+                                    disabled={isSubmitting}
+                                >
                                     {isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
                                     Save Changes
                                 </Button>

@@ -77,9 +77,11 @@ export default function Feedback() {
           </motion.button>
         </div>
         <p>Still have questions? Our lighting experts are ready to help.</p>
-        <button className="my-6 bg-[#2BA14D] text-white px-8 py-2 text-sm hover:text-[#2BA14D] hover:border hover:border-[#2BA14D] hover:bg-white transition-all duration-700 ease-in-out">
-          Contact Team
-        </button>
+        <Link href='/contact' >
+          <button className="my-6 bg-[#2BA14D] text-white px-8 py-2 text-sm hover:text-[#2BA14D] cursor-pointer">
+            Contact Team
+          </button>
+        </Link>
 
         <div className="flex gap-2 items-center justify-center">
           <Link href="https://www.facebook.com/profile.php?id=100090851693362" target="_blank">

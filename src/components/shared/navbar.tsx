@@ -150,17 +150,13 @@ export default function Navbar() {
 
                             {/* Profile Image */}
                             <Link href="/account" className={getIconClasses("/account")}>
-                                {userProfile?.avatar ? (
-                                    <Image
-                                        src={userProfile.avatar}
-                                        alt="User Avatar"
-                                        width={500}
-                                        height={500}
-                                        className="w-[70px] aspect-square rounded-full object-cover"
-                                    />
-                                ) : (
-                                    <div className="w-7 h-7 rounded-full bg-gray-300" />
-                                )}
+                                <Image
+                                    src={userProfile?.avatar || "/assets/profile.png"}
+                                    alt="User Avatar"
+                                    width={500}
+                                    height={500}
+                                    className="w-[70px] aspect-square rounded-full object-cover"
+                                />
                             </Link>
                         </div>
                     )}

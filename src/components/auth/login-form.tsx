@@ -61,8 +61,9 @@ export function LoginForm() {
                 toast.success("Login successful!");
                 router.push(`${response.url}`);
             } else {
-                toast.error("Invalid email or password");
+                toast.error(response?.error || "Invalid credentials");
             }
+
         } catch (error) {
             toast.error("Something went wrong. Please try again.", {
                 position: "top-right",
@@ -75,7 +76,6 @@ export function LoginForm() {
 
     return (
         <div className="flex justify-center items-center h-screen">
-
             <div className="container mx-auto">
                 <div className="flex flex-col lg:flex-row justify-between bg-primary/20 rounded-2xl h-auto lg:h-[600px] overflow-hidden">
                     {/* Left section */}
@@ -163,7 +163,7 @@ export function LoginForm() {
 
                                     <div className="flex justify-center">
                                         <Link
-                                            href="/auth/forgot-password"
+                                            href="/forgot-password"
                                             className="text-xs sm:text-sm text-[#0a1155] hover:underline"
                                         >
                                             Forgot password?
