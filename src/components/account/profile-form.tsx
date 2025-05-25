@@ -14,6 +14,7 @@ import { toast } from "sonner"
 import { Camera, Loader2 } from "lucide-react"
 import { format } from "date-fns"
 import { useSession } from "next-auth/react"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select"
 
 const profileFormSchema = z.object({
     fullname: z.string().min(2, {
@@ -49,7 +50,7 @@ export function ProfileForm() {
     const [isSubmitting, setIsSubmitting] = useState(false)
     const [profileImage, setProfileImage] = useState<string | null>(null)
     const queryClient = useQueryClient()
-
+    const [cities, setCities] = useState<string[]>([])
     const session = useSession()
     const token = session?.data?.user?.accessToken
 
@@ -80,6 +81,23 @@ export function ProfileForm() {
             })
         }
     }, [userProfile, form])
+
+    // Get cities of BD
+    useEffect(() => {
+        const fetchCities = async () => {
+            const res = await fetch("https://countriesnow.space/api/v0.1/countries/cities", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ country: "Bangladesh" })
+            });
+            const data = await res.json();
+            return setCities(data?.data)
+        }
+
+        fetchCities()
+    }, [])
 
     function onSubmit(values: ProfileFormValues) {
         setIsSubmitting(true)
@@ -152,13 +170,14 @@ export function ProfileForm() {
         )
     }
 
+
     return (
         <div className="space-y-6">
             <div className="grid gap-6 md:grid-cols-2">
-                <Card>
-                    <CardContent className="pt-6">
+                <Card className="border-1 border-primary shadow-[0px_4px_48px_-11px_rgba(34,_197,_94,_0.5)]">
+                    <CardContent className="flex items-center justify-center h-full">
                         <div className="flex flex-col items-center space-y-4">
-                            <Avatar className="h-32 w-32">
+                            <Avatar className="h-32 w-32 border border-primary">
                                 <AvatarImage src={profileImage || userProfile?.avatar} className="object-cover h-full w-full" />
                                 <AvatarFallback className="bg-green-100 text-green-600 text-xl">
                                     {(userProfile?.fullname ?? "User")
@@ -171,7 +190,7 @@ export function ProfileForm() {
 
                             <div className="grid w-full max-w-sm items-center gap-1.5">
                                 <label htmlFor="picture" className="cursor-pointer">
-                                    <div className="flex items-center gap-2 rounded-md border border-green-600 bg-green-50 px-4 py-2 text-green-600 hover:bg-green-100 dark:bg-green-950 dark:hover:bg-green-900">
+                                    <div className="flex items-center gap-2 rounded-md justify-center bg-green-50 px-4 py-2 text-green-600 hover:bg-green-100 dark:bg-green-950 dark:hover:bg-green-900">
                                         <Camera className="h-4 w-4" />
                                         <span>Change Picture</span>
                                     </div>
@@ -187,7 +206,7 @@ export function ProfileForm() {
                     </CardContent>
                 </Card>
 
-                <Card>
+                <Card className="border-1 border-primary shadow-[0px_4px_48px_-11px_rgba(34,_197,_94,_0.5)]">
                     <CardContent className="pt-6">
                         <Form {...form}>
                             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
@@ -200,7 +219,7 @@ export function ProfileForm() {
                                             <FormControl>
                                                 <Input placeholder="John Doe" {...field} />
                                             </FormControl>
-                                            <FormMessage className="text-red-500"/>
+                                            <FormMessage className="text-red-500" />
                                         </FormItem>
                                     )}
                                 />
@@ -215,7 +234,7 @@ export function ProfileForm() {
                                                 <Input placeholder="john.doe@example.com" {...field} disabled />
                                             </FormControl>
                                             <FormDescription>Email cannot be changed</FormDescription>
-                                            <FormMessage className="text-red-500"/>
+                                            <FormMessage className="text-red-500" />
                                         </FormItem>
                                     )}
                                 />
@@ -229,7 +248,7 @@ export function ProfileForm() {
                                             <FormControl>
                                                 <Input placeholder="1234567890" {...field} />
                                             </FormControl>
-                                            <FormMessage className="text-red-500"/>
+                                            <FormMessage className="text-red-500" />
                                         </FormItem>
                                     )}
                                 />
@@ -238,12 +257,29 @@ export function ProfileForm() {
                                     control={form.control}
                                     name="city"
                                     render={({ field }) => (
-                                        <FormItem>
+                                        <FormItem className="col-span-2 md:col-span-1">
                                             <FormLabel>City</FormLabel>
-                                            <FormControl>
-                                                <Input placeholder="New York" {...field} />
-                                            </FormControl>
-                                            <FormMessage className="text-red-500"/>
+                                            <Select
+                                                onValueChange={(value) => {
+                                                    field.onChange(value)
+                                                    form.trigger("city")
+                                                }}
+                                                defaultValue={field.value}
+                                            >
+                                                <FormControl>
+                                                    <SelectTrigger className="bg-white">
+                                                        <SelectValue placeholder="Dhaka" />
+                                                    </SelectTrigger>
+                                                </FormControl>
+                                                <SelectContent className="bg-white">
+                                                    {
+                                                        cities.map((city: string, index: number) => (
+                                                            <SelectItem key={index} value={city}>{city}</SelectItem>
+                                                        ))
+                                                    }
+                                                </SelectContent>
+                                            </Select>
+                                            <FormMessage className="text-red-500" />
                                         </FormItem>
                                     )}
                                 />

@@ -234,6 +234,7 @@ export default function CheckoutPage() {
             queryClient.invalidateQueries({ queryKey: ["cartData", token] })
             // Redirect to order confirmation page
             setIsSubmitting(false)
+            router.push("/order-confirmation")
         } catch (error) {
             toast.error("Failed to create order")
             setIsSubmitting(false)

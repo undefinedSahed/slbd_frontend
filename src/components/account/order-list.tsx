@@ -110,7 +110,7 @@ export function OrdersList() {
 
     return (
         <div className="w-full">
-            <Card>
+            <Card className="border border-primary shadow-[0px_4px_48px_-11px_rgba(34,_197,_94,_0.5)]">
                 <CardHeader className="pb-4">
                     <CardTitle className="text-xl sm:text-2xl">Order History</CardTitle>
                     <CardDescription>You have placed {orders?.length || 0} orders</CardDescription>
@@ -149,7 +149,7 @@ export function OrdersList() {
                             <div className="hidden md:block overflow-x-auto">
                                 <Table>
                                     <TableHeader>
-                                        <TableRow>
+                                        <TableRow className="border-primary">
                                             <TableHead className="min-w-[120px]">Order #</TableHead>
                                             <TableHead className="min-w-[100px]">Date</TableHead>
                                             <TableHead className="min-w-[100px]">Status</TableHead>
@@ -159,7 +159,7 @@ export function OrdersList() {
                                     </TableHeader>
                                     <TableBody>
                                         {filteredOrders.map((order) => (
-                                            <TableRow key={order._id}>
+                                            <TableRow key={order._id} className="border-primary">
                                                 <TableCell className="font-medium">
                                                     <span className="text-sm">#{order._id.slice(-8)}</span>
                                                 </TableCell>
@@ -194,7 +194,7 @@ export function OrdersList() {
                             {/* Mobile Card View */}
                             <div className="md:hidden space-y-4">
                                 {filteredOrders.map((order) => (
-                                    <Card key={order._id} className="p-4">
+                                    <Card key={order._id} className="p-4 border border-primary shadow-[0px_4px_48px_-11px_rgba(34,_197,_94,_0.5)]">
                                         <div className="space-y-3">
                                             <div className="flex items-center justify-between">
                                                 <div>
@@ -227,7 +227,7 @@ export function OrdersList() {
                             </div>
                         </>
                     ) : (
-                        <div className="flex flex-col items-center justify-center rounded-lg border border-dashed p-8 text-center min-h-[300px]">
+                        <div className="flex flex-col items-center justify-center rounded-lg border border-primary border-dashed p-8 text-center min-h-[300px]">
                             <Package className="h-12 w-12 text-muted-foreground mb-4" />
                             <h3 className="text-lg font-semibold mb-2">No orders found</h3>
                             <p className="text-sm text-muted-foreground max-w-sm">
@@ -240,7 +240,7 @@ export function OrdersList() {
                 </CardContent>
 
                 {filteredOrders && filteredOrders.length > 0 && (
-                    <CardFooter className="pt-4 border-t">
+                    <CardFooter className="pt-4 border-t border-primary">
                         <div className="text-sm text-muted-foreground">
                             Showing {filteredOrders.length} of {orders?.length || 0} orders
                         </div>

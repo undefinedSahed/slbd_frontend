@@ -90,7 +90,7 @@ export default function ChangePasswordForm() {
     return (
         <div className="mt-5 lg:mt-14">
             <h2 className="text-xl font-semibold mb-3">Change Password</h2>
-            <div className="max-w-full mx-auto p-6 bg-white border rounded-xl px-4">
+            <div className="max-w-full mx-auto border border-primary p-6 bg-white shadow-[0px_4px_48px_-11px_rgba(34,_197,_94,_0.5)] rounded-xl px-4">
                 <Form {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
                         {/* Current Password */}
