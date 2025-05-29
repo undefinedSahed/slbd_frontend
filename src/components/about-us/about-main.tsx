@@ -23,7 +23,7 @@ export default function AboutMain() {
                         </p>
                         <div>
                             <Link href="/services">
-                                <button className='bg-primary text-white px-12 py-3 rounded-md mt-4 text-sm cursor-pointer'>Explore </button>
+                                <button className='bg-primary hover:bg-primary/90 text-white px-12 py-3 rounded-md mt-4 text-sm cursor-pointer'>Explore </button>
                             </Link>
                         </div>
                     </div>

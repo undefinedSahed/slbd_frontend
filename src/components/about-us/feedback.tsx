@@ -78,7 +78,7 @@ export default function Feedback() {
         </div>
         <p>Still have questions? Our lighting experts are ready to help.</p>
         <Link href='/contact' >
-          <button className="my-6 bg-[#2BA14D] text-white px-8 py-2 text-sm hover:text-[#2BA14D] cursor-pointer">
+          <button className="my-6 bg-[#2BA14D] text-white px-8 py-2 text-sm hover:bg-primary/90 cursor-pointer">
             Contact Team
           </button>
         </Link>
