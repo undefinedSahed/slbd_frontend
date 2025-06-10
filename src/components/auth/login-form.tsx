@@ -4,7 +4,7 @@ import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
-import { signIn } from "next-auth/react";
+import { getSession, signIn } from "next-auth/react";
 import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
@@ -59,7 +59,14 @@ export function LoginForm() {
 
             if (response?.ok && !response.error) {
                 toast.success("Login successful!");
-                router.push(`${response.url}`);
+                const session = await getSession()
+                if (session?.user?.role == "admin") {
+                    router.push("/admin")
+                } else {
+                    router.push(`${response.url}`);
+                }
+
+
             } else {
                 toast.error(response?.error || "Invalid credentials");
             }
@@ -122,7 +129,7 @@ export function LoginForm() {
                                                         className="h-10 sm:h-12 text-sm sm:text-base"
                                                     />
                                                 </FormControl>
-                                                <FormMessage className="text-red-500"/>
+                                                <FormMessage className="text-red-500" />
                                             </FormItem>
                                         )}
                                     />
@@ -156,7 +163,7 @@ export function LoginForm() {
                                                         </button>
                                                     </div>
                                                 </FormControl>
-                                                <FormMessage className="text-red-500"/>
+                                                <FormMessage className="text-red-500" />
                                             </FormItem>
                                         )}
                                     />

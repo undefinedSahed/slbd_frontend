@@ -7,7 +7,6 @@ import { useMemo } from "react";
 import BackToTop from "@/components/shared/back-to-top";
 
 const hiddenPaths = [
-    "/dashboard",
     "/forgot-password",
     "/reset-password",
     "/signup/verify-email",
@@ -23,11 +22,11 @@ export default function LayoutShell({
     const pathname = usePathname();
 
     const shouldHideNavbar = useMemo(() => {
-        return hiddenPaths.includes(pathname);
+        return pathname.startsWith("/admin") || hiddenPaths.includes(pathname);
     }, [pathname]);
 
     const shouldHideFooter = useMemo(() => {
-        return hiddenPaths.includes(pathname) || pathname.startsWith("/account/");
+        return pathname.startsWith("/admin") || pathname.startsWith("/account/") || hiddenPaths.includes(pathname);
     }, [pathname]);
 
     return (
