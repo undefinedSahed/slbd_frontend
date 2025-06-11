@@ -34,7 +34,6 @@ export default function DashboardPage() {
 
                 if (data.success) {
                     setStats(data.data)
-                    toast.success(data.message)
                 } else {
                     toast.error(data.message || "Failed to fetch stats")
                 }

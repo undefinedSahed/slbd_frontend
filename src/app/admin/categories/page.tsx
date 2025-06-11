@@ -41,7 +41,6 @@ export default function CategoriesPage() {
 
             if (data.success) {
                 setCategories(data.data)
-                toast.success(data.message || "Categories fetched successfully")
             } else {
                 toast.error(data.message || "Failed to fetch categories")
             }

@@ -75,7 +75,6 @@ export default function OrdersPage() {
 
                 if (data.success) {
                     setOrders(data.data)
-                    toast.success(data.success)
                 } else {
                     toast.error(data.message || "Failed to fetch orders")
                 }

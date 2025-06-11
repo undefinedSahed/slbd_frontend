@@ -49,7 +49,7 @@ export function ProductDialog({ open, onOpenChange, product, isEditing, onSucces
         description: "",
         price: 0,
         category: "",
-        stock: 0,
+        stock: "in stock",
         sold: 0,
         featured: false,
         discount: 0,
@@ -60,7 +60,7 @@ export function ProductDialog({ open, onOpenChange, product, isEditing, onSucces
     const [categories, setCategories] = useState<Category[]>([])
     const [loading, setLoading] = useState(false)
 
-    
+
     const session = useSession()
     const token = session?.data?.user?.accessToken
 
@@ -89,7 +89,7 @@ export function ProductDialog({ open, onOpenChange, product, isEditing, onSucces
                 description: product.description,
                 price: product.price,
                 category: product.category._id,
-                stock: Number.parseInt(product.stock) || 0,
+                stock: product.stock || "in stock",
                 sold: product.sold,
                 featured: product.featured,
                 discount: product.discount,
@@ -103,7 +103,7 @@ export function ProductDialog({ open, onOpenChange, product, isEditing, onSucces
                 description: "",
                 price: 0,
                 category: "",
-                stock: 0,
+                stock: "in stock",
                 sold: 0,
                 featured: false,
                 discount: 0,
@@ -221,7 +221,7 @@ export function ProductDialog({ open, onOpenChange, product, isEditing, onSucces
                                 <SelectTrigger className="focus:ring-green-500 focus:border-green-500">
                                     <SelectValue placeholder="Select category" />
                                 </SelectTrigger>
-                                <SelectContent>
+                                <SelectContent className="bg-white">
                                     {categories.map((category) => (
                                         <SelectItem key={category._id} value={category._id}>
                                             {category.title}
@@ -233,15 +233,20 @@ export function ProductDialog({ open, onOpenChange, product, isEditing, onSucces
 
                         <div className="space-y-2">
                             <Label htmlFor="stock">Stock</Label>
-                            <Input
-                                id="stock"
-                                type="number"
+                            <Select
                                 value={formData.stock}
-                                onChange={(e) => setFormData({ ...formData, stock: Number.parseInt(e.target.value) })}
-                                required
-                                className="focus:ring-green-500 focus:border-green-500"
-                            />
+                                onValueChange={(value) => setFormData({ ...formData, stock: value })}
+                            >
+                                <SelectTrigger className="focus:ring-green-500 focus:border-green-500">
+                                    <SelectValue placeholder="Select stock status" />
+                                </SelectTrigger>
+                                <SelectContent className="bg-white">
+                                    <SelectItem value="in stock">In Stock</SelectItem>
+                                    <SelectItem value="out of stock">Out of Stock</SelectItem>
+                                </SelectContent>
+                            </Select>
                         </div>
+
                     </div>
 
                     <div className="grid grid-cols-2 gap-4">

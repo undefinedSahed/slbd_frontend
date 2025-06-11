@@ -8,13 +8,13 @@ import { ProductType } from '@/lib/types'
 import ProductCard from '@/components/shared/product-card'
 
 
-export default function RelatedProducts({ category }: { category: string }) {
+export default function RelatedProducts({ category, productId }: { category: string, productId: string }) {
 
 
     const { data: products, isLoading, isError, error } = useQuery({
         queryKey: ['products'],
         queryFn: async () => {
-            const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API_URL}/products/related-products/${category}`)
+            const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API_URL}/products/related-products/${category}/${productId}`)
             return res.json()
         },
         select: (productsData) => productsData?.data

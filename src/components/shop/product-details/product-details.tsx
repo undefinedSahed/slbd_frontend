@@ -144,7 +144,7 @@ export default function ProductDetails({ productName }: ProductDetails) {
 
                             <p className="mt-3 sm:mt-4 text-sm sm:text-base text-gray-600">{product.description}</p>
 
-                            
+
 
                             <div className="mt-4 sm:mt-6 flex flex-wrap items-center gap-3 sm:gap-4">
                                 <div className="flex items-center border border-primary rounded-md">
@@ -217,7 +217,7 @@ export default function ProductDetails({ productName }: ProductDetails) {
 
                 {/* Related Products */}
                 <div className="mt-20">
-                    <RelatedProducts category={product.category.title} />
+                    <RelatedProducts category={product.category.title} productId={product._id} />
                 </div>
             </div>
         </section>

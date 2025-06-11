@@ -40,7 +40,6 @@ export default function BlogsPage() {
 
             if (data.success) {
                 setBlogs(data.data)
-                toast.success(data.message)
             } else {
                 toast.error(data.message || "Failed to fetch blogs")
             }
@@ -138,7 +137,7 @@ export default function BlogsPage() {
                     <h1 className="text-3xl font-bold text-green-700">Blogs</h1>
                     <p className="text-muted-foreground">Manage your blog posts and articles</p>
                 </div>
-                <Button onClick={handleAddBlog} className="bg-green-600 hover:bg-green-700">
+                <Button onClick={handleAddBlog} className="bg-green-600 hover:bg-green-700 text-white">
                     <Plus className="h-4 w-4 mr-2" />
                     Add Blog Post
                 </Button>
@@ -158,11 +157,11 @@ export default function BlogsPage() {
 
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                 {filteredBlogs.map((blog) => (
-                    <Card key={blog._id} className="overflow-hidden border-green-200">
+                    <Card key={blog._id} className="overflow-hidden border-green-200 pt-0 pb-2">
                         <div className="relative h-48">
                             <Image src={blog.image || "/placeholder.svg"} alt={blog.title} fill className="object-cover" />
                         </div>
-                        <CardContent className="p-4">
+                        <CardContent className="p-4 pt-0">
                             <h3 className="font-semibold text-lg mb-2 line-clamp-2 text-green-700">{blog.title}</h3>
                             <p className="text-sm text-muted-foreground mb-3 line-clamp-3">{blog.description}</p>
                             <div className="flex items-center justify-between text-sm text-muted-foreground mb-4">

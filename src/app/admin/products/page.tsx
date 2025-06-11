@@ -51,7 +51,7 @@ export default function ProductsPage() {
     const [searchTerm, setSearchTerm] = useState("")
     const [currentPage, setCurrentPage] = useState(1)
     const [totalPages, setTotalPages] = useState(1)
-    
+
     const session = useSession()
     const token = session?.data?.user?.accessToken
 
@@ -64,7 +64,6 @@ export default function ProductsPage() {
                 setProducts(data.data.data)
                 setTotalPages(data.data.totalPages)
                 setCurrentPage(data.data.page)
-                toast.success(data.message)
             } else {
                 toast.error(data.message || "Failed to fetch products")
             }

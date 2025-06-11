@@ -12,7 +12,6 @@ import {
     SidebarFooter,
     SidebarGroup,
     SidebarGroupContent,
-    SidebarGroupLabel,
     SidebarHeader,
     SidebarMenu,
     SidebarMenuButton,
@@ -47,7 +46,7 @@ const menuItems = [
         icon: FileText,
     },
     {
-        title: "Settings",
+        title: "Update Profile",
         url: "/account/profile",
         icon: Settings,
     },
@@ -63,7 +62,6 @@ export function AppSidebar() {
             </SidebarHeader>
             <SidebarContent>
                 <SidebarGroup>
-                    <SidebarGroupLabel>Navigation</SidebarGroupLabel>
                     <SidebarGroupContent>
                         <SidebarMenu>
                             {menuItems.map((item) => (
@@ -71,7 +69,7 @@ export function AppSidebar() {
                                     <SidebarMenuButton asChild isActive={pathname === item.url}>
                                         <Link
                                             href={item.url}
-                                            className="hover:bg-green-50 data-[active=true]:bg-green-100 data-[active=true]:text-green-700 py-7 pl-5 text-[18px]"
+                                            className="hover:bg-green-50 data-[active=true]:bg-primary data-[active=true]:text-white py-7 pl-5 text-[18px]"
                                         >
                                             <item.icon className="h-7 w-7" />
                                             <span>{item.title}</span>
