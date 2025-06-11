@@ -163,7 +163,7 @@ export default function OrdersPage() {
                     <SelectTrigger className="w-48 focus:ring-green-500 focus:border-green-500">
                         <SelectValue placeholder="Filter by status" />
                     </SelectTrigger>
-                    <SelectContent>
+                    <SelectContent className="bg-white">
                         <SelectItem value="all">All Orders</SelectItem>
                         <SelectItem value="pending">Pending</SelectItem>
                         <SelectItem value="processing">Processing</SelectItem>
