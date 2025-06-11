@@ -105,7 +105,7 @@ export function BlogDialog({ open, onOpenChange, blog, isEditing, onSuccess }: B
 
     return (
         <Dialog open={open} onOpenChange={onOpenChange}>
-            <DialogContent className="sm:max-w-[600px] max-h-[80vh] overflow-y-auto">
+            <DialogContent className="sm:max-w-[600px] max-h-[80vh] overflow-y-auto bg-white">
                 <DialogHeader>
                     <DialogTitle className="text-green-700">{isEditing ? "Edit Blog Post" : "Add New Blog Post"}</DialogTitle>
                 </DialogHeader>

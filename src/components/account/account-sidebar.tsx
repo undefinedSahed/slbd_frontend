@@ -3,7 +3,7 @@
 import { usePathname } from "next/navigation"
 import Link from "next/link"
 import { User, Package } from "lucide-react"
-import { SidebarContent, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from "@/components/ui/sidebar"
+import { SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from "@/components/ui/sidebar"
 import LogoutButtonWithModal from "./logout-modal"
 
 export function AccountSidebar() {
@@ -55,12 +55,13 @@ export function AccountSidebar() {
                             isActive={isActive("/account/cart")}
                             className="data-[active=true]:bg-green-600 data-[active=true]:text-white py-6 pl-5"
                         >
-                            <LogoutButtonWithModal />
-
                         </SidebarMenuButton>
                     </SidebarMenuItem>
                 </SidebarMenu>
             </SidebarContent>
+            <SidebarFooter>
+                <LogoutButtonWithModal />
+            </SidebarFooter>
         </>
     )
 }

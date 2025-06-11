@@ -156,7 +156,7 @@ export default function ProductsPage() {
                     <h1 className="text-3xl font-bold text-green-700">Products</h1>
                     <p className="text-muted-foreground">Manage your product catalog</p>
                 </div>
-                <Button onClick={handleAddProduct} className="bg-green-600 hover:bg-green-700">
+                <Button onClick={handleAddProduct} className="bg-green-600 hover:bg-green-700 text-white">
                     <Plus className="h-4 w-4 mr-2" />
                     Add Product
                 </Button>
@@ -176,7 +176,7 @@ export default function ProductsPage() {
 
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                 {products.map((product) => (
-                    <Card key={product._id} className="overflow-hidden border-green-200">
+                    <Card key={product._id} className="overflow-hidden border-green-200 pt-0 pb-2">
                         <div className="relative h-48">
                             <Image src={product.thumbnail || "/placeholder.svg"} alt={product.title} fill className="object-cover" />
                             <div className="absolute top-2 right-2 flex gap-1">
@@ -184,7 +184,7 @@ export default function ProductsPage() {
                                 {product.discount > 0 && <Badge variant="destructive">{product.discount}% OFF</Badge>}
                             </div>
                         </div>
-                        <CardContent className="p-4">
+                        <CardContent className="p-4 pt-0">
                             <h3 className="font-semibold text-lg mb-1 text-green-700">{product.title}</h3>
                             <p className="text-sm text-muted-foreground mb-2">{product.category.title}</p>
                             <p className="text-sm text-muted-foreground mb-3 line-clamp-2">{product.description}</p>

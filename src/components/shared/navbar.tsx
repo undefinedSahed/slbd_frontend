@@ -149,15 +149,28 @@ export default function Navbar() {
                             </Link>
 
                             {/* Profile Image */}
-                            <Link href="/account" className={getIconClasses("/account")}>
-                                <Image
-                                    src={userProfile?.avatar || "/assets/profile.png"}
-                                    alt="User Avatar"
-                                    width={500}
-                                    height={500}
-                                    className="w-[70px] aspect-square rounded-full object-cover"
-                                />
-                            </Link>
+                            {
+                                session?.data?.user?.role === 'admin' ?
+                                    <Link href="/admin" className={getIconClasses("/account")}>
+                                        <Image
+                                            src={userProfile?.avatar || "/assets/profile.png"}
+                                            alt="User Avatar"
+                                            width={500}
+                                            height={500}
+                                            className="w-[70px] aspect-square rounded-full object-cover"
+                                        />
+                                    </Link>
+                                    :
+                                    <Link href="/account" className={getIconClasses("/account")}>
+                                        <Image
+                                            src={userProfile?.avatar || "/assets/profile.png"}
+                                            alt="User Avatar"
+                                            width={500}
+                                            height={500}
+                                            className="w-[70px] aspect-square rounded-full object-cover"
+                                        />
+                                    </Link>
+                            }
                         </div>
                     )}
 

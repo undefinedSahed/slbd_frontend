@@ -79,7 +79,7 @@ export function OrderDetailsDialog({ open, onOpenChange, order }: OrderDetailsDi
 
     return (
         <Dialog open={open} onOpenChange={onOpenChange}>
-            <DialogContent className="sm:max-w-[600px] max-h-[80vh] overflow-y-auto">
+            <DialogContent className="sm:max-w-[600px] max-h-[80vh] overflow-y-auto bg-white">
                 <DialogHeader>
                     <DialogTitle className="text-green-700">Order Details</DialogTitle>
                 </DialogHeader>

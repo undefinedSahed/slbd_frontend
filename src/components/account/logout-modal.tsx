@@ -27,7 +27,7 @@ export default function LogoutButtonWithModal() {
             <Dialog open={open} onOpenChange={setOpen}>
                 <DialogTrigger>
                     <div
-                        className="cursor-pointer flex items-center gap-2 pl-5 pt-4 w-full">
+                        className="cursor-pointer flex items-center gap-2 px-5 py-2 text-white rounded-md w-full bg-primary">
                         <LogOut className="mr-2 h-4 w-4" />
                         <span>Log out</span>
                     </div>

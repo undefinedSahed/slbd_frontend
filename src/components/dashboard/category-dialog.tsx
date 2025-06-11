@@ -97,7 +97,7 @@ export function CategoryDialog({ open, onOpenChange, category, isEditing, onSucc
 
     return (
         <Dialog open={open} onOpenChange={onOpenChange}>
-            <DialogContent className="sm:max-w-[425px]">
+            <DialogContent className="sm:max-w-[425px] bg-white">
                 <DialogHeader>
                     <DialogTitle className="text-green-700">{isEditing ? "Edit Category" : "Add New Category"}</DialogTitle>
                 </DialogHeader>

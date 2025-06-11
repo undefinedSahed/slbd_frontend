@@ -22,7 +22,7 @@ interface DeleteDialogProps {
 export function DeleteDialog({ open, onOpenChange, title, description, onConfirm }: DeleteDialogProps) {
     return (
         <AlertDialog open={open} onOpenChange={onOpenChange}>
-            <AlertDialogContent>
+            <AlertDialogContent className="bg-primary text-white">
                 <AlertDialogHeader>
                     <AlertDialogTitle className="text-red-600">{title}</AlertDialogTitle>
                     <AlertDialogDescription>{description}</AlertDialogDescription>

@@ -36,18 +36,18 @@ interface Order {
     totalAmount: number
     deliveryCharge: number
     totalPayable: number
-    orderStatus: "Pending" | "Processing" | "Shipped" | "Delivered" | "Cancelled"
+    orderStatus: "pending" | "processing" | "shipped" | "delivered" | "cancelled"
     paymentStatus: "Pending" | "Paid" | "Failed"
     createdAt: string
     updatedAt: string
 }
 
 const statusColors = {
-    Pending: "bg-yellow-100 text-yellow-800",
-    Processing: "bg-blue-100 text-blue-800",
-    Shipped: "bg-purple-100 text-purple-800",
-    Delivered: "bg-green-100 text-green-800",
-    Cancelled: "bg-red-100 text-red-800",
+    pending: "bg-yellow-100 text-yellow-800",
+    processing: "bg-blue-100 text-blue-800",
+    shipped: "bg-purple-100 text-purple-800",
+    delivered: "bg-green-100 text-green-800",
+    cancelled: "bg-red-100 text-red-800",
 }
 
 export default function OrdersPage() {
@@ -166,11 +166,11 @@ export default function OrdersPage() {
                     </SelectTrigger>
                     <SelectContent>
                         <SelectItem value="all">All Orders</SelectItem>
-                        <SelectItem value="Pending">Pending</SelectItem>
-                        <SelectItem value="Processing">Processing</SelectItem>
-                        <SelectItem value="Shipped">Shipped</SelectItem>
-                        <SelectItem value="Delivered">Delivered</SelectItem>
-                        <SelectItem value="Cancelled">Cancelled</SelectItem>
+                        <SelectItem value="pending">Pending</SelectItem>
+                        <SelectItem value="processing">Processing</SelectItem>
+                        <SelectItem value="shipped">Shipped</SelectItem>
+                        <SelectItem value="delivered">Delivered</SelectItem>
+                        <SelectItem value="cancelled">Cancelled</SelectItem>
                     </SelectContent>
                 </Select>
             </div>
@@ -225,12 +225,12 @@ export default function OrdersPage() {
                                             <SelectTrigger className="w-32 focus:ring-green-500 focus:border-green-500">
                                                 <SelectValue />
                                             </SelectTrigger>
-                                            <SelectContent>
-                                                <SelectItem value="Pending">Pending</SelectItem>
-                                                <SelectItem value="Processing">Processing</SelectItem>
-                                                <SelectItem value="Shipped">Shipped</SelectItem>
-                                                <SelectItem value="Delivered">Delivered</SelectItem>
-                                                <SelectItem value="Cancelled">Cancelled</SelectItem>
+                                            <SelectContent className="bg-white">
+                                                <SelectItem value="pending">Pending</SelectItem>
+                                                <SelectItem value="processing">Processing</SelectItem>
+                                                <SelectItem value="shipped">Shipped</SelectItem>
+                                                <SelectItem value="delivered">Delivered</SelectItem>
+                                                <SelectItem value="cancelled">Cancelled</SelectItem>
                                             </SelectContent>
                                         </Select>
                                     </div>

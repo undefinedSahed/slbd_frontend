@@ -2,7 +2,7 @@
 
 import type React from "react"
 
-import { Package, ShoppingCart, Tags, FileText, Settings, Home, LogOut } from "lucide-react"
+import { Package, ShoppingCart, Tags, FileText, Settings, Home } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 
@@ -18,12 +18,11 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
 } from "@/components/ui/sidebar"
-import { Button } from "../ui/button"
-import { signOut } from "next-auth/react"
+import LogoutButtonWithModal from "../account/logout-modal"
 
 const menuItems = [
     {
-        title: "admin",
+        title: "Admin",
         url: "/admin",
         icon: Home,
     },
@@ -72,9 +71,9 @@ export function AppSidebar() {
                                     <SidebarMenuButton asChild isActive={pathname === item.url}>
                                         <Link
                                             href={item.url}
-                                            className="hover:bg-green-50 data-[active=true]:bg-green-100 data-[active=true]:text-green-700"
+                                            className="hover:bg-green-50 data-[active=true]:bg-green-100 data-[active=true]:text-green-700 py-7 pl-5 text-[18px]"
                                         >
-                                            <item.icon className="h-4 w-4" />
+                                            <item.icon className="h-7 w-7" />
                                             <span>{item.title}</span>
                                         </Link>
                                     </SidebarMenuButton>
@@ -85,9 +84,7 @@ export function AppSidebar() {
                 </SidebarGroup>
             </SidebarContent>
             <SidebarFooter className="p-6">
-                <Button onClick={() => signOut()} className="cursor-pointer">
-                    <p className="text-white flex items-center gap-2"><LogOut className="h-4 w-4" />Logout</p>
-                </Button>
+                <LogoutButtonWithModal />
             </SidebarFooter>
         </Sidebar>
     )

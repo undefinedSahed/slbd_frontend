@@ -133,7 +133,7 @@ export default function CategoriesPage() {
                     <h1 className="text-3xl font-bold text-green-700">Categories</h1>
                     <p className="text-muted-foreground">Manage your product categories</p>
                 </div>
-                <Button onClick={handleAddCategory} className="bg-green-600 hover:bg-green-700">
+                <Button onClick={handleAddCategory} className="bg-green-600 hover:bg-green-700 text-white">
                     <Plus className="h-4 w-4 mr-2" />
                     Add Category
                 </Button>
@@ -141,7 +141,7 @@ export default function CategoriesPage() {
 
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                 {categories.map((category) => (
-                    <Card key={category._id} className="overflow-hidden border-green-200">
+                    <Card key={category._id} className="overflow-hidden border-green-200 pt-0 pb-2">
                         <div className="relative h-48">
                             <Image src={category.image || "/placeholder.svg"} alt={category.title} fill className="object-cover" />
                             <div className="absolute top-2 right-2">
@@ -153,7 +153,7 @@ export default function CategoriesPage() {
                                 </Badge>
                             </div>
                         </div>
-                        <CardContent className="p-4">
+                        <CardContent className="p-4 pt-0">
                             <h3 className="font-semibold text-lg mb-2 text-green-700">{category.title}</h3>
                             <p className="text-sm text-muted-foreground mb-3 line-clamp-2">{category.description}</p>
                             <div className="flex items-center justify-between text-sm text-muted-foreground mb-4">
