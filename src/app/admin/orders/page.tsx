@@ -200,7 +200,7 @@ export default function OrdersPage() {
                                         <p className="text-sm font-medium">Items</p>
                                         {order.items.slice(0, 2).map((item, index) => (
                                             <p key={index} className="text-sm text-muted-foreground">
-                                                {item.product.title} x{item.quantity}
+                                                {item?.product?.title} x {item.quantity}
                                             </p>
                                         ))}
                                         {order.items.length > 2 && (

@@ -10,6 +10,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
 import { Switch } from "@/components/ui/switch"
 import { toast } from "sonner"
+import { useSession } from "next-auth/react"
 
 interface Category {
     _id: string
@@ -28,6 +29,11 @@ interface CategoryDialogProps {
 }
 
 export function CategoryDialog({ open, onOpenChange, category, isEditing, onSuccess }: CategoryDialogProps) {
+
+    const session = useSession()
+    const token = session?.data?.user?.accessToken
+
+
     const [formData, setFormData] = useState({
         title: "",
         description: "",
@@ -75,6 +81,9 @@ export function CategoryDialog({ open, onOpenChange, category, isEditing, onSucc
 
             const response = await fetch(url, {
                 method,
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
                 body: formDataToSend,
             })
 

@@ -125,6 +125,7 @@ export function ProductDialog({ open, onOpenChange, product, isEditing, onSucces
             formDataToSend.append("price", formData.price.toString())
             formDataToSend.append("category", formData.category)
             formDataToSend.append("stock", formData.stock.toString())
+            formDataToSend.append("discount", formData.discount.toString())
             formDataToSend.append("sold", formData.sold.toString())
             formDataToSend.append("featured", formData.featured.toString())
             formDataToSend.append("specs", formData.specs)
