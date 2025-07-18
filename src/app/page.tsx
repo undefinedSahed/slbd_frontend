@@ -7,12 +7,14 @@ import Offer from "@/components/home/offer";
 import Policy from "@/components/home/policy";
 import PopularProducts from "@/components/home/popular-products";
 import Testimonial from "@/components/home/testimonial";
+import Services from "@/components/shared/services";
 
 export default function Home() {
   return (
     <div className="">
       <BannerHome />
       <Policy />
+      <Services />
       <Category />
       <PopularProducts />
       <FeaturedProducts />
