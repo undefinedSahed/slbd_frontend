@@ -6,7 +6,9 @@ import FeaturedProducts from "@/components/home/featured-products";
 import Offer from "@/components/home/offer";
 import Policy from "@/components/home/policy";
 import PopularProducts from "@/components/home/popular-products";
+import Projects from "@/components/home/Projects";
 import Testimonial from "@/components/home/testimonial";
+import Topsold from "@/components/home/topsold";
 import Services from "@/components/shared/services";
 
 export default function Home() {
@@ -16,9 +18,11 @@ export default function Home() {
       <Policy />
       <Services />
       <Category />
+      <Topsold/>
       <PopularProducts />
       <FeaturedProducts />
       <Offer />
+      <Projects/>
       <Testimonial />
       <HomeAbout />
       <Blogs />

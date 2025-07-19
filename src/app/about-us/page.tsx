@@ -5,6 +5,8 @@ import Goal from '@/components/about-us/goal'
 import CommonBanner from '@/components/shared/common-banner'
 import { Metadata } from 'next'
 import React from 'react'
+import Projects from "@/components/home/Projects"
+
 
 
 export const metadata: Metadata = {
@@ -21,6 +23,7 @@ export default function page() {
       <AboutMain />
       <Achievement />
       <Goal />
+      <Projects/>
       <Feedback />
     </div>
   )
