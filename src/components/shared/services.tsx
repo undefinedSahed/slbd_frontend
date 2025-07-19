@@ -12,8 +12,8 @@ export default function Services() {
         <section className='py-8 lg:py-28'>
             <div className="container lg:space-y-10 space-y-5">
                 <div className="text-center max-w-5xl mx-auto space-y-5">
-                    <h2 className='lg:text-4xl text-2xl font-bold'>Lighting Up Modern Workspaces with Smarter Energy</h2>
-                    <p className='lg:text-lg text-gray-500'>Workplaces are becoming more agile and innovative than ever. From personalized user control and real-time space insights to smart wayfinding, hot desking, and efficient meeting room bookings — we enable the future of work.</p>
+                    <h2 className='lg:text-4xl text-xl font-bold'>Lighting Up Modern Workspaces with Smarter Energy</h2>
+                    <p className='lg:text-lg text-sm text-justify lg:text-center text-gray-500'>Workplaces are becoming more agile and innovative than ever. From personalized user control and real-time space insights to smart wayfinding, hot desking, and efficient meeting room bookings — we enable the future of work.</p>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-10 items-center">
                     {

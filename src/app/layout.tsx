@@ -3,6 +3,7 @@ import { Poppins } from "next/font/google";
 import "./globals.css";
 import AppProvider from "@/provider/app-provider";
 import LayoutShell from "./layout-shell";
+import Whatsapp from "@/components/shared/whatsapp";
 
 const poppins = Poppins({
   weight: ["400", "500", "600", "700"],
@@ -26,6 +27,7 @@ export default function RootLayout({
         <main>
           <AppProvider>
             <LayoutShell>{children}</LayoutShell>
+            <Whatsapp />
           </AppProvider>
         </main>
       </body>

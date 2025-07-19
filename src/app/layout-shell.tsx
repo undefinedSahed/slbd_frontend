@@ -4,7 +4,6 @@ import { usePathname } from "next/navigation";
 import Navbar from "@/components/shared/navbar";
 import Footer from "@/components/shared/footer";
 import { useMemo } from "react";
-import BackToTop from "@/components/shared/back-to-top";
 
 const hiddenPaths = [
     "/forgot-password",
@@ -34,7 +33,6 @@ export default function LayoutShell({
             {!shouldHideNavbar && <Navbar />}
             {children}
             {!shouldHideFooter && <Footer />}
-            <BackToTop />
         </>
     );
 }

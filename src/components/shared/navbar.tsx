@@ -220,7 +220,7 @@ export default function Navbar() {
                                 </nav>
                                 <div className="flex flex-col gap-1">
                                     <a href="tel:8801724188240" className="text-xs font-medium">Call : +880 1724-188240</a>
-                                    <a href="mailto:superlightingbd1@gmail.com" className="text-xs font-medium">superlightingbd1@gmail.com</a>
+                                    <a href="mailto:superlightingbd@gmail.com" className="text-xs font-medium">superlightingbd@gmail.com</a>
                                     <div className="flex justify-start items-center gap-3 text-xl pt-5">
                                         <Link href="https://www.facebook.com/profile.php?id=100090851693362" target="_blank">
                                             <FaFacebook className="text-white hover:scale-110 hover:text-primary transition-all duration-300 cursor-pointer" />

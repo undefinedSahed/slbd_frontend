@@ -128,10 +128,8 @@ export default function FeaturedSingleProduct({ product, isLoading }: FeaturedSi
                 <Separator className="my-2" />
 
                 <div className="flex items-center gap-4">
-                    <div className="text-2xl font-bold">৳ {(product.price - (product.price * (product.discount || 0.10))).toFixed(2)}</div>
-                    {product.price < 1500 && (
-                        <div className="text-lg text-gray-500 line-through">৳ {product.price.toFixed(2)}</div>
-                    )}
+                    <div className="text-2xl font-bold">৳ {(product.price - (product.price * ((product.discount || 10) / 100))).toFixed(2)}</div>
+                    <div className="text-lg text-gray-500 line-through">৳ {product.price.toFixed(2)}</div>
                 </div>
 
                 <div className="flex items-center gap-1">

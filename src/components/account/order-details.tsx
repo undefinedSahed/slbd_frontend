@@ -211,7 +211,7 @@ const createInvoiceHTML = (order: any) => {
                         <div>House 116, Road W-02, Block D, Bashundhara R/A</div>
                         <div>Project: Bashundhara Residential Area 1216</div>
                         <div>Phone: +880 1724-188240</div>
-                        <div>Email: superlightingbd1@gmail.com</div>
+                        <div>Email: superlightingbd@gmail.com</div>
                         <div>Website: www.superlightingbd.com</div>
                     </div>
                 </div>

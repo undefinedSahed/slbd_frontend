@@ -2,6 +2,7 @@ export const services = [
   {
     id: 1,
     title: "All Kind Of Lighting Solution",
+    image: "/assets/banner_bg.jpg",
     thumbnail: "/assets/banner_bg.jpg",
     descriptionOne:
       "Are you looking for the best lighting solutions for your home or business? Dream Energy is here to help. We specialize in providing high-quality, energy-efficient lighting solutions that meet your unique needs. From LED lights to specialty commercial products, our team ensures the best fit for your space and budget. Save money while improving aesthetics and reducing your environmental impact.",
@@ -18,6 +19,7 @@ export const services = [
   {
     id: 2,
     title: "Smart Workplace Management",
+    image: "/assets/banner_bg.jpg",
     thumbnail: "/assets/banner_bg.jpg",
     descriptionOne:
       "Create agile, flexible, and tech-enabled workplaces with Dream Energy’s smart workplace solutions. We empower businesses with real-time data, intelligent lighting, and space management tools.",
@@ -32,6 +34,7 @@ export const services = [
   {
     id: 3,
     title: "Solar Energy Solutions",
+    image: "/assets/banner_bg.jpg",
     thumbnail: "/assets/banner_bg.jpg",
     descriptionOne:
       "Go green and cut energy costs with our solar power solutions. Dream Energy provides scalable, efficient solar setups for homes, industries, and commercial buildings.",
@@ -45,7 +48,8 @@ export const services = [
   },
   {
     id: 4,
-    title: "Energy Audit & Optimization",
+    title: "Energy Audit and Optimization",
+    image: "/assets/banner_bg.jpg",
     thumbnail: "/assets/banner_bg.jpg",
     descriptionOne:
       "Discover hidden energy waste and unlock cost savings with Dream Energy’s professional audit and optimization service.",
@@ -58,7 +62,8 @@ export const services = [
   },
   {
     id: 5,
-    title: "EV Charging Infrastructure",
+    title: "EV Charging and Infrastructure",
+    image: "/assets/banner_bg.jpg",
     thumbnail: "/assets/banner_bg.jpg",
     descriptionOne:
       "Power the electric future with Dream Energy’s EV charging solutions for homes, offices, and public spaces. We install reliable, scalable, and fast EV charging stations.",
@@ -73,6 +78,7 @@ export const services = [
   {
     id: 6,
     title: "Industrial Automation Lighting",
+    image: "/assets/banner_bg.jpg",
     thumbnail: "/assets/banner_bg.jpg",
     descriptionOne:
       "Enhance factory and warehouse operations with automated, sensor-based lighting. Dream Energy brings intelligent control to your industrial environment.",
@@ -85,7 +91,8 @@ export const services = [
   },
   {
     id: 7,
-    title: "Hospital & Healthcare Lighting",
+    title: "Hospital and Healthcare Lighting",
+    image: "/assets/banner_bg.jpg",
     thumbnail: "/assets/banner_bg.jpg",
     descriptionOne:
       "Healthcare environments require precision lighting for patient safety and operational efficiency. Dream Energy delivers specialized lighting for every healthcare zone.",
@@ -100,6 +107,7 @@ export const services = [
   {
     id: 8,
     title: "Lighting for Education Spaces",
+    image: "/assets/banner_bg.jpg",
     thumbnail: "/assets/banner_bg.jpg",
     descriptionOne:
       "Good lighting enhances learning outcomes. Dream Energy provides lighting systems designed for classrooms, labs, libraries, and outdoor education zones.",
@@ -113,7 +121,8 @@ export const services = [
   },
   {
     id: 9,
-    title: "Retail & Hospitality Lighting",
+    title: "Retail and Hospitality Lighting",
+    image: "/assets/banner_bg.jpg",
     thumbnail: "/assets/banner_bg.jpg",
     descriptionOne:
       "Attract customers and enhance ambiance with strategic retail and hospitality lighting. We blend aesthetics with energy-saving tech to set the right mood.",

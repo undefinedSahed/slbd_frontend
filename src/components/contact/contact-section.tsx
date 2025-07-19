@@ -172,7 +172,7 @@ export default function ContactSection() {
                                     <h3 className="text-lg font-medium text-green-600">Email</h3>
                                 </div>
                                 <div>
-                                    <a href="mailto:superlightingbd1@gmail.com" target="_blank" rel="noopener noreferrer" className="text-gray-600">Contact Email: superlightingbd1@gmail.com</a>
+                                    <a href="mailto:superlightingbd@gmail.com" target="_blank" rel="noopener noreferrer" className="text-gray-600">Contact Email: superlightingbd@gmail.com</a>
                                 </div>
                             </div>
                         </div>

@@ -19,11 +19,6 @@ export default function Footer() {
                 className='w-32 object-contain aspect-5/3'
               />
             </div>
-            <p className="text-[#727272] text-[16px]">
-              The smartest guide to decorating kitchen cabinets to help optimize
-              the area of family kitchen space.
-            </p>
-
             {/* Social Media Icons */}
             <div className="flex justify-center lg:justify-start py-6 gap-6 text-3xl">
               <Link href="https://www.facebook.com/profile.php?id=100090851693362" target="_blank">
@@ -34,6 +29,10 @@ export default function Footer() {
               <Twitter className="text-[#727272] hover:scale-110 hover:text-primary transition-all duration-300 cursor-pointer" />
               <PhoneCallIcon className="text-[#727272] hover:scale-110 hover:text-primary transition-all duration-300 cursor-pointer" />
             </div>
+            <p className="text-[#727272] text-[16px]">
+              The smartest guide to decorating kitchen cabinets to help optimize
+              the area of family kitchen space.
+            </p>
           </div>
 
           <div className="">
