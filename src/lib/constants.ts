@@ -135,3 +135,94 @@ export const services = [
     ],
   },
 ]
+
+export const projects = [
+  {
+    id: 1,
+    title: "52PCS SOLAR STREET LIGHT PACKAGE COMPLETE IN CHUADANGA POWROSABA",
+    description: "Dream Energy successfully completed the installation of 52 solar-powered street lights across Chuadanga Powrosaba, improving nighttime visibility and energy efficiency. The project contributes to environmental sustainability while ensuring safer public spaces for the local community through renewable energy solutions.",
+    image: "/assets/about1.jpg"
+  },
+  {
+    id: 2,
+    title: "INSTALLED NETWORKING SYSTEM IN SHAHID KAMRUZZAN TEXTILE INSTITUTE IN MANDA NAOGAON.",
+    description: "We provided a complete networking infrastructure for Shahid Kamruzzan Textile Institute, including cabling, switches, and routers. This project enhanced internet access and digital connectivity for students and staff, creating a modern, tech-friendly academic environment in Manda, Naogaon.",
+    image: "/assets/about1.jpg"
+  },
+  {
+    id: 3,
+    title: "40PCS SOLAR STREET LIGHT PACKAGE IN BANGLADESH SUBMERIN, KUAKATA AND COX'S BAZAR LANDING STATION",
+    description: "Installed 40 solar street lights at Submarine Landing Stations in Kuakata and Cox’s Bazar. This project supports national infrastructure with sustainable lighting solutions, ensuring security and functionality in key marine zones with zero dependency on the grid.",
+    image: "/assets/about1.jpg"
+  },
+  {
+    id: 4,
+    title: "INSTALLED CCTV, PABX, PA SYSTEM IN BCCT BHABAN",
+    description: "Dream Energy installed an integrated security and communication system—including CCTV, PABX, and public announcement units—at BCCT Bhaban. The project ensures real-time monitoring, improved internal communication, and greater safety across the entire building facility.",
+    image: "/assets/about1.jpg"
+  },
+  {
+    id: 5,
+    title: "110PCS SOLAR STREET LIGHT PACKAGE IN SQUARE GROUP PABNA FACTORY PLANT.",
+    description: "This large-scale project involved deploying 110 solar street lights across Square Group’s Pabna Factory Plant. The system delivers long-term energy savings and eco-friendly lighting, enhancing outdoor safety and reducing carbon emissions across the industrial campus.",
+    image: "/assets/about1.jpg"
+  },
+  {
+    id: 6,
+    title: "INSTALLED CCTV, PABX, PA SYSTEM IN MOSHARAF GROUP",
+    description: "Implemented a comprehensive security and communication setup for Mosharaf Group, featuring CCTV cameras, a PABX phone system, and public address systems. This deployment improved facility management, staff coordination, and workplace safety across the organization.",
+    image: "/assets/about1.jpg"
+  }
+];
+
+export const topsoldproduct =[
+  {
+    "id": 1,
+    "title": "Organic Honey 500g",
+    "thumbnail": "/assets/products/honey.jpg",
+    "price": 450,
+    "discount": 10,
+    "sold": 120
+  },
+  {
+    "id": 2,
+    "title": "Natural Coconut Oil 200ml",
+    "thumbnail": "/assets/products/coconut-oil.jpg",
+    "price": 300,
+    "discount": 0,
+    "sold": 95
+  },
+  {
+    "id": 3,
+    "title": "Premium Green Tea - 100g",
+    "thumbnail": "/assets/products/green-tea.jpg",
+    "price": 250,
+    "discount": 15,
+    "sold": 220
+  },
+  {
+    "id": 4,
+    "title": "Handmade Herbal Soap",
+    "thumbnail": "/assets/products/herbal-soap.jpg",
+    "price": 180,
+    "discount": 5,
+    "sold": 75
+  },
+  {
+    "id": 5,
+    "title": "Multigrain Flour 1kg",
+    "thumbnail": "/assets/products/multigrain-flour.jpg",
+    "price": 200,
+    "discount": 0,
+    "sold": 40
+  },
+  {
+    "id": 6,
+    "title": "Cold Pressed Mustard Oil 500ml",
+    "thumbnail": "/assets/products/mustard-oil.jpg",
+    "price": 350,
+    "discount": 20,
+    "sold": 180
+  }
+]
+
