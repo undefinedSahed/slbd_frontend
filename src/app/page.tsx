@@ -16,6 +16,7 @@ export default function Home() {
   return (
     <div className="">
       <BannerHome />
+      <HomeAbout />
       <Policy />
       <Services />
       <Category />
@@ -26,7 +27,6 @@ export default function Home() {
       <Projects />
       <Clients />
       <Testimonial />
-      <HomeAbout />
       <Blogs />
     </div>
   );

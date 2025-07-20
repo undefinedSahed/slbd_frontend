@@ -50,8 +50,8 @@ export default function Footer() {
               <li className="text-primary font-semibold text-[16px] pb-2">Customer Service</li>
               <li className="text-[#727272] text-[16px]"><Link href="/account">My Account</Link></li>
               <li className="text-[#727272] text-[16px]"><Link href="/cart">My Cart</Link></li>
-              <li className="text-[#727272] text-[16px]"><Link href="/return-policy">Deliveries & Returns</Link></li>
-              <li className="text-[#727272] text-[16px]"><Link href="/about-us">Contact</Link></li>
+              <li className="text-[#727272] text-[16px]"><Link href="/account/orders">My Orders</Link></li>
+              <li className="text-[#727272] text-[16px]"><Link href="/contact">Contact</Link></li>
             </ul>
           </div>
 
@@ -73,8 +73,7 @@ export default function Footer() {
         <div className="flex lg:flex-row flex-col gap-3 lg:gap-0 justify-between lg:items-center py-10 border-b-2 mb-2 border-primary">
           <p>&copy; Super Lighting BD - All rights reserved</p>
           <p className='text-xs md:text-base'>Design and developed by
-            <Link href="https://mernsahed.netlify.app" target="_blank" className="font-bold text-primary underline px-1 md:px-2">Md. Sahed Rahman</Link>
-            and his team.</p>
+            <Link href="https://mernsahed.netlify.app" target="_blank" className="font-bold text-primary underline px-1 md:px-2">Md. Sahed Rahman</Link></p>
         </div>
       </div>
     </footer>

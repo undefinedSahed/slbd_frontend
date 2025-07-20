@@ -43,6 +43,30 @@ interface ProductDialogProps {
     isEditing: boolean
     onSuccess: () => void
 }
+const defaultSpecs = {
+    nominatedRatedVoltage: "230V",
+    outputVoltage: "DC 48V",
+    luminousEfficiency: "110 lm/W",
+    lumensMaintenance: "85% @ 12000h",
+    efficiencyOfDriverCircuit: "91%",
+    colourOfLightOutput: "Natural White",
+    numberOfSMDModules: [6],
+    inputCurrentVariation: "<3%",
+    driver: "Isolated",
+    powerFactor: 0.96,
+    beamAngle: "160°",
+    CRI: "82",
+    THD: "<12%",
+    IPRating: "IP66",
+    frequency: "50/60Hz",
+    colourTemperature: "4000K",
+    materials: "Die-cast Aluminum",
+    lifeTime: "60000 hours",
+    operationTemperature: "-25°C to 55°C",
+    storageTemperature: "-30°C to 70°C",
+    warranty: ["5 years", "Terms and conditions apply"]
+};
+
 
 export function ProductDialog({ open, onOpenChange, product, isEditing, onSuccess }: ProductDialogProps) {
     const [formData, setFormData] = useState({
@@ -112,7 +136,7 @@ export function ProductDialog({ open, onOpenChange, product, isEditing, onSucces
                 discount: 0,
                 thumbnail: null,
                 images: [],
-                specs: "",
+                specs: JSON.stringify(defaultSpecs, null, 2),
                 topSold: false,
             })
         }

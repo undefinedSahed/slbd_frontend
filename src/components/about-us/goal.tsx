@@ -9,12 +9,12 @@ export default function Goal() {
         {
             icon: MissionImg,
             title: "Our Mission",
-            description: "At Super Light BD, our mission is to revolutionize the way people experience lighting. We strive to provide high-quality, energy-efficient, and aesthetically pleasing lighting solutions that enhance both residential and commercial spaces. Our focus is on innovation, sustainability, and customer satisfaction, ensuring "
+            description: "To illuminate lives and industries across Bangladesh with sustainable and high-performance LED lighting solutions that enhance efficiency, save energy, and support a greener future."
         },
         {
             icon: Vision,
             title: "Our Vision",
-            description: "We believe that lighting is not just a necessity but an experience that enhances the ambiance of your home and workspace. Super Light BD provides modern, artistic, and energy-efficient lighting solutions designed to make your life more beautiful and comfortable. Our goal is to combine quality, aesthetics, and sustainable "
+            description: "To become Bangladesh’s most trusted LED lighting brand by delivering superior products, unmatched service, and reliable solutions for every lighting need."
         },
         {
             icon: System,
