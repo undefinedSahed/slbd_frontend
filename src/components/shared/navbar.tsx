@@ -115,7 +115,7 @@ export default function Navbar() {
                 {/* Right Side */}
                 <div className="flex items-center gap-4">
                     {/* Search */}
-                    <div className="relative w-full max-w-[160px] sm:max-w-sm">
+                    <div className="relative w-full max-w-[160px] sm:max-w-sm hidden md:block">
                         <Input
                             placeholder="Search..."
                             className="pr-8 h-9 w-full border border-green-600 focus:outline-none placeholder:text-green-400 text-black text-sm"
@@ -197,6 +197,17 @@ export default function Navbar() {
                                             {link.name}
                                         </Link>
                                     ))}
+
+                                    <div className="relative w-full max-w-[160px] sm:max-w-sm">
+                                        <Input
+                                            placeholder="Search..."
+                                            className="pr-8 h-9 w-full border border-white focus:outline-none placeholder:text-white text-white text-sm"
+                                            value={searchTerm}
+                                            onChange={(e) => setSearchTerm(e.target.value)}
+                                            onKeyDown={handleSearch}
+                                        />
+                                        <Search className="absolute right-2 top-1/2 h-4 w-4 -translate-y-1/2 transform text-white" />
+                                    </div>
 
                                     {!isLoggedIn ? (
                                         <Link href="/login" className="text-base font-medium text-muted-foreground transition-colors hover:text-foreground">

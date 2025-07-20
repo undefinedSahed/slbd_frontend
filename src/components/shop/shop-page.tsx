@@ -468,6 +468,8 @@ function AllProducts() {
                                         price={product.price}
                                         discount={product.discount}
                                         sold={product.sold}
+                                        rating={product.rating}
+                                        reviewsCount={product.reviewsCount}
                                     />
                                 ))}
                             </div>

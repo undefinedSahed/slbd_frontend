@@ -60,6 +60,7 @@ export interface ProductType {
     rating?: number;
     stock: 'in stock' | 'out of stock';
     sold: number;
+    reviewsCount: number;
 }
 
 
@@ -71,6 +72,8 @@ export interface ProductCardProps {
     price: number
     discount: number
     sold: number
+    rating?: number;
+    reviewsCount: number;
 }
 
 

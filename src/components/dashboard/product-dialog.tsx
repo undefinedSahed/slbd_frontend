@@ -28,6 +28,7 @@ interface Product {
     discount: number
     // eslint-disable-next-line
     specs: any
+    topSold: boolean
 }
 
 interface Category {
@@ -56,6 +57,7 @@ export function ProductDialog({ open, onOpenChange, product, isEditing, onSucces
         thumbnail: null as File | null,
         images: [] as File[],
         specs: "",
+        topSold: false,
     })
     const [categories, setCategories] = useState<Category[]>([])
     const [loading, setLoading] = useState(false)
@@ -96,6 +98,7 @@ export function ProductDialog({ open, onOpenChange, product, isEditing, onSucces
                 thumbnail: null,
                 images: [],
                 specs: JSON.stringify(product.specs, null, 2),
+                topSold: product.topSold || false,
             })
         } else {
             setFormData({
@@ -110,6 +113,7 @@ export function ProductDialog({ open, onOpenChange, product, isEditing, onSucces
                 thumbnail: null,
                 images: [],
                 specs: "",
+                topSold: false,
             })
         }
     }, [isEditing, product, open])
@@ -129,6 +133,7 @@ export function ProductDialog({ open, onOpenChange, product, isEditing, onSucces
             formDataToSend.append("sold", formData.sold.toString())
             formDataToSend.append("featured", formData.featured.toString())
             formDataToSend.append("specs", formData.specs)
+            formDataToSend.append("topSold", formData.topSold.toString())
 
             if (formData.thumbnail) {
                 formDataToSend.append("thumbnail", formData.thumbnail)
@@ -310,13 +315,25 @@ export function ProductDialog({ open, onOpenChange, product, isEditing, onSucces
                         />
                     </div>
 
-                    <div className="flex items-center space-x-2">
-                        <Switch
-                            id="featured"
-                            checked={formData.featured}
-                            onCheckedChange={(checked) => setFormData({ ...formData, featured: checked })}
-                        />
-                        <Label htmlFor="featured">Featured Product</Label>
+                    <div className="flex items-center gap-4">
+                        <div className="flex items-center space-x-2">
+                            <Switch
+                                id="featured"
+                                checked={formData.featured}
+                                onCheckedChange={(checked) => setFormData({ ...formData, featured: checked })}
+                                className="focus:ring-green-500 focus:border-green-500 border border-primary"
+                            />
+                            <Label htmlFor="featured">Featured Product</Label>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                            <Switch
+                                id="topSold"
+                                checked={formData.topSold}
+                                onCheckedChange={(checked) => setFormData({ ...formData, topSold: checked })}
+                                className="focus:ring-green-500 focus:border-green-500 border border-primary"
+                            />
+                            <Label htmlFor="topSold">Top Sold Product</Label>
+                        </div>
                     </div>
 
                     <div className="flex justify-end space-x-2">

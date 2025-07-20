@@ -65,6 +65,8 @@ export default function PopularProducts() {
                                             price={item.price}
                                             discount={item.discount}
                                             sold={item.sold}
+                                            rating={item.rating}
+                                            reviewsCount={item.reviewsCount}
                                         />
                                     </div>
                                 </CarouselItem>

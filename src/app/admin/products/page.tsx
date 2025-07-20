@@ -31,6 +31,7 @@ interface Product {
     discount: number
     rating: number
     createdAt: string
+    topSold: boolean // Added to match expected Product type
 }
 
 interface ProductsResponse {
@@ -155,7 +156,7 @@ export default function ProductsPage() {
                     <h1 className="text-3xl font-bold text-green-700">Products</h1>
                     <p className="text-muted-foreground">Manage your product catalog</p>
                 </div>
-                <Button onClick={handleAddProduct} className="bg-green-600 hover:bg-green-700 text-white">
+                <Button onClick={handleAddProduct} className="bg-green-600 text-white hover:bg-green-700 text-white">
                     <Plus className="h-4 w-4 mr-2" />
                     Add Product
                 </Button>
@@ -179,8 +180,9 @@ export default function ProductsPage() {
                         <div className="relative h-48">
                             <Image src={product.thumbnail || "/placeholder.svg"} alt={product.title} fill className="object-cover" />
                             <div className="absolute top-2 right-2 flex gap-1">
-                                {product.featured && <Badge className="bg-green-600">Featured</Badge>}
-                                {product.discount > 0 && <Badge variant="destructive">{product.discount}% OFF</Badge>}
+                                {product.featured && <Badge className="bg-green-600 text-white">Featured</Badge>}
+                                {product.topSold && <Badge className="bg-green-600 text-white">Top Sold</Badge>}
+                                {product.discount > 0 && <Badge variant="destructive" className="bg-primary">{product.discount}% OFF</Badge>}
                             </div>
                         </div>
                         <CardContent className="p-4 pt-0">
@@ -198,7 +200,7 @@ export default function ProductsPage() {
                                 </div>
                                 <Badge
                                     variant={product.stock === "in stock" ? "default" : "secondary"}
-                                    className={product.stock === "in stock" ? "bg-green-600" : ""}
+                                    className={product.stock === "in stock" ? "bg-green-600 text-white" : ""}
                                 >
                                     {product.stock}
                                 </Badge>

@@ -37,19 +37,19 @@ export default function Footer() {
 
           <div className="">
             <ul className="flex flex-col gap-2">
-              <li className="text-primary font-semibold text-[16px] pb-2">About us</li>
-              <li className="text-[#727272] text-[16px]"><Link href="/about-us">Our Story</Link></li>
-              <li className="text-[#727272] text-[16px]"><Link href="/jobs">Job Opportunities</Link></li>
-              <li className="text-[#727272] text-[16px]"><Link href="/about-us">Store Locator</Link></li>
-              <li className="text-[#727272] text-[16px]"><Link href="/about-us">Contact Us</Link></li>
+              <li className="text-primary font-semibold text-[16px] pb-2">Quick Links</li>
+              <li className="text-[#727272] text-[16px]"><Link href="/about-us">About us</Link></li>
+              <li className="text-[#727272] text-[16px]"><Link href="/services">Our Services</Link></li>
+              <li className="text-[#727272] text-[16px]"><Link href="/shop">Visit Shop</Link></li>
+              <li className="text-[#727272] text-[16px]"><Link href="/contact">Contact Us</Link></li>
             </ul>
           </div>
 
           <div className="">
             <ul className="flex flex-col gap-2">
               <li className="text-primary font-semibold text-[16px] pb-2">Customer Service</li>
-              <li className="text-[#727272] text-[16px]"><Link href="/myaccount">My Account</Link></li>
-              <li className="text-[#727272] text-[16px]"><Link href="/terms">Term of Use</Link></li>
+              <li className="text-[#727272] text-[16px]"><Link href="/account">My Account</Link></li>
+              <li className="text-[#727272] text-[16px]"><Link href="/cart">My Cart</Link></li>
               <li className="text-[#727272] text-[16px]"><Link href="/return-policy">Deliveries & Returns</Link></li>
               <li className="text-[#727272] text-[16px]"><Link href="/about-us">Contact</Link></li>
             </ul>
@@ -65,7 +65,7 @@ export default function Footer() {
                 <span><PhoneCallIcon /></span><a href="callto:+8801724188240">+880 1724-188240</a>
               </li>
               <li className="text-[#727272] text-[16px] flex items-center gap-2">
-                <span><MailIcon /></span><a href="mailto:superlightingbd1..gmail.com">superlightingbd1@gmail.com</a>
+                <span><MailIcon /></span><a href="mailto:superlightingbd@gmail.com">superlightingbd@gmail.com</a>
               </li>
             </ul>
           </div>

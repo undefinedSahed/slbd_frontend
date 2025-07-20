@@ -7,6 +7,8 @@ import Link from 'next/link'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import React from 'react'
 import { toast } from 'sonner'
+import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
+
 
 export default function ProductCard({
     id,
@@ -14,7 +16,9 @@ export default function ProductCard({
     title,
     price,
     discount,
-    sold
+    sold,
+    rating,
+    reviewsCount
 }: ProductCardProps) {
 
     const router = useRouter()
@@ -52,6 +56,25 @@ export default function ProductCard({
     }
 
 
+    const renderStars = (rating: number) => {
+        const stars = [];
+        const fullStars = Math.floor(rating);
+        const hasHalfStar = rating - fullStars >= 0.25 && rating - fullStars < 0.75;
+
+        for (let i = 0; i < 5; i++) {
+            if (i < fullStars) {
+                stars.push(<FaStar key={i} className="text-yellow-400" />);
+            } else if (i === fullStars && hasHalfStar) {
+                stars.push(<FaStarHalfAlt key={i} className="text-yellow-400" />);
+            } else {
+                stars.push(<FaRegStar key={i} className="text-yellow-400" />);
+            }
+        }
+
+        return stars;
+    };
+
+
 
     return (
         <div className='shadow-primary shadow-sm mb-4 rounded-md'>
@@ -84,8 +107,22 @@ export default function ProductCard({
                 </div>
             </div>
             <Link href={`/shop/${title}`}>
-                <div className="px-2 md:px-3 py-2 md:py-5 text-[#1B6732] ">
-                    <h3 className="text-sm md:text-lg font-medium md:font-semibold pb-2 md:pb-2 line-clamp-2">{title}</h3>
+                <div className="px-2 md:px-3 py-2 md:py-5 text-[#1B6732] space-y-2">
+                    <h3 className="text-sm md:text-lg font-medium md:font-semibold line-clamp-2">{title}</h3>
+                    <div className="flex items-center gap-2 mt-1">
+                        {reviewsCount > 0 ? (
+                            <>
+                                <div className="flex items-center text-sm">
+                                    {renderStars(rating as number)}
+                                </div>
+                                <p className="text-xs md:text-sm text-gray-500">
+                                    {rating?.toFixed(1)} ({reviewsCount} {reviewsCount === 1 ? 'review' : 'reviews'})
+                                </p>
+                            </>
+                        ) : (
+                            <p className="text-xs md:text-sm text-gray-500">No reviews yet</p>
+                        )}
+                    </div>
                     <div className="flex items-start justify-between">
                         <div className="">
                             <div className="text-xs md:text-base font-medium lg:flex lg:items-center lg:gap-2">
