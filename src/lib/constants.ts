@@ -2,33 +2,33 @@ export const services = [
   {
     id: 1,
     title: "All Kind Of Lighting Solution",
-    image: "/assets/banner_bg.jpg",
-    thumbnail: "/assets/banner_bg.jpg",
+    image: "/assets/service-1-2.jpg",
+    thumbnail: "/assets/service-1.jpg",
     descriptionOne:
-      "Are you looking for the best lighting solutions for your home or business? Dream Energy is here to help. We specialize in providing high-quality, energy-efficient lighting solutions that meet your unique needs. From LED lights to specialty commercial products, our team ensures the best fit for your space and budget. Save money while improving aesthetics and reducing your environmental impact.",
+      "Are you looking for the best lighting solutions for your home or business? Super Lighting BD is here to help. We specialize in providing high-quality, energy-efficient lighting solutions that meet your unique needs. From LED lights to specialty commercial products, our team ensures the best fit for your space and budget. Save money while improving aesthetics and reducing your environmental impact.",
     descriptionTwo:
       "Our team of experienced professionals can help you with everything from selecting the right lighting solutions to installation and maintenance. Contact us today to learn more about how we can help you achieve the perfect lighting setup.",
     useArea: [
-      { id: 1, title: "Garments & Factory Production Area", image: "/assets/banner_bg.jpg" },
-      { id: 2, title: "Factory Warehouse Area", image: "/assets/banner_bg.jpg" },
-      { id: 3, title: "Factory Outdoor Area", image: "/assets/banner_bg.jpg" },
-      { id: 4, title: "Retail Shop Area", image: "/assets/banner_bg.jpg" },
-      { id: 5, title: "Interior Decoration with Light", image: "/assets/banner_bg.jpg" },
+      { id: 1, title: "Garments & Factory Production Area", image: "/assets/Garments & Factory Production Area.jpg" },
+      { id: 2, title: "Factory Warehouse Area", image: "/assets/Factory Warehouse Area.png" },
+      { id: 3, title: "Factory Outdoor Area", image: "/assets/factory-outdoor.jpg" },
+      { id: 4, title: "Retail Shop Area", image: "/assets/Interior Decoration with Light.jpeg" },
+      { id: 5, title: "Interior Decoration with Light", image: "/assets/Interior Decoration with Light.jpeg" },
     ],
   },
   {
     id: 2,
     title: "Smart Workplace Management",
-    image: "/assets/banner_bg.jpg",
-    thumbnail: "/assets/banner_bg.jpg",
+    image: "/assets/Decription.jpg",
+    thumbnail: "/assets/Smart Workplace Management.png",
     descriptionOne:
-      "Create agile, flexible, and tech-enabled workplaces with Dream Energy’s smart workplace solutions. We empower businesses with real-time data, intelligent lighting, and space management tools.",
+      "Create agile, flexible, and tech-enabled workplaces with Super Lighting BD’s smart workplace solutions. We empower businesses with real-time data, intelligent lighting, and space management tools.",
     descriptionTwo:
       "From personalized user control to hot desking and meeting room automation, we streamline operations and boost productivity. Discover how we can transform your workplace.",
     useArea: [
-      { id: 1, title: "Corporate Office Floors", image: "/assets/banner_bg.jpg" },
-      { id: 2, title: "Meeting & Conference Rooms", image: "/assets/banner_bg.jpg" },
-      { id: 3, title: "Co-working Spaces", image: "/assets/banner_bg.jpg" },
+      { id: 1, title: "Corporate Office Floors", image: "/assets/Corporate Office Floors.jpg" },
+      { id: 2, title: "Meeting & Conference Rooms", image: "/assets/Meeting & Conference Rooms.jpg" },
+      { id: 3, title: "Co-working Spaces", image: "/assets/Co-working Spaces.jpg" },
     ],
   },
   {
@@ -37,7 +37,7 @@ export const services = [
     image: "/assets/banner_bg.jpg",
     thumbnail: "/assets/banner_bg.jpg",
     descriptionOne:
-      "Go green and cut energy costs with our solar power solutions. Dream Energy provides scalable, efficient solar setups for homes, industries, and commercial buildings.",
+      "Go green and cut energy costs with our solar power solutions. Super Lighting BD provides scalable, efficient solar setups for homes, industries, and commercial buildings.",
     descriptionTwo:
       "Our team handles everything from consultation to installation and monitoring. Let’s build a sustainable future together.",
     useArea: [
@@ -52,7 +52,7 @@ export const services = [
     image: "/assets/banner_bg.jpg",
     thumbnail: "/assets/banner_bg.jpg",
     descriptionOne:
-      "Discover hidden energy waste and unlock cost savings with Dream Energy’s professional audit and optimization service.",
+      "Discover hidden energy waste and unlock cost savings with Super Lighting BD’s professional audit and optimization service.",
     descriptionTwo:
       "We analyze your energy consumption patterns and provide practical solutions to improve efficiency and reduce bills.",
     useArea: [
@@ -66,7 +66,7 @@ export const services = [
     image: "/assets/banner_bg.jpg",
     thumbnail: "/assets/banner_bg.jpg",
     descriptionOne:
-      "Power the electric future with Dream Energy’s EV charging solutions for homes, offices, and public spaces. We install reliable, scalable, and fast EV charging stations.",
+      "Power the electric future with Super Lighting BD’s EV charging solutions for homes, offices, and public spaces. We install reliable, scalable, and fast EV charging stations.",
     descriptionTwo:
       "From site evaluation to deployment and support, we make electric vehicle charging easy and efficient.",
     useArea: [
@@ -81,7 +81,7 @@ export const services = [
     image: "/assets/banner_bg.jpg",
     thumbnail: "/assets/banner_bg.jpg",
     descriptionOne:
-      "Enhance factory and warehouse operations with automated, sensor-based lighting. Dream Energy brings intelligent control to your industrial environment.",
+      "Enhance factory and warehouse operations with automated, sensor-based lighting. Super Lighting BD brings intelligent control to your industrial environment.",
     descriptionTwo:
       "Improve safety, reduce waste, and cut energy costs using our smart automation systems.",
     useArea: [
@@ -95,7 +95,7 @@ export const services = [
     image: "/assets/banner_bg.jpg",
     thumbnail: "/assets/banner_bg.jpg",
     descriptionOne:
-      "Healthcare environments require precision lighting for patient safety and operational efficiency. Dream Energy delivers specialized lighting for every healthcare zone.",
+      "Healthcare environments require precision lighting for patient safety and operational efficiency. Super Lighting BD delivers specialized lighting for every healthcare zone.",
     descriptionTwo:
       "From operating rooms to waiting areas, we ensure the perfect illumination to promote wellness and care.",
     useArea: [
@@ -110,7 +110,7 @@ export const services = [
     image: "/assets/banner_bg.jpg",
     thumbnail: "/assets/banner_bg.jpg",
     descriptionOne:
-      "Good lighting enhances learning outcomes. Dream Energy provides lighting systems designed for classrooms, labs, libraries, and outdoor education zones.",
+      "Good lighting enhances learning outcomes. Super Lighting BD provides lighting systems designed for classrooms, labs, libraries, and outdoor education zones.",
     descriptionTwo:
       "Our solutions reduce eye strain and create focused, healthy learning environments for students and educators alike.",
     useArea: [
@@ -140,7 +140,7 @@ export const projects = [
   {
     id: 1,
     title: "52PCS SOLAR STREET LIGHT PACKAGE COMPLETE IN CHUADANGA POWROSABA",
-    description: "Dream Energy successfully completed the installation of 52 solar-powered street lights across Chuadanga Powrosaba, improving nighttime visibility and energy efficiency. The project contributes to environmental sustainability while ensuring safer public spaces for the local community through renewable energy solutions.",
+    description: "Super Lighting BD successfully completed the installation of 52 solar-powered street lights across Chuadanga Powrosaba, improving nighttime visibility and energy efficiency. The project contributes to environmental sustainability while ensuring safer public spaces for the local community through renewable energy solutions.",
     image: "/assets/about1.jpg"
   },
   {
@@ -158,7 +158,7 @@ export const projects = [
   {
     id: 4,
     title: "INSTALLED CCTV, PABX, PA SYSTEM IN BCCT BHABAN",
-    description: "Dream Energy installed an integrated security and communication system—including CCTV, PABX, and public announcement units—at BCCT Bhaban. The project ensures real-time monitoring, improved internal communication, and greater safety across the entire building facility.",
+    description: "Super Lighting BD installed an integrated security and communication system—including CCTV, PABX, and public announcement units—at BCCT Bhaban. The project ensures real-time monitoring, improved internal communication, and greater safety across the entire building facility.",
     image: "/assets/about1.jpg"
   },
   {

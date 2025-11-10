@@ -6,17 +6,17 @@ import Link from "next/link"
 
 const slides = [
     {
-        bg: "/assets/banner_bg.jpg",
+        bg: "/assets/banner1.jpg",
         title1: "Super Light",
         title2: "Super Bright",
     },
     {
-        bg: "/assets/banner_bg.jpg",
+        bg: "/assets/banner2.jpg",
         title1: "Speedy Performance",
         title2: "Stunning Design",
     },
     {
-        bg: "/assets/banner_bg.jpg",
+        bg: "/assets/banner3.jpg",
         title1: "Bright Future",
         title2: "Smart Technology",
     },
