@@ -6,7 +6,7 @@ export default function CommonBanner({ heading }: CommonBannerProps) {
         <section
             className="md:h-[50vh] h-[20vh] relative flex items-center justify-center"
             style={{
-                backgroundImage: "url('../../assets/about_ban_bg.jpg')",
+                backgroundImage: "url('../../assets/common-banner.jpg')",
                 backgroundPosition: "center",
                 backgroundRepeat: "no-repeat",
                 backgroundSize: "cover",
