@@ -1,6 +1,6 @@
 import HomeAbout from "@/components/home/about-home";
 import BannerHome from "@/components/home/banner";
-import Blogs from "@/components/home/blog";
+// import Blogs from "@/components/home/blog";
 import Catalog from "@/components/home/catalog";
 import Category from "@/components/home/category";
 import FeaturedProducts from "@/components/home/featured-products";
@@ -27,7 +27,7 @@ export default function Home() {
       <Projects />
       <Clients />
       <Testimonial />
-      <Blogs />
+      {/* <Blogs /> */}
     </div>
   );
 }
