@@ -21,7 +21,7 @@ export default function page() {
                     </div>
                     <div className="hidden md:block md:w-1/3 ">
                         <Image
-                            src="/assets/faq.png"
+                            src="/assets/faq.jpg"
                             alt='FAQ Question Image'
                             width={1000}
                             height={1000}
