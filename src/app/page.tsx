@@ -18,14 +18,14 @@ export default function Home() {
       <BannerHome />
       <HomeAbout />
       <Policy />
+      <Clients />
+      <Catalog />
       <Services />
       <Category />
       <Topsold />
       <PopularProducts />
       <FeaturedProducts />
-      <Catalog />
       <Projects />
-      <Clients />
       <Testimonial />
       {/* <Blogs /> */}
     </div>

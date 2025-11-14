@@ -38,7 +38,7 @@ export default function Clients() {
             transition={{
               repeat: Infinity,
               ease: 'linear',
-              duration: 30
+              duration:50
             }}
           >
             {repeatedClients.map((client, index) => (

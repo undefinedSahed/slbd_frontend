@@ -46,7 +46,7 @@ function Policy() {
                             <div className='flex justify-center pb-2'>
                                 <ShieldCheck className='h-10 w-10' />
                             </div>
-                            <h3 className="text-xs md:text-base">FREE SHIPPING</h3>
+                            <h3 className="text-xs md:text-base">SAFE SHIPPING</h3>
                             <h6 className="text-xs md:text-base">Delivered To Your Door</h6>
                         </div>
                     </div>

@@ -77,8 +77,8 @@ export default function ProductCard({
 
 
     return (
-        <div className='shadow-primary shadow-sm mb-4 rounded-md'>
-            <div className="relative group overflow-hidden">
+        <div className='shadow-primary shadow-xs mb-4 rounded-md'>
+            <div className="relative group overflow-hidden bg-white">
 
                 {/* Discount show if has */}
 
@@ -95,7 +95,7 @@ export default function ProductCard({
                         width={1000}
                         height={1000}
                         layout="responsive"
-                        className="rounded-t-lg w-full aspect-[5/4] object-cover"
+                        className="rounded-t-lg w-full aspect-square object-contain"
                     />
                 </Link>
                 <div className="flex gap-2 bg-white rounded-sm py-1 md:py-2 px-5 absolute bottom-1 md:bottom-4 left-1/2 -translate-x-1/2 space-x-3 md:space-x-5 lg:opacity-0 group-hover:opacity-100 transition duration-500">

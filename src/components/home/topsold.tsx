@@ -18,9 +18,9 @@ const Topsold = () => {
 
   if (isLoading) {
     return (
-      <div className="flex gap-4">
+      <div className="container mx-auto flex gap-4">
         {
-          Array(4)
+          Array(5)
             .fill(0)
             .map((_, index) => (
               <div key={index}
@@ -64,9 +64,9 @@ const Topsold = () => {
               }
             </div>
           }
-          <CarouselContent className="-ml-4">
+          <CarouselContent className="mt-4 mx-[2px]">
             {products?.map((item: ProductType) => (
-              <CarouselItem key={item._id} className="basis-1/2 md:basis-1/3 lg:basis-1/4">
+              <CarouselItem key={item._id} className="basis-1/2 md:basis-1/3 lg:basis-1/5">
                 <div className="h-full">
                   <ProductCard
                     id={item._id}
