@@ -36,7 +36,7 @@ function AllProducts() {
     const searchParams = useSearchParams();
 
     const initialPage = parseInt(searchParams.get("page") || "1", 10);
-    const limit = 9; // or whatever page size you want
+    const limit = 12; // or whatever page size you want
 
     const [currentPage, setCurrentPage] = useState(initialPage);
     const [totalPages, setTotalPages] = useState(1);
@@ -458,7 +458,7 @@ function AllProducts() {
                         </div>
                     ) : (
                         <div className="">
-                            <div className="grid grid-cols-2 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3">
+                            <div className="grid grid-cols-2 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                                 {filteredProducts?.map((product: ProductType) => (
                                     <ProductCard
                                         id={product._id}

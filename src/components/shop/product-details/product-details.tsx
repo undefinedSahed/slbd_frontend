@@ -188,6 +188,9 @@ export default function ProductDetails({ productName }: ProductDetails) {
     return stars;
   };
 
+  const allImages = [product?.thumbnail, ...product?.images];
+
+
   return (
     <section className="py-4 sm:py-5 lg:py-20">
       <div className="container mx-auto px-4 sm:px-6">
@@ -195,15 +198,15 @@ export default function ProductDetails({ productName }: ProductDetails) {
           <div className="space-y-2 sm:space-y-4">
             <div className="rounded-md bg-muted">
               <Image
-                src={product?.images[selectedImageIndex] || "/placeholder.svg"}
+                src={allImages[selectedImageIndex] || "/placeholder.svg"}
                 alt={product?.title}
                 width={1000}
                 height={1000}
-                className="w-full aspect-video rounded-md object-cover"
+                className="w-full aspect-video rounded-md object-contain"
               />
             </div>
             <ProductImageGallery
-              images={product?.images}
+              images={allImages}
               selectedIndex={selectedImageIndex}
               onSelect={setSelectedImageIndex}
             />
@@ -424,8 +427,8 @@ export default function ProductDetails({ productName }: ProductDetails) {
 
         <Tabs defaultValue="specs" className="mt-20">
           <TabsList className="gap-3 mb-5">
-            <TabsTrigger value="specs" className="data-[state=active]:bg-[#28A745] data-[state=active]:text-white bg-[#E0E0E0] px-5 py-2">Specifications</TabsTrigger>
-            <TabsTrigger value="reviews" className="data-[state=active]:bg-[#28A745] data-[state=active]:text-white bg-[#E0E0E0] px-5 py-2">Reviews</TabsTrigger>
+            <TabsTrigger value="specs" className="data-[state=active]:bg-[#28A745] data-[state=active]:text-white bg-[#E0E0E0] px-5 py-2 cursor-pointer">Specifications</TabsTrigger>
+            <TabsTrigger value="reviews" className="data-[state=active]:bg-[#28A745] data-[state=active]:text-white bg-[#E0E0E0] px-5 py-2 cursor-pointer">Reviews</TabsTrigger>
           </TabsList>
           <TabsContent value="specs">
             <FeaturesTable specs={product.specs} isLoading={isLoadingProductData} />

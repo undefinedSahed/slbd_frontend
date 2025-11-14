@@ -53,9 +53,9 @@ export default function RelatedProducts({ category, productId }: { category: str
                                 }
                             </div>
                         }
-                        <CarouselContent className="-ml-4">
+                        <CarouselContent className="ml-[1px] mt-1">
                             {products?.map((item: ProductType) => (
-                                <CarouselItem key={item._id} className="basis-1/2 md:basis-1/3 lg:basis-1/4">
+                                <CarouselItem key={item._id} className="basis-1/2 md:basis-1/3 lg:basis-1/5">
                                     <div className="h-full">
                                         <ProductCard
                                             id={item._id}
