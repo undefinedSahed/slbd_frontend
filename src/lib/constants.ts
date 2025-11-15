@@ -12,7 +12,7 @@ export const services = [
       {
         id: 1,
         title: "Garments & Factory Production Area",
-        image: "/assets/Garments & Factory Production Area.jpg",
+        image: "/assets/Garments Factory Production Area.jpg",
       },
       {
         id: 2,
@@ -55,7 +55,7 @@ export const services = [
       {
         id: 2,
         title: "Meeting & Conference Rooms",
-        image: "/assets/Meeting & Conference Rooms.jpg",
+        image: "/assets/Meeting Conference Rooms.jpg",
       },
       { id: 3, title: "Co-working Spaces", image: "/assets/Decription.jpg" },
     ],
