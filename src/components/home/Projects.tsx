@@ -23,14 +23,11 @@ const Projects = () => {
                 alt={project.title}
                 height={500}
                 width={900}
-                className="w-full aspect-[4/5] object-cover rounded-md mb-4"
+                className="w-full aspect-[4/4] object-cover rounded-md mb-4"
               />
               <h3 className="md:text-xl text-lg font-semibold text-center">
                 {project.title}
               </h3>
-              {/* <p className="text-gray-700 text-sm md:text-base text-justify lg:text-start">
-                {project.description}
-              </p> */}
             </div>
           ))}
         </div>

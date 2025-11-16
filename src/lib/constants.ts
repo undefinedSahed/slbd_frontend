@@ -162,25 +162,34 @@ export const services = [
 
 export const projects = [
   {
+    id: 6,
+    title: "Meeting Room Lighting Setup",
+    image: "/assets/meeting_room.jpg",
+  },
+  {
     id: 1,
     title: "Head Office Workstation Lighting",
-    description:
-      "Super Lighting BD successfully completed the installation of 52 solar-powered street lights across Chuadanga Powrosaba, improving nighttime visibility and energy efficiency. The project contributes to environmental sustainability while ensuring safer public spaces for the local community through renewable energy solutions.",
     image: "/assets/image.png",
   },
   {
     id: 2,
     title: "Hall Room Lighting Installation",
-    description:
-      "We provided a complete networking infrastructure for Shahid Kamruzzan Textile Institute, including cabling, switches, and routers. This project enhanced internet access and digital connectivity for students and staff, creating a modern, tech-friendly academic environment in Manda, Naogaon.",
     image: "/assets/image2.png",
   },
   {
     id: 3,
-    title: "Gym Lighting Setup",
-    description:
-      "Installed 40 solar street lights at Submarine Landing Stations in Kuakata and Cox’s Bazar. This project supports national infrastructure with sustainable lighting solutions, ensuring security and functionality in key marine zones with zero dependency on the grid.",
-    image: "/assets/about1.jpg",
+    title: "Production House Lighting Installation",
+    image: "/assets/production_house.png",
+  },
+  {
+    id: 4,
+    title: "Washing Area Lighting Setup",
+    image: "/assets/washing_area.jpeg",
+  },
+  {
+    id: 5,
+    title: "Office Lighting Installation",
+    image: "/assets/office.jpg",
   },
 ];
 
